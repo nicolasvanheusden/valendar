@@ -41,7 +41,7 @@ class Week with _$Week {
     final int? nextYear,
   }) = _Week;
 
-  factory Week.initialize() => _Week(
+  factory Week.initialize(DateTime now) => _Week(
     dayNames: [
       _calendarNames.monday, 
       _calendarNames.tuesday,
@@ -52,9 +52,9 @@ class Week with _$Week {
       _calendarNames.sunday
     ],
     daysNumber: List.generate(7,
-    (index) => DateTime.now().weekday > DateTime.monday + index 
-      ? DateTime.now().subtract(Duration(days: DateTime.now().weekday - DateTime.monday - index)).day
-      : DateTime.now().add(Duration(days: (DateTime.now().weekday - DateTime.monday - index).abs())).day
+    (index) => now.weekday > DateTime.monday + index 
+      ? now.subtract(Duration(days: now.weekday - DateTime.monday - index)).day
+      : now.add(Duration(days: (now.weekday - DateTime.monday - index).abs())).day
     ), 
     monthName: [
       _calendarNames.january,
@@ -69,9 +69,9 @@ class Week with _$Week {
       _calendarNames.october,
       _calendarNames.november,
       _calendarNames.december
-    ].elementAt(DateTime.now().month-1),
-    monthNumber: DateTime.now().month,
-    year: DateTime.now().year,
+    ].elementAt(now.month-1),
+    monthNumber: now.month,
+    year: now.year,
   );
 
   _Week initializeNullableFields() {

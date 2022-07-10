@@ -1,16 +1,11 @@
 # valendar
 
-A new Flutter project.
+A Flutter project to create a specific calendar for one of my friends.
+This calendar must implement the following features : 
+    - Days' week on the horizontal axis and names on the vertical one.
+    - We can add as many names as we want on the vertical one.
+    - Each cell must be an input.
+    - There must be 2 calendars : one for adding hours, the other one for adding tasks.
+    - There must be a final column calculating the total of hours.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
