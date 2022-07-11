@@ -45,16 +45,44 @@ class _TeamScreenState extends State<TeamScreen> {
               return state.members.isEmpty 
                 ? const NoResult()
                 : ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   itemCount: state.members.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      child: Text(state.members.elementAt(index).name),
+                      height: 80,
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: blue064F60
+                        ),
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${state.members.elementAt(index).name} : ${state.members.elementAt(index).role}',
+                              style: GoogleFonts.montserrat(
+                                fontSize: 25
+                              ), 
+                            ),
+                            Text(
+                              'Date du Contrat : ${state.members.elementAt(index).startContract.toString().split(' ').first} - ${state.members.elementAt(index).endContract?.toString().split(' ').first ?? ''}',
+                              style: GoogleFonts.montserrat(
+                                fontSize: 16
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   }
                 );
             }
           ),
-          
         ],
       ),
     );    

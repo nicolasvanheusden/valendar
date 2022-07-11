@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:valendar/application/member/member_bloc.dart';
@@ -164,13 +163,27 @@ class _AppScreenState extends State<AppScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Ajout membre d'équipe",
-              style: GoogleFonts.montserrat(
-                color: blue064F60,
-                fontSize: 25,
-                fontWeight: FontWeight.w500
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Ajout membre d'équipe",
+                  style: GoogleFonts.montserrat(
+                    color: blue064F60,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => setState(() {
+                    _isOverlayVisible = false;
+                  }),
+                  icon: const Icon(
+                    Icons.close_rounded,
+                    size: 30,
+                  )
+                )
+              ],
             ),
             TextFormField(
               controller: _nameController,
@@ -245,10 +258,6 @@ class _AppScreenState extends State<AppScreen> {
                   return 'Champs mal formaté';
                 }  
               },
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              keyboardType: TextInputType.datetime,
             ),
             const SizedBox(
               height: 20,
