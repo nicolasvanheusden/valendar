@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:valendar/application/member/member_bloc.dart';
+import 'package:valendar/domain/member/member.dart';
 import 'package:valendar/presentation/core/colors.dart';
 import 'package:valendar/presentation/screen/analytics_screen.dart';
 import 'package:valendar/presentation/screen/home_screen.dart';
@@ -123,7 +127,7 @@ class _AppScreenState extends State<AppScreen> {
       floatingActionButton: Visibility(
         visible: _selectedTabIndex == 2 && !_isOverlayVisible,
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 120),
+          padding: const EdgeInsets.only(bottom: 100),
           child: FloatingActionButton(
             elevation: 5,
             onPressed: () {
@@ -147,7 +151,7 @@ class _AppScreenState extends State<AppScreen> {
       key: _formKey,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal :10, vertical: 20),
-        height: MediaQuery.of(context).size.height * 0.5,
+        height: MediaQuery.of(context).size.height * 0.6,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(50),
@@ -205,6 +209,7 @@ class _AppScreenState extends State<AppScreen> {
               enableSuggestions: false,
               decoration: InputDecoration(
                 label: const Text('Date de début de contrat'),
+                hintText: 'AAAA-MM-JJ',
                 labelStyle: GoogleFonts.montserrat(
                   color: blue064F60
                 ),
@@ -213,7 +218,11 @@ class _AppScreenState extends State<AppScreen> {
                 if (value?.isEmpty ?? true) {
                   return 'Champs requis';
                 }
-                return null;
+                if (RegExp(r'\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])').stringMatch(value ?? '') == value!) {
+                  return null;
+                } else {
+                  return 'Champs mal formaté';
+                }
               },
             ),
             TextFormField(
@@ -221,10 +230,25 @@ class _AppScreenState extends State<AppScreen> {
               enableSuggestions: false,
               decoration: InputDecoration(
                 label: const Text('Date de fin de contrat'),
+                hintText: 'AAAA-MM-JJ',
                 labelStyle: GoogleFonts.montserrat(
                   color: blue064F60
                 ),
               ),
+              validator: (value) {
+                if(value?.isEmpty ?? true) {
+                  return null;
+                }
+                if (RegExp(r'\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])').stringMatch(value ?? '') == value) {
+                  return null;
+                } else {
+                  return 'Champs mal formaté';
+                }  
+              },
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+              ],
+              keyboardType: TextInputType.datetime,
             ),
             const SizedBox(
               height: 20,
@@ -237,6 +261,22 @@ class _AppScreenState extends State<AppScreen> {
                     setState(() {
                       _isOverlayVisible = false;
                     });
+                    BlocProvider.of<MemberBloc>(context).add(
+                      MemberEvent.addMember(
+                        Member(
+                          name: _nameController.text,
+                          role: _roleController.text,
+                          startContract: DateTime.parse(_startContractController.text),
+                          endContract: _endContractController.text.isEmpty
+                            ? null
+                            : DateTime.parse(_endContractController.text)
+                        )
+                      )
+                    );
+                    _nameController.clear();
+                    _roleController.clear();
+                    _startContractController.clear();
+                    _endContractController.clear();
                   }
                 },
                 style: ButtonStyle(

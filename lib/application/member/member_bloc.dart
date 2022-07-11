@@ -14,7 +14,9 @@ part 'member_bloc.freezed.dart';
 class MemberBloc extends Bloc<MemberEvent, MemberState> with HydratedMixin{
   MemberBloc() : super(MemberState.initial()) {
     on<_AddMember>((event, emit) {
-      
+      emit(state.copyWith(
+        members: [...state.members, event.member]
+      ));
     });
     on<_DeleteMember>((event, emit) {
 
