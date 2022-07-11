@@ -12,7 +12,36 @@ part of 'week.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
+class _$WeekTearOff {
+  const _$WeekTearOff();
+
+  _Week call(
+      {required List<String> dayNames,
+      required List<int> daysNumber,
+      required String monthName,
+      required int monthNumber,
+      required int year,
+      String? nextMonthName,
+      int? nextMonthNumber,
+      int? nextYear}) {
+    return _Week(
+      dayNames: dayNames,
+      daysNumber: daysNumber,
+      monthName: monthName,
+      monthNumber: monthNumber,
+      year: year,
+      nextMonthName: nextMonthName,
+      nextMonthNumber: nextMonthNumber,
+      nextYear: nextYear,
+    );
+  }
+}
+
+/// @nodoc
+const $Week = _$WeekTearOff();
 
 /// @nodoc
 mixin _$Week {
@@ -101,9 +130,9 @@ class _$WeekCopyWithImpl<$Res> implements $WeekCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
-  factory _$$_WeekCopyWith(_$_Week value, $Res Function(_$_Week) then) =
-      __$$_WeekCopyWithImpl<$Res>;
+abstract class _$WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
+  factory _$WeekCopyWith(_Week value, $Res Function(_Week) then) =
+      __$WeekCopyWithImpl<$Res>;
   @override
   $Res call(
       {List<String> dayNames,
@@ -117,13 +146,13 @@ abstract class _$$_WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
-    implements _$$_WeekCopyWith<$Res> {
-  __$$_WeekCopyWithImpl(_$_Week _value, $Res Function(_$_Week) _then)
-      : super(_value, (v) => _then(v as _$_Week));
+class __$WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
+    implements _$WeekCopyWith<$Res> {
+  __$WeekCopyWithImpl(_Week _value, $Res Function(_Week) _then)
+      : super(_value, (v) => _then(v as _Week));
 
   @override
-  _$_Week get _value => super._value as _$_Week;
+  _Week get _value => super._value as _Week;
 
   @override
   $Res call({
@@ -136,13 +165,13 @@ class __$$_WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
     Object? nextMonthNumber = freezed,
     Object? nextYear = freezed,
   }) {
-    return _then(_$_Week(
+    return _then(_Week(
       dayNames: dayNames == freezed
-          ? _value._dayNames
+          ? _value.dayNames
           : dayNames // ignore: cast_nullable_to_non_nullable
               as List<String>,
       daysNumber: daysNumber == freezed
-          ? _value._daysNumber
+          ? _value.daysNumber
           : daysNumber // ignore: cast_nullable_to_non_nullable
               as List<int>,
       monthName: monthName == freezed
@@ -177,32 +206,20 @@ class __$$_WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
 
 class _$_Week extends _Week {
   _$_Week(
-      {required final List<String> dayNames,
-      required final List<int> daysNumber,
+      {required this.dayNames,
+      required this.daysNumber,
       required this.monthName,
       required this.monthNumber,
       required this.year,
       this.nextMonthName,
       this.nextMonthNumber,
       this.nextYear})
-      : _dayNames = dayNames,
-        _daysNumber = daysNumber,
-        super._();
+      : super._();
 
-  final List<String> _dayNames;
   @override
-  List<String> get dayNames {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dayNames);
-  }
-
-  final List<int> _daysNumber;
+  final List<String> dayNames;
   @override
-  List<int> get daysNumber {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_daysNumber);
-  }
-
+  final List<int> daysNumber;
   @override
   final String monthName;
   @override
@@ -225,10 +242,10 @@ class _$_Week extends _Week {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Week &&
-            const DeepCollectionEquality().equals(other._dayNames, _dayNames) &&
+            other is _Week &&
+            const DeepCollectionEquality().equals(other.dayNames, dayNames) &&
             const DeepCollectionEquality()
-                .equals(other._daysNumber, _daysNumber) &&
+                .equals(other.daysNumber, daysNumber) &&
             const DeepCollectionEquality().equals(other.monthName, monthName) &&
             const DeepCollectionEquality()
                 .equals(other.monthNumber, monthNumber) &&
@@ -243,8 +260,8 @@ class _$_Week extends _Week {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_dayNames),
-      const DeepCollectionEquality().hash(_daysNumber),
+      const DeepCollectionEquality().hash(dayNames),
+      const DeepCollectionEquality().hash(daysNumber),
       const DeepCollectionEquality().hash(monthName),
       const DeepCollectionEquality().hash(monthNumber),
       const DeepCollectionEquality().hash(year),
@@ -254,20 +271,20 @@ class _$_Week extends _Week {
 
   @JsonKey(ignore: true)
   @override
-  _$$_WeekCopyWith<_$_Week> get copyWith =>
-      __$$_WeekCopyWithImpl<_$_Week>(this, _$identity);
+  _$WeekCopyWith<_Week> get copyWith =>
+      __$WeekCopyWithImpl<_Week>(this, _$identity);
 }
 
 abstract class _Week extends Week {
   factory _Week(
-      {required final List<String> dayNames,
-      required final List<int> daysNumber,
-      required final String monthName,
-      required final int monthNumber,
-      required final int year,
-      final String? nextMonthName,
-      final int? nextMonthNumber,
-      final int? nextYear}) = _$_Week;
+      {required List<String> dayNames,
+      required List<int> daysNumber,
+      required String monthName,
+      required int monthNumber,
+      required int year,
+      String? nextMonthName,
+      int? nextMonthNumber,
+      int? nextYear}) = _$_Week;
   _Week._() : super._();
 
   @override
@@ -288,5 +305,5 @@ abstract class _Week extends Week {
   int? get nextYear;
   @override
   @JsonKey(ignore: true)
-  _$$_WeekCopyWith<_$_Week> get copyWith => throw _privateConstructorUsedError;
+  _$WeekCopyWith<_Week> get copyWith => throw _privateConstructorUsedError;
 }

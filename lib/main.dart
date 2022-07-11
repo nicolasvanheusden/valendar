@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:valendar/home_page.dart';
+import 'package:injectable/injectable.dart';
+import 'package:valendar/presentation/screen/home_screen.dart';
+
+import 'injection.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized(); // need explicit binding
+  configureInjection(Environment.dev);
    SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarBrightness: Brightness.light)
   );
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Valendar',
       theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const HomeScreen(),
     );
   }
 }
