@@ -22,12 +22,14 @@ class _$TaskTearOff {
       {required String title,
       required int hours,
       required List<Member> members,
-      required bool atNight}) {
+      required bool atNight,
+      required DateTime date}) {
     return _Task(
       title: title,
       hours: hours,
       members: members,
       atNight: atNight,
+      date: date,
     );
   }
 }
@@ -41,6 +43,7 @@ mixin _$Task {
   int get hours => throw _privateConstructorUsedError;
   List<Member> get members => throw _privateConstructorUsedError;
   bool get atNight => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
@@ -50,7 +53,12 @@ mixin _$Task {
 abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res>;
-  $Res call({String title, int hours, List<Member> members, bool atNight});
+  $Res call(
+      {String title,
+      int hours,
+      List<Member> members,
+      bool atNight,
+      DateTime date});
 }
 
 /// @nodoc
@@ -67,6 +75,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
     Object? hours = freezed,
     Object? members = freezed,
     Object? atNight = freezed,
+    Object? date = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed
@@ -85,6 +94,10 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.atNight
           : atNight // ignore: cast_nullable_to_non_nullable
               as bool,
+      date: date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -94,7 +107,12 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   factory _$TaskCopyWith(_Task value, $Res Function(_Task) then) =
       __$TaskCopyWithImpl<$Res>;
   @override
-  $Res call({String title, int hours, List<Member> members, bool atNight});
+  $Res call(
+      {String title,
+      int hours,
+      List<Member> members,
+      bool atNight,
+      DateTime date});
 }
 
 /// @nodoc
@@ -112,6 +130,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object? hours = freezed,
     Object? members = freezed,
     Object? atNight = freezed,
+    Object? date = freezed,
   }) {
     return _then(_Task(
       title: title == freezed
@@ -130,6 +149,10 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.atNight
           : atNight // ignore: cast_nullable_to_non_nullable
               as bool,
+      date: date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -141,7 +164,8 @@ class _$_Task extends _Task {
       {required this.title,
       required this.hours,
       required this.members,
-      required this.atNight})
+      required this.atNight,
+      required this.date})
       : super._();
 
   @override
@@ -152,10 +176,12 @@ class _$_Task extends _Task {
   final List<Member> members;
   @override
   final bool atNight;
+  @override
+  final DateTime date;
 
   @override
   String toString() {
-    return 'Task(title: $title, hours: $hours, members: $members, atNight: $atNight)';
+    return 'Task(title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date)';
   }
 
   @override
@@ -166,7 +192,8 @@ class _$_Task extends _Task {
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.hours, hours) &&
             const DeepCollectionEquality().equals(other.members, members) &&
-            const DeepCollectionEquality().equals(other.atNight, atNight));
+            const DeepCollectionEquality().equals(other.atNight, atNight) &&
+            const DeepCollectionEquality().equals(other.date, date));
   }
 
   @override
@@ -175,7 +202,8 @@ class _$_Task extends _Task {
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(hours),
       const DeepCollectionEquality().hash(members),
-      const DeepCollectionEquality().hash(atNight));
+      const DeepCollectionEquality().hash(atNight),
+      const DeepCollectionEquality().hash(date));
 
   @JsonKey(ignore: true)
   @override
@@ -188,7 +216,8 @@ abstract class _Task extends Task {
       {required String title,
       required int hours,
       required List<Member> members,
-      required bool atNight}) = _$_Task;
+      required bool atNight,
+      required DateTime date}) = _$_Task;
   _Task._() : super._();
 
   @override
@@ -199,6 +228,8 @@ abstract class _Task extends Task {
   List<Member> get members;
   @override
   bool get atNight;
+  @override
+  DateTime get date;
   @override
   @JsonKey(ignore: true)
   _$TaskCopyWith<_Task> get copyWith => throw _privateConstructorUsedError;

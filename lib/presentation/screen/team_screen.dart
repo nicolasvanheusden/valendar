@@ -43,7 +43,7 @@ class _TeamScreenState extends State<TeamScreen> {
           BlocBuilder<MemberBloc, MemberState>(
             builder: (context, state) {
               return state.members.isEmpty 
-                ? const NoResult()
+                ? const NoResult(title: "Aucun membre dans l'équipe")
                 : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   itemCount: state.members.length,

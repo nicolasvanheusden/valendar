@@ -26,12 +26,14 @@ class _$TaskDTOTearOff {
       {required String title,
       required int hours,
       required List<MemberDTO> members,
-      required bool atNight}) {
+      required bool atNight,
+      required DateTime date}) {
     return _TaskDTO(
       title: title,
       hours: hours,
       members: members,
       atNight: atNight,
+      date: date,
     );
   }
 
@@ -49,6 +51,7 @@ mixin _$TaskDTO {
   int get hours => throw _privateConstructorUsedError;
   List<MemberDTO> get members => throw _privateConstructorUsedError;
   bool get atNight => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,7 +62,12 @@ mixin _$TaskDTO {
 abstract class $TaskDTOCopyWith<$Res> {
   factory $TaskDTOCopyWith(TaskDTO value, $Res Function(TaskDTO) then) =
       _$TaskDTOCopyWithImpl<$Res>;
-  $Res call({String title, int hours, List<MemberDTO> members, bool atNight});
+  $Res call(
+      {String title,
+      int hours,
+      List<MemberDTO> members,
+      bool atNight,
+      DateTime date});
 }
 
 /// @nodoc
@@ -76,6 +84,7 @@ class _$TaskDTOCopyWithImpl<$Res> implements $TaskDTOCopyWith<$Res> {
     Object? hours = freezed,
     Object? members = freezed,
     Object? atNight = freezed,
+    Object? date = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed
@@ -94,6 +103,10 @@ class _$TaskDTOCopyWithImpl<$Res> implements $TaskDTOCopyWith<$Res> {
           ? _value.atNight
           : atNight // ignore: cast_nullable_to_non_nullable
               as bool,
+      date: date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -103,7 +116,12 @@ abstract class _$TaskDTOCopyWith<$Res> implements $TaskDTOCopyWith<$Res> {
   factory _$TaskDTOCopyWith(_TaskDTO value, $Res Function(_TaskDTO) then) =
       __$TaskDTOCopyWithImpl<$Res>;
   @override
-  $Res call({String title, int hours, List<MemberDTO> members, bool atNight});
+  $Res call(
+      {String title,
+      int hours,
+      List<MemberDTO> members,
+      bool atNight,
+      DateTime date});
 }
 
 /// @nodoc
@@ -121,6 +139,7 @@ class __$TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
     Object? hours = freezed,
     Object? members = freezed,
     Object? atNight = freezed,
+    Object? date = freezed,
   }) {
     return _then(_TaskDTO(
       title: title == freezed
@@ -139,6 +158,10 @@ class __$TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
           ? _value.atNight
           : atNight // ignore: cast_nullable_to_non_nullable
               as bool,
+      date: date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -150,7 +173,8 @@ class _$_TaskDTO extends _TaskDTO {
       {required this.title,
       required this.hours,
       required this.members,
-      required this.atNight})
+      required this.atNight,
+      required this.date})
       : super._();
 
   factory _$_TaskDTO.fromJson(Map<String, dynamic> json) =>
@@ -164,10 +188,12 @@ class _$_TaskDTO extends _TaskDTO {
   final List<MemberDTO> members;
   @override
   final bool atNight;
+  @override
+  final DateTime date;
 
   @override
   String toString() {
-    return 'TaskDTO(title: $title, hours: $hours, members: $members, atNight: $atNight)';
+    return 'TaskDTO(title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date)';
   }
 
   @override
@@ -178,7 +204,8 @@ class _$_TaskDTO extends _TaskDTO {
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.hours, hours) &&
             const DeepCollectionEquality().equals(other.members, members) &&
-            const DeepCollectionEquality().equals(other.atNight, atNight));
+            const DeepCollectionEquality().equals(other.atNight, atNight) &&
+            const DeepCollectionEquality().equals(other.date, date));
   }
 
   @override
@@ -187,7 +214,8 @@ class _$_TaskDTO extends _TaskDTO {
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(hours),
       const DeepCollectionEquality().hash(members),
-      const DeepCollectionEquality().hash(atNight));
+      const DeepCollectionEquality().hash(atNight),
+      const DeepCollectionEquality().hash(date));
 
   @JsonKey(ignore: true)
   @override
@@ -205,7 +233,8 @@ abstract class _TaskDTO extends TaskDTO {
       {required String title,
       required int hours,
       required List<MemberDTO> members,
-      required bool atNight}) = _$_TaskDTO;
+      required bool atNight,
+      required DateTime date}) = _$_TaskDTO;
   _TaskDTO._() : super._();
 
   factory _TaskDTO.fromJson(Map<String, dynamic> json) = _$_TaskDTO.fromJson;
@@ -218,6 +247,8 @@ abstract class _TaskDTO extends TaskDTO {
   List<MemberDTO> get members;
   @override
   bool get atNight;
+  @override
+  DateTime get date;
   @override
   @JsonKey(ignore: true)
   _$TaskDTOCopyWith<_TaskDTO> get copyWith =>

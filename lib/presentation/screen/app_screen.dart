@@ -46,6 +46,7 @@ class _AppScreenState extends State<AppScreen> {
           sizing: StackFit.expand,
           children: [
             Stack(
+              fit: StackFit.expand,
               children: [
                 _bodys.elementAt(_selectedTabIndex),
                 Align(

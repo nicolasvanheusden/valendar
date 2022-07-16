@@ -11,6 +11,7 @@ class Task with _$Task {
     required final String title,
     required final int hours,
     required final List<Member> members,
-    required final bool atNight
+    required final bool atNight,
+    required final DateTime date,
   }) = _Task;
 }

@@ -13,7 +13,8 @@ class TaskDTO with _$TaskDTO {
     required final String title,
     required final int hours,
     required final List<MemberDTO> members,
-    required final bool atNight
+    required final bool atNight,
+    required final DateTime date
   }) = _TaskDTO;
 
 
@@ -23,7 +24,8 @@ class TaskDTO with _$TaskDTO {
     members: task.members
       .map((member) => MemberDTO.fromDomain(member))
       .toList(),
-    atNight: task.atNight
+    atNight: task.atNight,
+    date: task.date
   );
 
   Task toDomain() => Task(
@@ -32,7 +34,8 @@ class TaskDTO with _$TaskDTO {
     members: members
       .map((memberDTO) => memberDTO.toDomain())
       .toList(),
-    atNight: atNight
+    atNight: atNight,
+    date: date
   );
 
   factory TaskDTO.fromJson(Map<String, dynamic> json) => _$TaskDTOFromJson(json);

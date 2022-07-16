@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:valendar/application/member/member_bloc.dart';
+import 'package:valendar/application/task/task_bloc.dart';
 import 'package:valendar/presentation/core/colors.dart';
 import 'package:valendar/presentation/screen/app_screen.dart';
 
@@ -21,9 +22,12 @@ void main() async {
     () => runApp(
       MultiBlocProvider(
         providers: [
-        BlocProvider(
-          create: (context) => getIt<MemberBloc>()
-        ),
+          BlocProvider(
+            create: (context) => getIt<MemberBloc>()
+          ),
+          BlocProvider(
+            create: (context) => getIt<TaskBloc>()
+          ),
         ],
         child: const MyApp(),
     )),
