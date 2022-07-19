@@ -61,7 +61,7 @@ class _AppScreenState extends State<AppScreen> {
                     shadowColor: whiteFAFAFA,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
-                      height: 80,
+                      height: MediaQuery.of(context).size.height * 0.08,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -73,7 +73,7 @@ class _AppScreenState extends State<AppScreen> {
                           },
                           icon: Icon(
                             Icons.home_rounded,
-                            size: 40,
+                            size: MediaQuery.of(context).size.height * 0.05,
                             color: _selectedTabIndex == 0 ? blue064F60 : blue064F60.withOpacity(0.5),
                           )
                         ),
@@ -88,7 +88,7 @@ class _AppScreenState extends State<AppScreen> {
                           },
                           icon: Icon(
                             Icons.analytics_outlined,
-                            size: 40,
+                            size: MediaQuery.of(context).size.height * 0.05,
                             color: _selectedTabIndex == 1 ? blue064F60 : blue064F60.withOpacity(0.5),
                           )
                         ),
@@ -103,7 +103,7 @@ class _AppScreenState extends State<AppScreen> {
                           },
                           icon: Icon(
                             Icons.group_outlined,
-                            size: 40,
+                            size: MediaQuery.of(context).size.height * 0.05,
                             color: _selectedTabIndex == 2 ? blue064F60 : blue064F60.withOpacity(0.5),
                           )
                         ),
@@ -151,7 +151,7 @@ class _AppScreenState extends State<AppScreen> {
       key: _formKey,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal :10, vertical: 20),
-        height: MediaQuery.of(context).size.height * 0.6,
+        height: MediaQuery.of(context).size.height * 0.65,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(50),
@@ -186,82 +186,91 @@ class _AppScreenState extends State<AppScreen> {
                 )
               ],
             ),
-            TextFormField(
-              controller: _nameController,
-              enableSuggestions: false,
-              decoration: InputDecoration(
-                label: const Text('Nom'),
-                labelStyle: GoogleFonts.montserrat(
-                  color: blue064F60
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: TextFormField(
+                controller: _nameController,
+                enableSuggestions: false,
+                decoration: InputDecoration(
+                  label: const Text('Nom'),
+                  labelStyle: GoogleFonts.montserrat(
+                    color: blue064F60
+                  ),
                 ),
-              ),
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  return 'Champs requis';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _roleController,
-              enableSuggestions: false,
-              decoration: InputDecoration(
-                label: const Text('Poste'),
-                labelStyle: GoogleFonts.montserrat(
-                  color: blue064F60
-                ),
-              ),
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  return 'Champs requis';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _startContractController,
-              enableSuggestions: false,
-              decoration: InputDecoration(
-                label: const Text('Date de début de contrat'),
-                hintText: 'AAAA-MM-JJ',
-                labelStyle: GoogleFonts.montserrat(
-                  color: blue064F60
-                ),
-              ),
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  return 'Champs requis';
-                }
-                if (RegExp(r'\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])').stringMatch(value ?? '') == value!) {
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Champs requis';
+                  }
                   return null;
-                } else {
-                  return 'Champs mal formaté';
-                }
-              },
-            ),
-            TextFormField(
-              controller: _endContractController,
-              enableSuggestions: false,
-              decoration: InputDecoration(
-                label: const Text('Date de fin de contrat'),
-                hintText: 'AAAA-MM-JJ',
-                labelStyle: GoogleFonts.montserrat(
-                  color: blue064F60
-                ),
+                },
               ),
-              validator: (value) {
-                if(value?.isEmpty ?? true) {
-                  return null;
-                }
-                if (RegExp(r'\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])').stringMatch(value ?? '') == value) {
-                  return null;
-                } else {
-                  return 'Champs mal formaté';
-                }  
-              },
             ),
-            const SizedBox(
-              height: 20,
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: TextFormField(
+                controller: _roleController,
+                enableSuggestions: false,
+                decoration: InputDecoration(
+                  label: const Text('Poste'),
+                  labelStyle: GoogleFonts.montserrat(
+                    color: blue064F60
+                  ),
+                ),
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Champs requis';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: TextFormField(
+                controller: _startContractController,
+                enableSuggestions: false,
+                decoration: InputDecoration(
+                  label: const Text('Date de début de contrat'),
+                  hintText: 'AAAA-MM-JJ',
+                  labelStyle: GoogleFonts.montserrat(
+                    color: blue064F60
+                  ),
+                ),
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Champs requis';
+                  }
+                  if (RegExp(r'\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])').stringMatch(value ?? '') == value!) {
+                    return null;
+                  } else {
+                    return 'Champs mal formaté';
+                  }
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: TextFormField(
+                controller: _endContractController,
+                enableSuggestions: false,
+                decoration: InputDecoration(
+                  label: const Text('Date de fin de contrat'),
+                  hintText: 'AAAA-MM-JJ',
+                  labelStyle: GoogleFonts.montserrat(
+                    color: blue064F60
+                  ),
+                ),
+                validator: (value) {
+                  if(value?.isEmpty ?? true) {
+                    return null;
+                  }
+                  if (RegExp(r'\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])').stringMatch(value ?? '') == value) {
+                    return null;
+                  } else {
+                    return 'Champs mal formaté';
+                  }  
+                },
+              ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -291,7 +300,11 @@ class _AppScreenState extends State<AppScreen> {
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(yellowFFAD47),
-                  fixedSize: MaterialStateProperty.all(const Size(200, 50)),
+                  fixedSize: MaterialStateProperty.all(Size(
+                    MediaQuery.of(context).size.width * 0.5,
+                    40
+                  )
+                  ),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
                   ))

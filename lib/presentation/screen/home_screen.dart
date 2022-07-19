@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:valendar/application/member/member_bloc.dart';
 import 'package:valendar/application/task/task_bloc.dart';
 import 'package:valendar/domain/member/member.dart';
+import 'package:valendar/domain/task/task.dart';
 import 'package:valendar/domain/week/week.dart';
 import 'package:valendar/presentation/core/colors.dart';
 import 'package:valendar/presentation/task/task_tile.dart';
@@ -88,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        '${_currentWeek.dayNames.elementAt(index).substring(0, 3)}\n${_currentWeek.daysNumber.elementAt(index)}',
+                        '${_currentWeek.dayNames.elementAt(index).substring(0, 2)}\n${_currentWeek.daysNumber.elementAt(index)}',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
                         color: _selectedDate.day == _currentWeek.daysNumber.elementAt(index) 
@@ -137,6 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
                                           const SizedBox(
                                             height: 20,
@@ -180,7 +182,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 style: GoogleFonts.montserrat(
                                                   color: blue064F60,
                                                   fontSize: 20,
-                                                  fontWeight: FontWeight.w500
                                                 ),
                                               ),
                                               const SizedBox(
@@ -199,31 +200,40 @@ class _HomeScreenState extends State<HomeScreen> {
                                               return SizedBox(
                                                 height: 200,
                                                 child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     const SizedBox(
                                                       height: 20,
                                                     ),
                                                     Text(
                                                       'Membres : ',
+                                                      textAlign: TextAlign.start,
                                                       style: GoogleFonts.montserrat(
                                                         color: blue064F60,
                                                         fontSize: 20
                                                       ),
                                                     ),
                                                     Wrap(
-                                                      children: _currentMembersToAdd.map((member) => Container(
-                                                        padding: const EdgeInsets.all(8),
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(20),
-                                                          border: Border.all(
-                                                            color: blue064F60
-                                                          )
+                                                      children: _currentMembersToAdd.map((member) => GestureDetector(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            _currentMembersToAdd.remove(member);
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          padding: const EdgeInsets.all(8),
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(20),
+                                                            border: Border.all(
+                                                              color: blue064F60
+                                                            )
+                                                          ),
+                                                          child: Text(
+                                                            member.name,
+                                                            style: GoogleFonts.montserrat(
+                                                              color: blue064F60
+                                                            ),),
                                                         ),
-                                                        child: Text(
-                                                          member.name,
-                                                          style: GoogleFonts.montserrat(
-                                                            color: blue064F60
-                                                          ),),
                                                       )).toList()
                                                     ),
                                                     Expanded(
@@ -239,14 +249,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       _currentMembersToAdd.add(member);
                                                                     });
                                                                   },
-                                                                  child: SizedBox(
+                                                                  child: Container(
                                                                     width: constraints.maxWidth,
-                                                                    child: Text(
-                                                                      member.name,
-                                                                      textAlign: TextAlign.center,
-                                                                      style: GoogleFonts.montserrat(
-                                                                        color: blue064F60,
-                                                                        fontSize: 20
+                                                                    margin: const EdgeInsets.all(5),
+                                                                    decoration: BoxDecoration(
+                                                                      borderRadius: BorderRadius.circular(5),
+                                                                      border: Border.all(
+                                                                        color: blue064F60
+                                                                      )
+                                                                    ),
+                                                                    child: Padding(
+                                                                      padding: const EdgeInsets.all(8.0),
+                                                                      child: Row(
+                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Text(
+                                                                            member.name,
+                                                                            style: GoogleFonts.montserrat(
+                                                                              color: blue064F60,
+                                                                              fontSize: 20
+                                                                            ),
+                                                                          ),
+                                                                          Text(
+                                                                            'Selectionnez',
+                                                                            style: GoogleFonts.montserrat(
+                                                                              color: blue064F60,
+                                                                              fontSize: 15
+                                                                            ),
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ),
                                                                   ),
@@ -264,7 +295,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           ElevatedButton(
                                             onPressed: () {
-                                              // TODO add task
+                                              BlocProvider.of<TaskBloc>(context).add(TaskEvent.addTask(
+                                                Task(
+                                                  title: _titleController.text,
+                                                  hours: int.parse(_hoursController.text),
+                                                  members: _currentMembersToAdd,
+                                                  atNight: atNight,
+                                                  date: _selectedDate
+                                                )
+                                              ));
                                             },
                                             style: ButtonStyle(
                                               backgroundColor: MaterialStateProperty.all<Color>(yellowFFAD47),
@@ -306,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   backgroundColor: MaterialStateProperty.all<Color>(yellowFFAD47),
                   fixedSize: MaterialStateProperty.all<Size>(Size(
                     MediaQuery.of(context).size.width * 0.8,
-                    50
+                    MediaQuery.of(context).size.height * 0.05
                   )),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)

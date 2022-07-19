@@ -22,10 +22,11 @@ class NoResult extends StatelessWidget {
         Image.asset(
           'assets/no_results.png',
           filterQuality: FilterQuality.high,
-          width: MediaQuery.of(context).size.width * 0.6,
+          width: MediaQuery.of(context).size.width * 0.5,
+          height: MediaQuery.of(context).size.width * 0.5,
         ),
-        const SizedBox(
-          height: 50,
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.04
         ),
         Text(
           title,
@@ -35,7 +36,7 @@ class NoResult extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.1,
         )
       ],
     );

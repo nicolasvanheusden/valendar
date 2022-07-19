@@ -67,8 +67,13 @@ class MyApp extends StatelessWidget {
         ) 
       ),
       debugShowCheckedModeBanner: false,
-      home: const Scaffold(
-        body: AppScreen(),
+      home: Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            print(constraints.maxHeight);
+            return const AppScreen();
+          }
+        ),
       )
       
     );

@@ -43,7 +43,7 @@ class _TeamScreenState extends State<TeamScreen> {
           BlocBuilder<MemberBloc, MemberState>(
             builder: (context, state) {
               return state.members.isEmpty 
-                ? const NoResult(title: "Aucun membre dans l'équipe")
+                ? const Center(child: NoResult(title: "Aucun membre dans l'équipe"))
                 : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   itemCount: state.members.length,
@@ -66,13 +66,13 @@ class _TeamScreenState extends State<TeamScreen> {
                             Text(
                               '${state.members.elementAt(index).name} : ${state.members.elementAt(index).role}',
                               style: GoogleFonts.montserrat(
-                                fontSize: 25
+                                fontSize: MediaQuery.of(context).size.height * 0.03
                               ), 
                             ),
                             Text(
                               'Date du Contrat : ${state.members.elementAt(index).startContract.toString().split(' ').first} - ${state.members.elementAt(index).endContract?.toString().split(' ').first ?? ''}',
                               style: GoogleFonts.montserrat(
-                                fontSize: 16
+                                fontSize: MediaQuery.of(context).size.height * 0.02
                               ),
                             ),
                           ],
