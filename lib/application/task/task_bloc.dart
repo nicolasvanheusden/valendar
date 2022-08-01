@@ -1,6 +1,8 @@
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:valendar/domain/member/member.dart';
 import 'package:valendar/domain/task/task.dart';
 import 'package:valendar/infrastructure/task/task_dto.dart';
 
@@ -10,13 +12,13 @@ part 'task_bloc.freezed.dart';
 
 @injectable
 class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
+  
   TaskBloc() : super(TaskState.initial()) {
-
     on<_AddTask>((event, emit) {
       emit(state.copyWith(tasks: [...state.tasks, event.task]));
     });
   }
-  
+
   @override
   TaskState? fromJson(Map<String, dynamic> json) {
     final List<dynamic> tasks = json['tasks'];

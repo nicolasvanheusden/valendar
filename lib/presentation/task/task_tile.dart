@@ -28,21 +28,51 @@ class _TaskTileState extends State<TaskTile> {
         border: Border.all(
           color: blue064F60,
           width: 2,
-        )
+        ),
+        color: widget.task.atNight ? blue064F60 : Colors.white,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ListView(
-            children: widget.task.members.map(
-              (member) => Text(
-                '${member.name}: ${member.role}',
-                style: GoogleFonts.montserrat(
-                  fontSize: 18
-                ),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
               ),
-              ).toList()
+              padding: const EdgeInsets.all(10),
+              child: ListView(
+                children: widget.task.members.map(
+                  (member) => Text(
+                    member.name,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16,
+                      color: widget.task.atNight ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  ).toList()
+                ),
             ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  widget.task.title,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    color: widget.task.atNight ? Colors.white : Colors.black,
+                  ),
+                ),
+                Text(
+                  '${widget.task.hours.toString()}h',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    color: widget.task.atNight ? Colors.white : Colors.black,
+                  ),
+                ),
+              ],
+            )
+          )
         ],
       ),
     );
