@@ -23,7 +23,15 @@ class TaskState with _$TaskState {
     return tasksByMember;
   }
 
-  List<Task> tasksByMemberForMember(Member member, int day, Map<Member,List<Task>> tasksByMember) {
+  List<Task> tasksByMemberAtSpecificDay(Member member, int day, Map<Member,List<Task>> tasksByMember) {
     return tasksByMember[member]?.where((element) => element.date.day == day).toList() ?? [];
+  }
+
+  int sumOfWeekHours(Member member, DateTime firstDate, DateTime lastDate) {
+    return tasksByMember()[member]
+      ?.where((element) => element.date.difference(firstDate).inDays >= 0 && element.date.difference(lastDate).inDays <= 0)
+      .map((task) => task.hours)
+      .reduce((value, element) => value + element) 
+    ?? 0;
   }
 }

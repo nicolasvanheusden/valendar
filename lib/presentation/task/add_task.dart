@@ -61,7 +61,7 @@ class _AddTaskState extends State<AddTask> {
                         'Ajouter une tâche',
                         style: GoogleFonts.montserrat(
                           color: blue064F60,
-                          fontSize: 20
+                          fontSize: MediaQuery.of(context).size.width * 0.05
                         ),
                       ),
                       const SizedBox(
@@ -101,7 +101,7 @@ class _AddTaskState extends State<AddTask> {
                             'De nuit : ',
                             style: GoogleFonts.montserrat(
                               color: blue064F60,
-                              fontSize: 20,
+                              fontSize: MediaQuery.of(context).size.width * 0.04,
                             ),
                           ),
                           const SizedBox(
@@ -127,7 +127,7 @@ class _AddTaskState extends State<AddTask> {
                                   textAlign: TextAlign.start,
                                   style: GoogleFonts.montserrat(
                                     color: blue064F60,
-                                    fontSize: 20
+                                    fontSize: MediaQuery.of(context).size.width * 0.04
                                   ),
                                 ),
                                 Wrap(
@@ -184,14 +184,14 @@ class _AddTaskState extends State<AddTask> {
                                                         member.name,
                                                         style: GoogleFonts.montserrat(
                                                           color: blue064F60,
-                                                          fontSize: 20
+                                                          fontSize: MediaQuery.of(context).size.width * 0.04
                                                         ),
                                                       ),
                                                       Text(
                                                         'Selectionnez',
                                                         style: GoogleFonts.montserrat(
                                                           color: blue064F60,
-                                                          fontSize: 15
+                                                          fontSize: MediaQuery.of(context).size.width * 0.035
                                                         ),
                                                       ),
                                                     ],
@@ -214,14 +214,17 @@ class _AddTaskState extends State<AddTask> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             BlocProvider.of<TaskBloc>(context).add(TaskEvent.addTask(
-                            Task(
-                              title: _titleController.text,
-                              hours: int.parse(_hoursController.text),
-                              members: _currentMembersToAdd,
-                              atNight: atNight,
-                              date: widget.selectedDate
-                            )
-                          ));
+                              Task(
+                                title: _titleController.text,
+                                hours: int.parse(_hoursController.text),
+                                members: _currentMembersToAdd,
+                                atNight: atNight,
+                                date: widget.selectedDate
+                              )
+                            ));
+                            _titleController.clear();
+                            _hoursController.clear();
+                            Navigator.pop(context);
                           }
                           
                         },

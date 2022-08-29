@@ -39,7 +39,8 @@ class _TaskTileState extends State<TaskTile> {
                 borderRadius: BorderRadius.circular(30),
               ),
               padding: const EdgeInsets.all(10),
-              child: ListView(
+              child: Wrap(
+                direction: Axis.vertical,
                 children: widget.task.members.map(
                   (member) => Text(
                     member.name,

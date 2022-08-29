@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _currentWeek.monthName,
           style: GoogleFonts.montserrat(
             color: blue064F60,
-            fontSize: 30,
+            fontSize: MediaQuery.of(context).size.width * 0.08,
           )
         ),
         centerTitle: false,
@@ -58,118 +58,107 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(_currentWeek.dayNames.length,
-                    (index) => Card(
-                      color: _selectedDate.day == _currentWeek.daysNumber.elementAt(index) 
-                        ? blue064F60 
-                        : whiteFAFAFA,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                      elevation: 5,
-                      shadowColor: whiteFAFAFA,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 7 - (3 * 6),
-                        height: 60,
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 3
-                        ),
-                        child: Center(
-                          child: Text(
-                            '${_currentWeek.dayNames.elementAt(index).substring(0, 2)}\n${_currentWeek.daysNumber.elementAt(index)}',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.montserrat(
-                            color: _selectedDate.day == _currentWeek.daysNumber.elementAt(index) 
-                              ? whiteFAFAFA 
-                              : blue064F60,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500 
-                          )
-                          ),
-                        )
-                      ),
-                    )
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(_currentWeek.dayNames.length,
+              (index) => Card(
+                color: _selectedDate.day == _currentWeek.daysNumber.elementAt(index) 
+                  ? blue064F60 
+                  : whiteFAFAFA,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                elevation: 5,
+                shadowColor: whiteFAFAFA,
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 7 - (3 * 6),
+                  height: 60,
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 3
                   ),
-                ),
-                const Divider(
-                  height: 50,
-                  thickness: 1.3,
-                  indent: 50,
-                  endIndent: 50,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      showGeneralDialog(
-                        barrierLabel: 'Label',
-                        barrierDismissible: true,
-                        barrierColor: Colors.black.withOpacity(0.5),
-                        transitionDuration: const Duration(milliseconds: 700),
-                        context: context,
-                        pageBuilder: (context, anim1, anim2) {
-                          return AddTask(selectedDate: _selectedDate);
-                        },
-                        transitionBuilder: (context, anim1, anim2, child) {
-                          return SlideTransition(
-                            position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(anim1),
-                            child: child,
-                          );
-                        },
-                      );
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(yellowFFAD47),
-                      fixedSize: MaterialStateProperty.all<Size>(Size(
-                        MediaQuery.of(context).size.width * 0.8,
-                        MediaQuery.of(context).size.height * 0.05
-                      )),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)
-                      ))
-                    ),
+                  child: Center(
                     child: Text(
-                      'Ajouter une tâche',
+                      '${_currentWeek.dayNames.elementAt(index).substring(0, 2)}\n${_currentWeek.daysNumber.elementAt(index)}',
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.montserrat(
-                        color: whiteFAFAFA,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500
-                      ),
+                      color: _selectedDate.day == _currentWeek.daysNumber.elementAt(index) 
+                        ? whiteFAFAFA 
+                        : blue064F60,
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      fontWeight: FontWeight.w500 
                     )
-                  ),
+                    ),
+                  )
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      print(constraints.maxHeight);
-                      return BlocBuilder<TaskBloc, TaskState>(
-                        builder: (context, state) {
-                          return state.tasks.isEmpty 
-                            ? const NoResult(title: "Aucune tâche pour aujourd'hui",)
-                            : ListView.builder(
-                              itemCount: state.tasks.length,
-                              itemBuilder: (context, index) {
-                                return TaskTile(task: state.tasks.elementAt(index));
-                              }
-                            );
-                          }
+              )
+            ),
+          ),
+          const Divider(
+            height: 50,
+            thickness: 1.3,
+            indent: 50,
+            endIndent: 50,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showGeneralDialog(
+                barrierLabel: 'Label',
+                barrierDismissible: true,
+                barrierColor: Colors.black.withOpacity(0.5),
+                transitionDuration: const Duration(milliseconds: 700),
+                context: context,
+                pageBuilder: (context, anim1, anim2) {
+                  return AddTask(selectedDate: _selectedDate);
+                },
+                transitionBuilder: (context, anim1, anim2, child) {
+                  return SlideTransition(
+                    position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(anim1),
+                    child: child,
+                  );
+                },
+              );
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(yellowFFAD47),
+              fixedSize: MaterialStateProperty.all<Size>(Size(
+                MediaQuery.of(context).size.width * 0.8,
+                MediaQuery.of(context).size.height * 0.05
+              )),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30)
+              ))
+            ),
+            child: Text(
+              'Ajouter une tâche',
+              style: GoogleFonts.montserrat(
+                color: whiteFAFAFA,
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontWeight: FontWeight.w500
+              ),
+            )
+          ),
+          Expanded(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return BlocBuilder<TaskBloc, TaskState>(
+                  builder: (context, state) {
+                    return state.tasks.isEmpty 
+                      ? const NoResult(title: "Aucune tâche pour aujourd'hui",)
+                      : ListView.builder(
+                        itemCount: state.tasks.length,
+                        itemBuilder: (context, index) {
+                          return TaskTile(task: state.tasks.elementAt(index));
+                        }
                       );
                     }
-                  ),
-                ),
-              ],
+                );
+              }
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

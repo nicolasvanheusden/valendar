@@ -19,7 +19,8 @@ class _$WeekTearOff {
   const _$WeekTearOff();
 
   _Week call(
-      {required List<String> dayNames,
+      {required List<DateTime> days,
+      required List<String> dayNames,
       required List<int> daysNumber,
       required String monthName,
       required int monthNumber,
@@ -28,6 +29,7 @@ class _$WeekTearOff {
       int? nextMonthNumber,
       int? nextYear}) {
     return _Week(
+      days: days,
       dayNames: dayNames,
       daysNumber: daysNumber,
       monthName: monthName,
@@ -45,6 +47,7 @@ const $Week = _$WeekTearOff();
 
 /// @nodoc
 mixin _$Week {
+  List<DateTime> get days => throw _privateConstructorUsedError;
   List<String> get dayNames => throw _privateConstructorUsedError;
   List<int> get daysNumber => throw _privateConstructorUsedError;
   String get monthName => throw _privateConstructorUsedError;
@@ -63,7 +66,8 @@ abstract class $WeekCopyWith<$Res> {
   factory $WeekCopyWith(Week value, $Res Function(Week) then) =
       _$WeekCopyWithImpl<$Res>;
   $Res call(
-      {List<String> dayNames,
+      {List<DateTime> days,
+      List<String> dayNames,
       List<int> daysNumber,
       String monthName,
       int monthNumber,
@@ -83,6 +87,7 @@ class _$WeekCopyWithImpl<$Res> implements $WeekCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? days = freezed,
     Object? dayNames = freezed,
     Object? daysNumber = freezed,
     Object? monthName = freezed,
@@ -93,6 +98,10 @@ class _$WeekCopyWithImpl<$Res> implements $WeekCopyWith<$Res> {
     Object? nextYear = freezed,
   }) {
     return _then(_value.copyWith(
+      days: days == freezed
+          ? _value.days
+          : days // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
       dayNames: dayNames == freezed
           ? _value.dayNames
           : dayNames // ignore: cast_nullable_to_non_nullable
@@ -135,7 +144,8 @@ abstract class _$WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
       __$WeekCopyWithImpl<$Res>;
   @override
   $Res call(
-      {List<String> dayNames,
+      {List<DateTime> days,
+      List<String> dayNames,
       List<int> daysNumber,
       String monthName,
       int monthNumber,
@@ -156,6 +166,7 @@ class __$WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? days = freezed,
     Object? dayNames = freezed,
     Object? daysNumber = freezed,
     Object? monthName = freezed,
@@ -166,6 +177,10 @@ class __$WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
     Object? nextYear = freezed,
   }) {
     return _then(_Week(
+      days: days == freezed
+          ? _value.days
+          : days // ignore: cast_nullable_to_non_nullable
+              as List<DateTime>,
       dayNames: dayNames == freezed
           ? _value.dayNames
           : dayNames // ignore: cast_nullable_to_non_nullable
@@ -206,7 +221,8 @@ class __$WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
 
 class _$_Week extends _Week {
   _$_Week(
-      {required this.dayNames,
+      {required this.days,
+      required this.dayNames,
       required this.daysNumber,
       required this.monthName,
       required this.monthNumber,
@@ -216,6 +232,8 @@ class _$_Week extends _Week {
       this.nextYear})
       : super._();
 
+  @override
+  final List<DateTime> days;
   @override
   final List<String> dayNames;
   @override
@@ -235,7 +253,7 @@ class _$_Week extends _Week {
 
   @override
   String toString() {
-    return 'Week(dayNames: $dayNames, daysNumber: $daysNumber, monthName: $monthName, monthNumber: $monthNumber, year: $year, nextMonthName: $nextMonthName, nextMonthNumber: $nextMonthNumber, nextYear: $nextYear)';
+    return 'Week(days: $days, dayNames: $dayNames, daysNumber: $daysNumber, monthName: $monthName, monthNumber: $monthNumber, year: $year, nextMonthName: $nextMonthName, nextMonthNumber: $nextMonthNumber, nextYear: $nextYear)';
   }
 
   @override
@@ -243,6 +261,7 @@ class _$_Week extends _Week {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Week &&
+            const DeepCollectionEquality().equals(other.days, days) &&
             const DeepCollectionEquality().equals(other.dayNames, dayNames) &&
             const DeepCollectionEquality()
                 .equals(other.daysNumber, daysNumber) &&
@@ -260,6 +279,7 @@ class _$_Week extends _Week {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(days),
       const DeepCollectionEquality().hash(dayNames),
       const DeepCollectionEquality().hash(daysNumber),
       const DeepCollectionEquality().hash(monthName),
@@ -277,7 +297,8 @@ class _$_Week extends _Week {
 
 abstract class _Week extends Week {
   factory _Week(
-      {required List<String> dayNames,
+      {required List<DateTime> days,
+      required List<String> dayNames,
       required List<int> daysNumber,
       required String monthName,
       required int monthNumber,
@@ -287,6 +308,8 @@ abstract class _Week extends Week {
       int? nextYear}) = _$_Week;
   _Week._() : super._();
 
+  @override
+  List<DateTime> get days;
   @override
   List<String> get dayNames;
   @override

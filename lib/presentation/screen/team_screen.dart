@@ -1,8 +1,3 @@
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,11 +21,14 @@ class _TeamScreenState extends State<TeamScreen> {
       resizeToAvoidBottomInset: true,
       backgroundColor: whiteFAFAFA,
       appBar: AppBar(
-        title: Text(
-          'Mon équipe',
-          style: GoogleFonts.montserrat(
-            color: blue064F60,
-            fontSize: 30
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Mon équipe',
+            style: GoogleFonts.montserrat(
+              color: blue064F60,
+              fontSize: MediaQuery.of(context).size.width * 0.08
+            ),
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -43,13 +41,16 @@ class _TeamScreenState extends State<TeamScreen> {
           BlocBuilder<MemberBloc, MemberState>(
             builder: (context, state) {
               return state.members.isEmpty 
-                ? const Center(child: NoResult(title: "Aucun membre dans l'équipe"))
+                ? const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Center(child: NoResult(title: "Aucun membre dans l'équipe")),
+                )
                 : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   itemCount: state.members.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      height: 80,
+                      height: MediaQuery.of(context).size.height * 0.1,
                       margin: const EdgeInsets.symmetric(vertical: 5),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -66,13 +67,13 @@ class _TeamScreenState extends State<TeamScreen> {
                             Text(
                               '${state.members.elementAt(index).name} : ${state.members.elementAt(index).role}',
                               style: GoogleFonts.montserrat(
-                                fontSize: MediaQuery.of(context).size.height * 0.03
+                                fontSize: MediaQuery.of(context).size.height * 0.025
                               ), 
                             ),
                             Text(
                               'Date du Contrat : ${state.members.elementAt(index).startContract.toString().split(' ').first} - ${state.members.elementAt(index).endContract?.toString().split(' ').first ?? ''}',
                               style: GoogleFonts.montserrat(
-                                fontSize: MediaQuery.of(context).size.height * 0.02
+                                fontSize: MediaQuery.of(context).size.height * 0.015
                               ),
                             ),
                           ],

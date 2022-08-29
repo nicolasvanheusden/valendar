@@ -30,13 +30,14 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
           children: [
-            Expanded(
-              child: ListView(
-                children: [
-                  Card(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Card(
                     color: whiteFAFAFA,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)
@@ -57,46 +58,16 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.montserrat(
                           color: blue064F60,
-                          fontSize: 18,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
                           fontWeight: FontWeight.w500 
                         )
                         ),
                       )
-                    ),
+                    ),    
                   ),
-                  Expanded(
-                    child: BlocBuilder<MemberBloc, MemberState>(
-                      builder: (context, memberState) {
-                        return Column(
-                          children: List.generate(
-                            memberState.members.length,
-                            (index) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 3
-                              ),
-                              child: Text(
-                                memberState.members.elementAt(index).name,
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.montserrat(
-                                  color: blue064F60,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500 
-                                )
-                              ),
-                            )
-                          )
-                        );
-                      }
-                    ),
-                  )
-                ]      
-              ),
-            ),
-            ...List.generate(_currentWeek.dayNames.length,
-              (index) => Column(
-                children: [
-                  Card(
+                ),
+                ...List.generate(_currentWeek.dayNames.length,
+                  (index) => Card(
                     color: whiteFAFAFA,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)
@@ -116,184 +87,145 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.montserrat(
                           color: blue064F60,
-                          fontSize: 18,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
                           fontWeight: FontWeight.w500 
                         )
                         ),
                       )
                     ),
+                  )
+                ),
+                Card(
+                  color: whiteFAFAFA,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
                   ),
-                  BlocBuilder<TaskBloc, TaskState>( 
-                  builder: (context, taskState) {
-                    final map = taskState.tasksByMember();
-                    return BlocBuilder<MemberBloc, MemberState>(
-                      builder: (context, memberState) {
-                        return SizedBox(
-                          height: MediaQuery.of(context).size.height - 160,
-                          width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-                          child: Column(
-                            children: List.generate(
-                                memberState.members.length, (memberIndex) {
-                                  final tasksFromMember = taskState.tasksByMemberForMember(
-                                  memberState.members.elementAt(memberIndex),
-                                  _currentWeek.daysNumber.elementAt(index),
-                                  map
+                  elevation: 5,
+                  shadowColor: whiteFAFAFA,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 9 - (3 * 6),
+                    height: 60,
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 3
+                    ),
+                    child: Center(
+                      child: Text(
+                        'T',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.montserrat(
+                        color: blue064F60,
+                        fontSize: MediaQuery.of(context).size.width * 0.04,
+                        fontWeight: FontWeight.w500 
+                      )
+                      ),
+                    )
+                  ),
+                ),
+              ]
+            ),
+            Expanded(
+              child: BlocBuilder<MemberBloc, MemberState>(
+                builder: (context, memberState) {
+                  return BlocBuilder<TaskBloc, TaskState>(
+                    builder: (context, taskState) {
+                      final map = taskState.tasksByMember();
+                      return ListView(
+                        children: List.generate(
+                          memberState.members.length,
+                          (memberIndex) => Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 3
+                                ),
+                                child: Text(
+                                  memberState.members.elementAt(memberIndex).name,
+                                  textAlign: TextAlign.center,
+                                  maxLines: 1,
+                                  style: GoogleFonts.montserrat(
+                                    color: blue064F60,
+                                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                                    fontWeight: FontWeight.w500 
+                                  )
+                                ),
+                              )
+                              ),
+                              ...List.generate(
+                                _currentWeek.dayNames.length, (index) {                                  
+                                  final tasksFromMember = taskState.tasksByMemberAtSpecificDay(
+                                    memberState.members.elementAt(memberIndex),
+                                    _currentWeek.daysNumber.elementAt(index),
+                                    map
+                                  );
+                                return Row(
+                                  children: [
+                                    Card(
+                                      elevation: 0,
+                                      color: Colors.transparent,
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width / 9 - (3 * 6),
+                                        margin: const EdgeInsets.symmetric(
+                                          vertical: 10,
+                                          horizontal: 3
+                                        ),
+                                        child: Text(
+                                          tasksFromMember.isEmpty 
+                                            ? '0' 
+                                            : tasksFromMember.map((task) => task.hours)
+                                            .reduce((value, element) => value + element)
+                                            .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.montserrat(
+                                            color: blue064F60,
+                                            fontSize: MediaQuery.of(context).size.width * 0.035,
+                                            fontWeight: FontWeight.w500 
+                                          )
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 );
-                                return Container(
+                                }
+                              ),
+                              Card(
+                                elevation: 0,
+                                color: Colors.transparent,
+                                child: Container(
                                   width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-                                  padding: const EdgeInsets.symmetric(
+                                  margin: const EdgeInsets.symmetric(
                                     vertical: 10,
                                     horizontal: 3
                                   ),
                                   child: Text(
-                                    tasksFromMember.isEmpty ? '0' : tasksFromMember.first.hours.toString(),
+                                    taskState.sumOfWeekHours(
+                                      memberState.members.elementAt(memberIndex),
+                                      _currentWeek.days.first,
+                                      _currentWeek.days.last
+                                    ).toString(),
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.montserrat(
                                       color: blue064F60,
-                                      fontSize: 18,
+                                      fontSize: MediaQuery.of(context).size.width * 0.035,
                                       fontWeight: FontWeight.w500 
                                     )
                                   ),
-                                );
-                                }
+                                ),
                               ),
-                            ),
-                        );
-                        }
-                      );
-                  },
-                  )
-                ],
-              )
-            ),
-            Column(
-              children: [
-                Card(
-                    color: whiteFAFAFA,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    elevation: 5,
-                    shadowColor: whiteFAFAFA,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-                      height: 60,
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 3
-                      ),
-                      child: Center(
-                        child: Text(
-                          'T',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.montserrat(
-                          color: blue064F60,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500 
-                        )
+                            ],
+                          )
                         ),
-                      )
-                    ),
-                  ),
-              ],
+                      );
+                    },
+                  );
+                },
+              )
             )
-          ]
+          ],
         ),
-            // Expanded(
-            //   child: BlocBuilder<TaskBloc, TaskState>( 
-            //     builder: (context, taskState) {
-            //       final map = taskState.tasksByMember();
-            //       return BlocBuilder<MemberBloc, MemberState>(
-            //         builder: (context, memberState) {
-            //           return ListView.builder(
-            //             itemCount: memberState.members.length,
-            //             itemBuilder: (context, memberIndex) {
-            //               return Row(
-            //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //                 children: [
-            //                   Expanded(
-            //                     child: Container(
-            //                       child: Text(
-            //                         memberState.members.elementAt(memberIndex).name,
-            //                         style: GoogleFonts.montserrat(
-            //                           color: blue064F60,
-            //                           fontSize: 18,
-            //                           fontWeight: FontWeight.w500 
-            //                         )
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   ...List.generate(
-            //                     7,
-            //                     (index) {
-            //                       final tasksFromMember = taskState.tasksByMemberForMember(
-            //                         memberState.members.elementAt(memberIndex),
-            //                         _currentWeek.daysNumber.elementAt(index),
-            //                         map
-            //                       );
-            //                       return Container(
-            //                         width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-            //                         padding: const EdgeInsets.symmetric(
-            //                         vertical: 10,
-            //                         horizontal: 3
-            //                       ),
-            //                       decoration: const BoxDecoration(
-            //                       border: Border.symmetric(
-            //                         vertical: BorderSide(
-            //                           color: blue064F60,
-            //                         )
-            //                         ),
-            //                       ),
-            //                       child: Text(
-            //                         tasksFromMember.isEmpty ? '0' : tasksFromMember.first.hours.toString(),
-            //                         style: GoogleFonts.montserrat(
-            //                           color: blue064F60,
-            //                           fontSize: 18,
-            //                           fontWeight: FontWeight.w500 
-            //                         )
-            //                       ),
-            //                     );
-            //                   }),
-            //                   Container(
-            //                     width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-            //                     padding: const EdgeInsets.symmetric(
-            //                       vertical: 10,
-            //                       horizontal: 3
-            //                     ),
-            //                     decoration: const BoxDecoration(
-            //                       border: Border.symmetric(
-            //                         vertical: BorderSide(
-            //                           color: blue064F60,
-            //                         )
-            //                         ),
-            //                     ),
-            //                     child: Text(
-            //                       '8',
-            //                       style: GoogleFonts.montserrat(
-            //                         color: blue064F60,
-            //                         fontSize: 18,
-            //                         fontWeight: FontWeight.w500 
-            //                       )
-            //                     ),
-            //                   ),
-            //                 ],
-            //               );
-            //             }
-            //           );
-            //         },
-            //       );
-            //     },
-            //   )
-            // )
       ),
     );
   }
 }
-
-// Text(
-//               'Semaine du ${_currentWeek.daysNumber.first}/${_currentWeek.monthNumber} au ${_currentWeek.daysNumber.last}/${_currentWeek.nextMonthNumber ?? _currentWeek.monthNumber}',
-//               style: GoogleFonts.montserrat(
-//                 color: Colors.black,
-//                 fontSize: 18,
-//               )
-//             ), 

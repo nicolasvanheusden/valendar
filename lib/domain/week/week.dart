@@ -21,7 +21,7 @@ class Week with _$Week {
     may: 'Mai',
     june: 'Juin', 
     july: 'Juillet', 
-    august: 'Aout',
+    august: 'Août',
     september: 'Septembre',
     october: 'Octobre',
     november: 'Novembre',
@@ -29,6 +29,7 @@ class Week with _$Week {
   );
 
   factory Week({
+    required final List<DateTime> days,
     required final List<String> dayNames,
     required final List<int> daysNumber,
     required final String monthName,
@@ -40,6 +41,11 @@ class Week with _$Week {
   }) = _Week;
 
   factory Week.initialize(DateTime now) => _Week(
+    days: List.generate(7,
+    (index) => now.weekday > DateTime.monday + index 
+      ? now.subtract(Duration(days: now.weekday - DateTime.monday - index))
+      : now.add(Duration(days: (now.weekday - DateTime.monday - index).abs()))
+    ),
     dayNames: [
       _calendarNames.monday, 
       _calendarNames.tuesday,
@@ -81,6 +87,7 @@ class Week with _$Week {
       : null;
 
     return _Week(
+      days: days,
       dayNames: dayNames,
       daysNumber: daysNumber,
       monthName: monthName,

@@ -15,30 +15,33 @@ class NoResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          'assets/no_results.png',
-          filterQuality: FilterQuality.high,
-          width: MediaQuery.of(context).size.width * 0.5,
-          height: MediaQuery.of(context).size.width * 0.5,
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.04
-        ),
-        Text(
-          title,
-          style: GoogleFonts.montserrat(
-            color: blue064F60,
-            fontSize: 20,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/no_results.png',
+            filterQuality: FilterQuality.high,
+            width: MediaQuery.of(context).size.width * 0.5,
+            height: MediaQuery.of(context).size.width * 0.5,
           ),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.1,
-        )
-      ],
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.04
+          ),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.montserrat(
+              color: blue064F60,
+              fontSize: MediaQuery.of(context).size.width * 0.05,
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.1,
+          )
+        ],
+      ),
     );
   }
 }
