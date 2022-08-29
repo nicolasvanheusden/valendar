@@ -146,9 +146,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 return BlocBuilder<TaskBloc, TaskState>(
                   builder: (context, state) {
                     return state.tasks.isEmpty 
-                      ? const NoResult(title: "Aucune tâche pour aujourd'hui",)
+                      ? const Center(child: NoResult(title: "Aucune tâche pour aujourd'hui",))
                       : ListView.builder(
                         itemCount: state.tasks.length,
+                        addRepaintBoundaries: false,
                         itemBuilder: (context, index) {
                           return TaskTile(task: state.tasks.elementAt(index));
                         }

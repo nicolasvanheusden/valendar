@@ -54,18 +54,12 @@ class _AddTaskState extends State<AddTask> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
                       Text(
                         'Ajouter une tâche',
                         style: GoogleFonts.montserrat(
                           color: blue064F60,
                           fontSize: MediaQuery.of(context).size.width * 0.05
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
                       ),
                       TextFormField(
                         controller: _titleController,
@@ -75,9 +69,6 @@ class _AddTaskState extends State<AddTask> {
                             color: blue064F60
                           )
                         ),
-                      ),
-                      const SizedBox(
-                        height: 15,
                       ),
                       TextFormField(
                         controller: _hoursController,
