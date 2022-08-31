@@ -1,3 +1,4 @@
+import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,11 +57,11 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
                 child: Text(
-                  'Du ${_currentWeek.days.first.day} ${_currentWeek.monthName} au ${_currentWeek.days.last.day} ${_currentWeek.nextMonthName ?? _currentWeek.monthName} ${_currentWeek.nextYear}',
+                  '${_currentWeek.monthName}${_currentWeek.nextMonthName != _currentWeek.monthName ? ' - ${_currentWeek.nextMonthName}' : ''} ${_currentWeek.nextYear}',
                   style: GoogleFonts.roboto(
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: blue064F60,
                     height: 2,
@@ -110,23 +111,41 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                                         elevation: 0,
                                         color: Colors.transparent,
                                         child: Container(
-                                          width: MediaQuery.of(context).size.width / 9 - (3 * 6),
+                                          width: MediaQuery.of(context).size.width / 9 - (3 * 6),  
+                                          height: 20,                                       
                                           margin: const EdgeInsets.symmetric(
-                                            vertical: 10,
-                                            horizontal: 3
+                                            horizontal: 3,
+                                            vertical: 10
                                           ),
-                                          child: Text(
-                                            tasksFromMember.isEmpty 
-                                              ? '0' 
-                                              : tasksFromMember.map((task) => task.hours)
-                                              .reduce((value, element) => value + element)
-                                              .toString(),
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.montserrat(
-                                              color: blue064F60,
-                                              fontSize: MediaQuery.of(context).size.width * 0.035,
-                                              fontWeight: FontWeight.w500 
-                                            )
+                                          child: Stack(
+                                            alignment: Alignment.center,                                          
+                                            children: [
+                                              if (tasksFromMember.where((task) => task.atNight).isNotEmpty)
+                                                AlignPositioned(
+                                                  alignment: Alignment.topRight,
+                                                  child: Text(
+                                                    'N',
+                                                    style: GoogleFonts.montserrat(
+                                                    color: purple2E1A47,
+                                                    fontSize: MediaQuery.of(context).size.width * 0.02,
+                                                    fontWeight: FontWeight.w500 
+                                                    )
+                                                  ),
+                                                ),
+                                              Text(
+                                                tasksFromMember.isEmpty 
+                                                  ? '0' 
+                                                  : tasksFromMember.map((task) => task.hours)
+                                                  .reduce((value, element) => value + element)
+                                                  .toString(),
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.montserrat(
+                                                  color: blue064F60,
+                                                  fontSize: MediaQuery.of(context).size.width * 0.035,
+                                                  fontWeight: FontWeight.w500 
+                                                )
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
