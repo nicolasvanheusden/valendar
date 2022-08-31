@@ -13,12 +13,12 @@ class AnalyticsScreen extends StatefulWidget {
   State<AnalyticsScreen> createState() => _AnalyticsScreenState();
 }
 
-
-
-
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
-  late final Week _currentWeek;
+  late Week _currentWeek;
+  double _horizontalDragStart = 0;
+  double _horizontalDragEnd = 0;
+
 
   @override
   void initState() {
@@ -30,202 +30,249 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Card(
-                    color: whiteFAFAFA,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    elevation: 5,
-                    shadowColor: whiteFAFAFA,
-                    child: Container(
-                      constraints: const BoxConstraints.expand(
-                        height: 60
-                      ),
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 3
-                      ),
-                      child: Center(
-                        child: Text(
-                          'N',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.montserrat(
-                          color: blue064F60,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
-                          fontWeight: FontWeight.w500 
-                        )
-                        ),
-                      )
-                    ),    
+        child: GestureDetector(
+          onHorizontalDragStart: (details) {
+            setState(() {
+              _horizontalDragStart = details.localPosition.dx;
+            });
+          },
+          onHorizontalDragUpdate: (details) {
+            setState(() {
+              _horizontalDragEnd = details.localPosition.dx;        
+            });
+          },
+          onHorizontalDragEnd: (_) {
+            if (_horizontalDragEnd > _horizontalDragStart) {
+              setState(() {
+                _currentWeek = _currentWeek.previousWeek();
+              });
+            } else {
+              setState(() {
+                _currentWeek = _currentWeek.nextWeek();
+              });
+            }
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  'Du ${_currentWeek.days.first.day} ${_currentWeek.monthName} au ${_currentWeek.days.last.day} ${_currentWeek.nextMonthName ?? _currentWeek.monthName} ${_currentWeek.nextYear}',
+                  style: GoogleFonts.roboto(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: blue064F60,
+                    height: 2,
                   ),
                 ),
-                ...List.generate(_currentWeek.dayNames.length,
-                  (index) => Card(
-                    color: whiteFAFAFA,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    elevation: 5,
-                    shadowColor: whiteFAFAFA,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-                      height: 60,
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 3
-                      ),
-                      child: Center(
-                        child: Text(
-                          '${_currentWeek.dayNames.elementAt(index).substring(0, 1)}\n${_currentWeek.daysNumber.elementAt(index)}',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.montserrat(
-                          color: blue064F60,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
-                          fontWeight: FontWeight.w500 
-                        )
-                        ),
-                      )
-                    ),
-                  )
-                ),
-                Card(
-                  color: whiteFAFAFA,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  elevation: 5,
-                  shadowColor: whiteFAFAFA,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-                    height: 60,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 3
-                    ),
-                    child: Center(
-                      child: Text(
-                        'T',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(
-                        color: blue064F60,
-                        fontSize: MediaQuery.of(context).size.width * 0.04,
-                        fontWeight: FontWeight.w500 
-                      )
-                      ),
-                    )
-                  ),
-                ),
-              ]
-            ),
-            Expanded(
-              child: BlocBuilder<MemberBloc, MemberState>(
-                builder: (context, memberState) {
-                  return BlocBuilder<TaskBloc, TaskState>(
-                    builder: (context, taskState) {
-                      final map = taskState.tasksByMember();
-                      return ListView(
-                        children: List.generate(
-                          memberState.members.length,
-                          (memberIndex) => Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 3
-                                ),
-                                child: Text(
-                                  memberState.members.elementAt(memberIndex).name,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  style: GoogleFonts.montserrat(
-                                    color: blue064F60,
-                                    fontSize: MediaQuery.of(context).size.width * 0.04,
-                                    fontWeight: FontWeight.w500 
-                                  )
-                                ),
-                              )
-                              ),
-                              ...List.generate(
-                                _currentWeek.dayNames.length, (index) {                                  
-                                  final tasksFromMember = taskState.tasksByMemberAtSpecificDay(
-                                    memberState.members.elementAt(memberIndex),
-                                    _currentWeek.daysNumber.elementAt(index),
-                                    map
-                                  );
-                                return Row(
-                                  children: [
-                                    Card(
-                                      elevation: 0,
-                                      color: Colors.transparent,
-                                      child: Container(
-                                        width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-                                        margin: const EdgeInsets.symmetric(
-                                          vertical: 10,
-                                          horizontal: 3
-                                        ),
-                                        child: Text(
-                                          tasksFromMember.isEmpty 
-                                            ? '0' 
-                                            : tasksFromMember.map((task) => task.hours)
-                                            .reduce((value, element) => value + element)
-                                            .toString(),
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.montserrat(
-                                            color: blue064F60,
-                                            fontSize: MediaQuery.of(context).size.width * 0.035,
-                                            fontWeight: FontWeight.w500 
-                                          )
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                                }
-                              ),
-                              Card(
-                                elevation: 0,
-                                color: Colors.transparent,
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width / 9 - (3 * 6),
-                                  margin: const EdgeInsets.symmetric(
+              ),
+              _header(),
+              Expanded(
+                child: BlocBuilder<MemberBloc, MemberState>(
+                  builder: (context, memberState) {
+                    return BlocBuilder<TaskBloc, TaskState>(
+                      builder: (context, taskState) {
+                        final map = taskState.tasksByMember();
+                        return ListView(
+                          children: List.generate(
+                            memberState.members.length,
+                            (memberIndex) => Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                  padding: const EdgeInsets.symmetric(
                                     vertical: 10,
                                     horizontal: 3
                                   ),
                                   child: Text(
-                                    taskState.sumOfWeekHours(
-                                      memberState.members.elementAt(memberIndex),
-                                      _currentWeek.days.first,
-                                      _currentWeek.days.last
-                                    ).toString(),
+                                    memberState.members.elementAt(memberIndex).name,
                                     textAlign: TextAlign.center,
+                                    maxLines: 1,
                                     style: GoogleFonts.montserrat(
                                       color: blue064F60,
-                                      fontSize: MediaQuery.of(context).size.width * 0.035,
+                                      fontSize: MediaQuery.of(context).size.width * 0.04,
                                       fontWeight: FontWeight.w500 
                                     )
                                   ),
+                                )
                                 ),
-                              ),
-                            ],
-                          )
-                        ),
-                      );
-                    },
-                  );
-                },
+                                ...List.generate(
+                                  _currentWeek.dayNames.length, (index) {                                  
+                                    final tasksFromMember = taskState.tasksByMemberAtSpecificDay(
+                                      memberState.members.elementAt(memberIndex),
+                                      _currentWeek.daysNumber.elementAt(index),
+                                      map
+                                    );
+                                  return Row(
+                                    children: [
+                                      Card(
+                                        elevation: 0,
+                                        color: Colors.transparent,
+                                        child: Container(
+                                          width: MediaQuery.of(context).size.width / 9 - (3 * 6),
+                                          margin: const EdgeInsets.symmetric(
+                                            vertical: 10,
+                                            horizontal: 3
+                                          ),
+                                          child: Text(
+                                            tasksFromMember.isEmpty 
+                                              ? '0' 
+                                              : tasksFromMember.map((task) => task.hours)
+                                              .reduce((value, element) => value + element)
+                                              .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.montserrat(
+                                              color: blue064F60,
+                                              fontSize: MediaQuery.of(context).size.width * 0.035,
+                                              fontWeight: FontWeight.w500 
+                                            )
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                  }
+                                ),
+                                Card(
+                                  elevation: 0,
+                                  color: Colors.transparent,
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width / 9 - (3 * 6),
+                                    margin: const EdgeInsets.symmetric(
+                                      vertical: 10,
+                                      horizontal: 3
+                                    ),
+                                    child: Text(
+                                      taskState.sumOfWeekHours(
+                                        memberState.members.elementAt(memberIndex),
+                                        _currentWeek.days.first,
+                                        _currentWeek.days.last
+                                      ).toString(),
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserrat(
+                                        color: blue064F60,
+                                        fontSize: MediaQuery.of(context).size.width * 0.035,
+                                        fontWeight: FontWeight.w500 
+                                      )
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ),
+                        );
+                      },
+                    );
+                  },
+                )
               )
-            )
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+
+
+  Widget _header() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Name Case
+        Expanded(
+          child: Card(
+            color: whiteFAFAFA,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10)
+            ),
+            elevation: 5,
+            shadowColor: whiteFAFAFA,
+            child: Container(
+              constraints: const BoxConstraints.expand(
+                height: 60
+              ),
+              margin: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 3
+              ),
+              child: Center(
+                child: Text(
+                  'N',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.montserrat(
+                  color: blue064F60,
+                  fontSize: MediaQuery.of(context).size.width * 0.04,
+                  fontWeight: FontWeight.w500 
+                )
+                ),
+              )
+            ),    
+          ),
+        ),
+
+        // Day Cases
+        ...List.generate(_currentWeek.dayNames.length,
+          (index) => Card(
+            color: whiteFAFAFA,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10)
+            ),
+            elevation: 5,
+            shadowColor: whiteFAFAFA,
+            child: Container(
+              width: MediaQuery.of(context).size.width / 9 - (3 * 6) + 1,
+              height: 60,
+              margin: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 3
+              ),
+              child: Center(
+                child: Text(
+                  '${_currentWeek.dayNames.elementAt(index).substring(0, 1)}\n${_currentWeek.daysNumber.elementAt(index)}',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.montserrat(
+                  color: blue064F60,
+                  fontSize: MediaQuery.of(context).size.width * 0.035,
+                  fontWeight: FontWeight.w500 
+                )
+                ),
+              )
+            ),
+          )
+        ),
+
+        // Total Case
+        Card(
+          color: whiteFAFAFA,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10)
+          ),
+          elevation: 5,
+          shadowColor: whiteFAFAFA,
+          child: Container(
+            width: MediaQuery.of(context).size.width / 9 - (3 * 6),
+            height: 60,
+            margin: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 3
+            ),
+            child: Center(
+              child: Text(
+                'T',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.montserrat(
+                color: blue064F60,
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontWeight: FontWeight.w500 
+              )
+              ),
+            )
+          ),
+        ),
+      ]
     );
   }
 }

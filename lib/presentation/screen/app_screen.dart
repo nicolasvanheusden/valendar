@@ -34,16 +34,11 @@ class _AppScreenState extends State<AppScreen> {
       body: SafeArea(
         top: false,
         bottom: false,
-        child: IndexedStack(
-          sizing: StackFit.expand,
+        child: Stack(
+          fit: StackFit.expand,
           children: [
-            Stack(
-              fit: StackFit.expand,
-              children: [
-                _bodys.elementAt(_selectedTabIndex),
-                _bottomNavBar(),
-              ],
-            )
+            _bodys.elementAt(_selectedTabIndex),
+            _bottomNavBar(),
           ],
         )
       ),
@@ -58,7 +53,7 @@ class _AppScreenState extends State<AppScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30)
         ), 
-        margin: const EdgeInsets.only(bottom: 50),
+        margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.05),
         elevation: 10,
         color: whiteFAFAFA,
         child: SizedBox(
@@ -99,7 +94,6 @@ class _AppScreenState extends State<AppScreen> {
                 setState(() {
                   _selectedTabIndex = 2;
                 });
-                
                 // TODO(nico): display team screen
               },
               icon: Icon(

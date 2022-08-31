@@ -23,14 +23,31 @@ class _AddMemberState extends State<AddMember> {
   final TextEditingController _startContractController = TextEditingController();
   final TextEditingController _endContractController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  late double modalHeight = MediaQuery.of(context).size.height * 0.6;
+
+
+  @override
+  void didChangeDependencies() { 
+    super.didChangeDependencies();
+    if (MediaQuery.of(context).viewInsets.bottom == 0) {
+      setState(() {
+        modalHeight = MediaQuery.of(context).size.height * 0.6;
+      });
+    } else {
+      setState(() {
+        modalHeight = MediaQuery.of(context).size.height * 0.9;
+      });
+    }
+   }
   
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.symmetric(horizontal :10, vertical: 20),
-        height: MediaQuery.of(context).size.height * 0.6,
+        height: modalHeight,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(50),
@@ -40,7 +57,6 @@ class _AddMemberState extends State<AddMember> {
         ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -68,11 +84,16 @@ class _AddMemberState extends State<AddMember> {
               child: TextFormField(
                 controller: _nameController,
                 enableSuggestions: false,
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
+                ),
                 decoration: InputDecoration(
                   label: const Text('Nom'),
                   labelStyle: GoogleFonts.montserrat(
-                    color: blue064F60
+                    color: blue064F60,
+                    fontSize: 12,
                   ),
+                  constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                 ),
                 validator: (value) {
                   if (value?.isEmpty ?? true) {
@@ -87,11 +108,16 @@ class _AddMemberState extends State<AddMember> {
               child: TextFormField(
                 controller: _roleController,
                 enableSuggestions: false,
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
+                ),
                 decoration: InputDecoration(
                   label: const Text('Poste'),
                   labelStyle: GoogleFonts.montserrat(
-                    color: blue064F60
+                    color: blue064F60,
+                    fontSize: 12,
                   ),
+                  constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                 ),
                 validator: (value) {
                   if (value?.isEmpty ?? true) {
@@ -106,12 +132,20 @@ class _AddMemberState extends State<AddMember> {
               child: TextFormField(
                 controller: _startContractController,
                 enableSuggestions: false,
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
+                ),
                 decoration: InputDecoration(
                   label: const Text('Date de début de contrat'),
                   hintText: 'AAAA-MM-JJ',
-                  labelStyle: GoogleFonts.montserrat(
-                    color: blue064F60
+                  hintStyle: GoogleFonts.montserrat(
+                    fontSize: 12,
                   ),
+                  labelStyle: GoogleFonts.montserrat(
+                    color: blue064F60,
+                    fontSize: 12,
+                  ),
+                  constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                 ),
                 validator: (value) {
                   if (value?.isEmpty ?? true) {
@@ -130,12 +164,20 @@ class _AddMemberState extends State<AddMember> {
               child: TextFormField(
                 controller: _endContractController,
                 enableSuggestions: false,
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
+                ),
                 decoration: InputDecoration(
                   label: const Text('Date de fin de contrat'),
                   hintText: 'AAAA-MM-JJ',
-                  labelStyle: GoogleFonts.montserrat(
-                    color: blue064F60
+                  hintStyle: GoogleFonts.montserrat(
+                    fontSize: 12,
                   ),
+                  labelStyle: GoogleFonts.montserrat(
+                    color: blue064F60,
+                    fontSize: 12,
+                  ),
+                  constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                 ),
                 validator: (value) {
                   if(value?.isEmpty ?? true) {
@@ -177,7 +219,7 @@ class _AddMemberState extends State<AddMember> {
                   backgroundColor: MaterialStateProperty.all(yellowFFAD47),
                   fixedSize: MaterialStateProperty.all(Size(
                     MediaQuery.of(context).size.width * 0.5,
-                    40
+                    MediaQuery.of(context).size.height * 0.05
                   )
                   ),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(

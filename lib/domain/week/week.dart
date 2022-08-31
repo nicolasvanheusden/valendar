@@ -28,6 +28,21 @@ class Week with _$Week {
     december: 'Decembre'
   );
 
+  static final List<String> monthNames = [
+    _calendarNames.january,
+    _calendarNames.february,
+    _calendarNames.march,
+    _calendarNames.april,
+    _calendarNames.may,
+    _calendarNames.june,
+    _calendarNames.july,
+    _calendarNames.august,
+    _calendarNames.september,
+    _calendarNames.october,
+    _calendarNames.november,
+    _calendarNames.december
+  ];
+
   factory Week({
     required final List<DateTime> days,
     required final List<String> dayNames,
@@ -60,32 +75,19 @@ class Week with _$Week {
       ? now.subtract(Duration(days: now.weekday - DateTime.monday - index)).day
       : now.add(Duration(days: (now.weekday - DateTime.monday - index).abs())).day
     ), 
-    monthName: [
-      _calendarNames.january,
-      _calendarNames.february,
-      _calendarNames.march,
-      _calendarNames.april,
-      _calendarNames.may,
-      _calendarNames.june,
-      _calendarNames.july,
-      _calendarNames.august,
-      _calendarNames.september,
-      _calendarNames.october,
-      _calendarNames.november,
-      _calendarNames.december
-    ].elementAt(now.month-1),
+    monthName: monthNames.elementAt(now.month-1),
     monthNumber: now.month,
     year: now.year,
   );
 
   _Week initializeNullableFields() {
+    final daysNumberSorted = daysNumber.sublist(0); // copy
+    daysNumberSorted.sort();    
 
-    final daysNumberSorted = daysNumber.sublist(0);
-    daysNumberSorted.sort();
-    final nextMonthNumber = daysNumberSorted != daysNumber 
+    final tmpNextMonthNumber = daysNumberSorted.whereIndexed((index, element) => daysNumber.elementAt(index) != element).isNotEmpty
       ? (monthNumber+1) % 12 
-      : null;
-
+      : monthNumber;  
+    
     return _Week(
       days: days,
       dayNames: dayNames,
@@ -93,9 +95,20 @@ class Week with _$Week {
       monthName: monthName,
       monthNumber: monthNumber,
       year: year,
-      nextMonthNumber: nextMonthNumber,
-      nextYear: nextMonthNumber != monthNumber ? year+1 : null
+      nextMonthNumber: tmpNextMonthNumber,
+      nextYear: tmpNextMonthNumber < monthNumber ? year+1 : year,
+      nextMonthName: tmpNextMonthNumber != monthNumber ? monthNames.elementAt(tmpNextMonthNumber-1) : monthName
     );
+  }
+
+
+  Week nextWeek() {
+    return Week.initialize(days.first.add(const Duration(days: 7))).initializeNullableFields();
+  }
+
+
+  Week previousWeek() {
+    return Week.initialize(days.first.subtract(const Duration(days: 7))).initializeNullableFields();
   }
   
 

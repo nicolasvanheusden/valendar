@@ -31,7 +31,6 @@ class TaskState with _$TaskState {
     return tasksByMember()[member]
       ?.where((element) => element.date.difference(firstDate).inDays >= 0 && element.date.difference(lastDate).inDays <= 0)
       .map((task) => task.hours)
-      .reduce((value, element) => value + element) 
-    ?? 0;
+      .fold(0, (value, element) => (value ?? 0) + element) ?? 0;
   }
 }

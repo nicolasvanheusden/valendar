@@ -100,6 +100,7 @@ class _TeamScreenState extends State<TeamScreen> {
                     isDismissible: true,
                     barrierColor: Colors.black.withOpacity(0.5),
                     context: context,
+                    isScrollControlled: true,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
