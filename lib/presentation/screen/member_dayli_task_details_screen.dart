@@ -6,6 +6,7 @@ import 'package:valendar/domain/task/task.dart';
 import 'package:valendar/domain/week/week.dart';
 import 'package:valendar/presentation/core/colors.dart';
 import 'package:valendar/presentation/task/task_tile.dart';
+import 'package:valendar/presentation/widget/no_result.dart';
 
 class MemberDayliTaskDetail extends StatelessWidget {
 
@@ -36,7 +37,11 @@ class MemberDayliTaskDetail extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: ListView(
+              child: memberTasks.isEmpty
+              ? const Center(
+                child: NoResult(title: 'Aucune activité pour ce jour'),
+              )
+              : ListView(
                 children: memberTasks
                   .where((task) => task.date.day == selectedDate.day && task.date.month == selectedDate.month && task.date.year == selectedDate.year)
                   .map((e) => TaskTile(task: e))

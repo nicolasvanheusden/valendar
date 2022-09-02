@@ -103,7 +103,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                                   _currentWeek.dayNames.length, (index) {                                  
                                     final tasksFromMember = taskState.tasksByMemberAtSpecificDay(
                                       memberState.members.elementAt(memberIndex),
-                                      _currentWeek.daysNumber.elementAt(index),
+                                      _currentWeek.days.elementAt(index),
                                       map
                                     );
                                   return Row(
@@ -246,7 +246,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
         // Day Cases
         ...List.generate(_currentWeek.dayNames.length,
           (index) => Card(
-            color: whiteFAFAFA,
+            color: _currentWeek.days.elementAt(index).day == DateTime.now().day && _currentWeek.days.elementAt(index).month == DateTime.now().month ? blue064F60 : whiteFAFAFA,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10)
             ),
@@ -264,9 +264,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   '${_currentWeek.dayNames.elementAt(index).substring(0, 1)}\n${_currentWeek.daysNumber.elementAt(index)}',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
-                  color: blue064F60,
+                  color: _currentWeek.days.elementAt(index).day == DateTime.now().day && _currentWeek.days.elementAt(index).month == DateTime.now().month ? whiteFAFAFA : blue064F60,
                   fontSize: MediaQuery.of(context).size.width * 0.035,
-                  fontWeight: FontWeight.w500 
+                  fontWeight: FontWeight.w500
                 )
                 ),
               )

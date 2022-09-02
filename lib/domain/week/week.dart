@@ -83,16 +83,7 @@ class Week with _$Week {
   );
 
   _Week initializeNullableFields() {
-    final daysNumberSorted = daysNumber.sublist(0); // copy
-    daysNumberSorted.sort();    
-
-    final tmpNextMonthNumber = daysNumberSorted.whereIndexed((index, element) => daysNumber.elementAt(index) != element).isNotEmpty
-      ? (monthNumber+1)
-      : monthNumber;  
     
-
-    print(tmpNextMonthNumber);
-    print(monthNumber);
     return _Week(
       days: days,
       dayNames: dayNames,
@@ -100,11 +91,10 @@ class Week with _$Week {
       monthName: monthName,
       monthNumber: monthNumber,
       year: year,
-      nextMonthNumber: tmpNextMonthNumber % 12,
-      nextYear: tmpNextMonthNumber % 13 < monthNumber ? year+1 : year,
-      nextMonthName: tmpNextMonthNumber != monthNumber ? monthNames.elementAt((tmpNextMonthNumber-1) % 12) : monthName
+      nextMonthNumber: days.last.month,
+      nextYear: days.last.year,
+      nextMonthName: monthNames.elementAt(days.last.month-1)
     );
-
   }
 
   Week nextWeek() {
