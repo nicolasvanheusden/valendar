@@ -10,32 +10,38 @@ part 'task_dto.g.dart';
 class TaskDTO with _$TaskDTO {
   const TaskDTO._();
   factory TaskDTO({
+    required final String uuid,
     required final String title,
     required final int hours,
     required final List<MemberDTO> members,
     required final bool atNight,
-    required final DateTime date
+    required final DateTime date,
+    required final bool completed
   }) = _TaskDTO;
 
 
   factory TaskDTO.fromDomain(Task task) => TaskDTO(
+    uuid: task.uuid,
     title: task.title,
     hours: task.hours,
     members: task.members
       .map((member) => MemberDTO.fromDomain(member))
       .toList(),
     atNight: task.atNight,
-    date: task.date
+    date: task.date,
+    completed: task.completed
   );
 
   Task toDomain() => Task(
+    uuid: uuid,
     title: title,
     hours: hours,
     members: members
       .map((memberDTO) => memberDTO.toDomain())
       .toList(),
     atNight: atNight,
-    date: date
+    date: date,
+    completed: completed
   );
 
   factory TaskDTO.fromJson(Map<String, dynamic> json) => _$TaskDTOFromJson(json);

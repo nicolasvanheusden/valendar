@@ -85,9 +85,12 @@ class Week with _$Week {
     daysNumberSorted.sort();    
 
     final tmpNextMonthNumber = daysNumberSorted.whereIndexed((index, element) => daysNumber.elementAt(index) != element).isNotEmpty
-      ? (monthNumber+1) % 12 
+      ? (monthNumber+1)
       : monthNumber;  
     
+
+    print(tmpNextMonthNumber);
+    print(monthNumber);
     return _Week(
       days: days,
       dayNames: dayNames,
@@ -95,23 +98,21 @@ class Week with _$Week {
       monthName: monthName,
       monthNumber: monthNumber,
       year: year,
-      nextMonthNumber: tmpNextMonthNumber,
-      nextYear: tmpNextMonthNumber < monthNumber ? year+1 : year,
-      nextMonthName: tmpNextMonthNumber != monthNumber ? monthNames.elementAt(tmpNextMonthNumber-1) : monthName
+      nextMonthNumber: tmpNextMonthNumber % 12,
+      nextYear: tmpNextMonthNumber % 13 < monthNumber ? year+1 : year,
+      nextMonthName: tmpNextMonthNumber != monthNumber ? monthNames.elementAt((tmpNextMonthNumber-1) % 12) : monthName
     );
-  }
 
+  }
 
   Week nextWeek() {
     return Week.initialize(days.first.add(const Duration(days: 7))).initializeNullableFields();
   }
 
-
   Week previousWeek() {
     return Week.initialize(days.first.subtract(const Duration(days: 7))).initializeNullableFields();
   }
   
-
 }
 
 class _CalendarNames {

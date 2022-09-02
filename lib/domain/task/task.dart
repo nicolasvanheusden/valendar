@@ -8,10 +8,12 @@ part 'task.freezed.dart';
 class Task with _$Task {
   const Task._();
   factory Task({
+    required final String uuid,
     required final String title,
     required final int hours,
     required final List<Member> members,
     required final bool atNight,
     required final DateTime date,
+    required final bool completed,
   }) = _Task;
 }

@@ -19,17 +19,21 @@ class _$TaskTearOff {
   const _$TaskTearOff();
 
   _Task call(
-      {required String title,
+      {required String uuid,
+      required String title,
       required int hours,
       required List<Member> members,
       required bool atNight,
-      required DateTime date}) {
+      required DateTime date,
+      required bool completed}) {
     return _Task(
+      uuid: uuid,
       title: title,
       hours: hours,
       members: members,
       atNight: atNight,
       date: date,
+      completed: completed,
     );
   }
 }
@@ -39,11 +43,13 @@ const $Task = _$TaskTearOff();
 
 /// @nodoc
 mixin _$Task {
+  String get uuid => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get hours => throw _privateConstructorUsedError;
   List<Member> get members => throw _privateConstructorUsedError;
   bool get atNight => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
+  bool get completed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
@@ -54,11 +60,13 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res>;
   $Res call(
-      {String title,
+      {String uuid,
+      String title,
       int hours,
       List<Member> members,
       bool atNight,
-      DateTime date});
+      DateTime date,
+      bool completed});
 }
 
 /// @nodoc
@@ -71,13 +79,19 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? uuid = freezed,
     Object? title = freezed,
     Object? hours = freezed,
     Object? members = freezed,
     Object? atNight = freezed,
     Object? date = freezed,
+    Object? completed = freezed,
   }) {
     return _then(_value.copyWith(
+      uuid: uuid == freezed
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -98,6 +112,10 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      completed: completed == freezed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -108,11 +126,13 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$TaskCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String title,
+      {String uuid,
+      String title,
       int hours,
       List<Member> members,
       bool atNight,
-      DateTime date});
+      DateTime date,
+      bool completed});
 }
 
 /// @nodoc
@@ -126,13 +146,19 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? uuid = freezed,
     Object? title = freezed,
     Object? hours = freezed,
     Object? members = freezed,
     Object? atNight = freezed,
     Object? date = freezed,
+    Object? completed = freezed,
   }) {
     return _then(_Task(
+      uuid: uuid == freezed
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -153,6 +179,10 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      completed: completed == freezed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -161,13 +191,17 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
 class _$_Task extends _Task {
   _$_Task(
-      {required this.title,
+      {required this.uuid,
+      required this.title,
       required this.hours,
       required this.members,
       required this.atNight,
-      required this.date})
+      required this.date,
+      required this.completed})
       : super._();
 
+  @override
+  final String uuid;
   @override
   final String title;
   @override
@@ -178,10 +212,12 @@ class _$_Task extends _Task {
   final bool atNight;
   @override
   final DateTime date;
+  @override
+  final bool completed;
 
   @override
   String toString() {
-    return 'Task(title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date)';
+    return 'Task(uuid: $uuid, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed)';
   }
 
   @override
@@ -189,21 +225,25 @@ class _$_Task extends _Task {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Task &&
+            const DeepCollectionEquality().equals(other.uuid, uuid) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.hours, hours) &&
             const DeepCollectionEquality().equals(other.members, members) &&
             const DeepCollectionEquality().equals(other.atNight, atNight) &&
-            const DeepCollectionEquality().equals(other.date, date));
+            const DeepCollectionEquality().equals(other.date, date) &&
+            const DeepCollectionEquality().equals(other.completed, completed));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(uuid),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(hours),
       const DeepCollectionEquality().hash(members),
       const DeepCollectionEquality().hash(atNight),
-      const DeepCollectionEquality().hash(date));
+      const DeepCollectionEquality().hash(date),
+      const DeepCollectionEquality().hash(completed));
 
   @JsonKey(ignore: true)
   @override
@@ -213,13 +253,17 @@ class _$_Task extends _Task {
 
 abstract class _Task extends Task {
   factory _Task(
-      {required String title,
+      {required String uuid,
+      required String title,
       required int hours,
       required List<Member> members,
       required bool atNight,
-      required DateTime date}) = _$_Task;
+      required DateTime date,
+      required bool completed}) = _$_Task;
   _Task._() : super._();
 
+  @override
+  String get uuid;
   @override
   String get title;
   @override
@@ -230,6 +274,8 @@ abstract class _Task extends Task {
   bool get atNight;
   @override
   DateTime get date;
+  @override
+  bool get completed;
   @override
   @JsonKey(ignore: true)
   _$TaskCopyWith<_Task> get copyWith => throw _privateConstructorUsedError;

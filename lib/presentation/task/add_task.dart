@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uuid/uuid.dart';
 import 'package:valendar/application/member/member_bloc.dart';
 import 'package:valendar/application/task/task_bloc.dart';
 import 'package:valendar/domain/member/member.dart';
@@ -67,8 +68,10 @@ class _AddTaskState extends State<AddTask> {
                           labelText: 'Titre',
                           labelStyle: GoogleFonts.montserrat(
                             color: blue064F60
-                          )
+                          ),
+                          constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                         ),
+                         
                       ),
                       TextFormField(
                         controller: _hoursController,
@@ -76,7 +79,8 @@ class _AddTaskState extends State<AddTask> {
                           labelText: 'Heures',
                           labelStyle: GoogleFonts.montserrat(
                             color: blue064F60
-                          )
+                          ),
+                          constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                         ),
                         validator: (value) {
                           if (int.tryParse(value ?? '') == null) {
@@ -206,11 +210,13 @@ class _AddTaskState extends State<AddTask> {
                           if (_formKey.currentState!.validate()) {
                             BlocProvider.of<TaskBloc>(context).add(TaskEvent.addTask(
                               Task(
+                                uuid: const Uuid().v4(),
                                 title: _titleController.text,
                                 hours: int.parse(_hoursController.text),
                                 members: _currentMembersToAdd,
                                 atNight: atNight,
-                                date: widget.selectedDate
+                                date: widget.selectedDate,
+                                completed: false
                               )
                             ));
                             _titleController.clear();

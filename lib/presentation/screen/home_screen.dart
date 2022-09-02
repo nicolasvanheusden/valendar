@@ -40,23 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
           _currentWeek.monthName,
           style: GoogleFonts.montserrat(
             color: blue064F60,
-            fontSize: MediaQuery.of(context).size.width * 0.08,
+            fontSize: MediaQuery.of(context).size.width * 0.07,
           )
         ),
         centerTitle: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.calendar_month_rounded,
-              color: blue064F60,
-              size: 30,
-            )
-          )
-        ],
+        systemOverlayStyle: SystemUiOverlayStyle.dark        
       ),
       body: Column(
         children: [
@@ -154,10 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context, state) {
                     final tasksFromSelectedDate = state.tasks.where((task) => task.date.day == _selectedDate.day && task.date.month == _selectedDate.month && task.date.year == _selectedDate.year).toList();
                     return tasksFromSelectedDate.isEmpty 
-                      ? const Center(child: NoResult(title: "Aucune tâche pour aujourd'hui",))
+                      ? const Center(child: NoResult(title: 'Aucune tâche pour ce jour',))
                       : ListView.builder(
                         itemCount: tasksFromSelectedDate.length,
-                        addRepaintBoundaries: false,
                         itemBuilder: (context, index) {
                           return TaskTile(task: tasksFromSelectedDate.elementAt(index));
                         }
