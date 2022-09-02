@@ -6,6 +6,7 @@ import 'package:valendar/application/member/member_bloc.dart';
 import 'package:valendar/application/task/task_bloc.dart';
 import 'package:valendar/domain/week/week.dart';
 import 'package:valendar/presentation/core/colors.dart';
+import 'package:valendar/presentation/screen/member_dayli_task_details_screen.dart';
 
 class AnalyticsScreen extends StatefulWidget {
 
@@ -60,7 +61,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
                 child: Text(
                   '${_currentWeek.monthName}${_currentWeek.nextMonthName != _currentWeek.monthName ? ' - ${_currentWeek.nextMonthName}' : ''} ${_currentWeek.nextYear}',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.montserrat(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: blue064F60,
@@ -107,45 +108,55 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                                     );
                                   return Row(
                                     children: [
-                                      Card(
-                                        elevation: 0,
-                                        color: Colors.transparent,
-                                        child: Container(
-                                          width: MediaQuery.of(context).size.width / 9 - (3 * 6),  
-                                          height: 20,                                       
-                                          margin: const EdgeInsets.symmetric(
-                                            horizontal: 3,
-                                            vertical: 10
-                                          ),
-                                          child: Stack(
-                                            alignment: Alignment.center,                                          
-                                            children: [
-                                              if (tasksFromMember.where((task) => task.atNight).isNotEmpty)
-                                                AlignPositioned(
-                                                  alignment: Alignment.topRight,
-                                                  child: Text(
-                                                    'N',
-                                                    style: GoogleFonts.montserrat(
-                                                    color: purple2E1A47,
-                                                    fontSize: MediaQuery.of(context).size.width * 0.02,
-                                                    fontWeight: FontWeight.w500 
-                                                    )
+                                      GestureDetector(
+                                        onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => MemberDayliTaskDetail(
+                                            memberTasks: tasksFromMember,
+                                            selectedDate: _currentWeek.days.elementAt(index),
+                                          ))
+                                        ),
+                                        child: Card(
+                                          elevation: 0,
+                                          color: Colors.transparent,
+                                          child: Container(
+                                            width: MediaQuery.of(context).size.width / 9 - (3 * 6),  
+                                            height: 20,                                       
+                                            margin: const EdgeInsets.symmetric(
+                                              horizontal: 3,
+                                              vertical: 10
+                                            ),
+                                            child: Stack(
+                                              alignment: Alignment.center,                                          
+                                              children: [
+                                                if (tasksFromMember.where((task) => task.atNight).isNotEmpty)
+                                                  AlignPositioned(
+                                                    alignment: Alignment.topRight,
+                                                    moveHorizontallyByChildHeight: 0.2,
+                                                    child: Text(
+                                                      'N',
+                                                      style: GoogleFonts.montserrat(
+                                                      color: purple2E1A47,
+                                                      fontSize: MediaQuery.of(context).size.width * 0.02,
+                                                      fontWeight: FontWeight.w500 
+                                                      )
+                                                    ),
                                                   ),
+                                                Text(
+                                                  tasksFromMember.isEmpty 
+                                                    ? '0' 
+                                                    : tasksFromMember.map((task) => task.hours)
+                                                    .reduce((value, element) => value + element)
+                                                    .toString(),
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.montserrat(
+                                                    color: blue064F60,
+                                                    fontSize: MediaQuery.of(context).size.width * 0.035,
+                                                    fontWeight: FontWeight.w500 
+                                                  )
                                                 ),
-                                              Text(
-                                                tasksFromMember.isEmpty 
-                                                  ? '0' 
-                                                  : tasksFromMember.map((task) => task.hours)
-                                                  .reduce((value, element) => value + element)
-                                                  .toString(),
-                                                textAlign: TextAlign.center,
-                                                style: GoogleFonts.montserrat(
-                                                  color: blue064F60,
-                                                  fontSize: MediaQuery.of(context).size.width * 0.035,
-                                                  fontWeight: FontWeight.w500 
-                                                )
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),

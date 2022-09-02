@@ -43,6 +43,16 @@ class Week with _$Week {
     _calendarNames.december
   ];
 
+  static final List<String> weekdayNames = [
+      _calendarNames.monday, 
+      _calendarNames.tuesday,
+      _calendarNames.wednesday,
+      _calendarNames.thursday,
+      _calendarNames.friday,
+      _calendarNames.saturday,
+      _calendarNames.sunday
+  ];
+
   factory Week({
     required final List<DateTime> days,
     required final List<String> dayNames,
@@ -61,15 +71,7 @@ class Week with _$Week {
       ? now.subtract(Duration(days: now.weekday - DateTime.monday - index))
       : now.add(Duration(days: (now.weekday - DateTime.monday - index).abs()))
     ),
-    dayNames: [
-      _calendarNames.monday, 
-      _calendarNames.tuesday,
-      _calendarNames.wednesday,
-      _calendarNames.thursday,
-      _calendarNames.friday,
-      _calendarNames.saturday,
-      _calendarNames.sunday
-    ],
+    dayNames: weekdayNames,
     daysNumber: List.generate(7,
     (index) => now.weekday > DateTime.monday + index 
       ? now.subtract(Duration(days: now.weekday - DateTime.monday - index)).day
