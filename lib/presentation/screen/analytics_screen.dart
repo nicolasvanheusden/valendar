@@ -81,6 +81,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                             memberState.members.length,
                             (memberIndex) => Row(
                               children: [
+                                // Member's name
                                 Expanded(
                                   child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -99,6 +100,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                                   ),
                                 )
                                 ),
+                                // Member's hours  
                                 ...List.generate(
                                   _currentWeek.dayNames.length, (index) {                                  
                                     final tasksFromMember = taskState.tasksByMemberAtSpecificDay(
@@ -164,6 +166,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                                   );
                                   }
                                 ),
+                                // Member's total hours
                                 Card(
                                   elevation: 0,
                                   color: Colors.transparent,

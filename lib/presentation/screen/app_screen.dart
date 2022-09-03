@@ -62,51 +62,32 @@ class _AppScreenState extends State<AppScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  _selectedTabIndex = 0;
-                });
-              },
-              icon: Icon(
-                Icons.home_rounded,
-                size: MediaQuery.of(context).size.height * 0.05,
-                color: _selectedTabIndex == 0 ? blue064F60 : blue064F60.withOpacity(0.5),
-              )
-            ),
-            IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                setState(() {
-                  _selectedTabIndex = 1;
-                });
-                // TODO(nico): navigate to analytics screen
-              },
-              icon: Icon(
-                Icons.analytics_outlined,
-                size: MediaQuery.of(context).size.height * 0.05,
-                color: _selectedTabIndex == 1 ? blue064F60 : blue064F60.withOpacity(0.5),
-              )
-            ),
-            IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                setState(() {
-                  _selectedTabIndex = 2;
-                });
-                // TODO(nico): display team screen
-              },
-              icon: Icon(
-                Icons.group_outlined,
-                size: MediaQuery.of(context).size.height * 0.05,
-                color: _selectedTabIndex == 2 ? blue064F60 : blue064F60.withOpacity(0.5),
-              )
-            ),
+              _bottomBtn(0, Icons.home_rounded),
+              _bottomBtn(1, Icons.analytics_outlined),
+              _bottomBtn(2, Icons.group_outlined),
           ]),
         ),
       ),
     );
   }
+
+  Widget _bottomBtn(int tabIndex, IconData icon) {
+    return IconButton(
+      padding: EdgeInsets.zero,
+      onPressed: () {
+        setState(() {
+          _selectedTabIndex = tabIndex;
+        });                
+      },
+      icon: Icon(
+        icon,
+        size: MediaQuery.of(context).size.height * 0.05,
+        color: _selectedTabIndex == tabIndex ? blue064F60 : blue064F60.withOpacity(0.5),
+      )
+    );
+  }
+
+
 
 
 }

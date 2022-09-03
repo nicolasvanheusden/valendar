@@ -25,7 +25,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
       emit(state.copyWith(tasks: [
         ...state.tasks.map((task) => task.uuid == event.task.uuid ? event.task : task)
       ]));
-      print(state.tasks);
     });
   }
 
