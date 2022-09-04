@@ -15,5 +15,7 @@ class Task with _$Task {
     required final bool atNight,
     required final DateTime date,
     required final bool completed,
+    required final DateTime startDate,
+    required final DateTime endDate,
   }) = _Task;
 }

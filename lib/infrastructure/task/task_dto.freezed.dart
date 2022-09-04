@@ -29,7 +29,9 @@ class _$TaskDTOTearOff {
       required List<MemberDTO> members,
       required bool atNight,
       required DateTime date,
-      required bool completed}) {
+      required bool completed,
+      required DateTime startDate,
+      required DateTime endDate}) {
     return _TaskDTO(
       uuid: uuid,
       title: title,
@@ -38,6 +40,8 @@ class _$TaskDTOTearOff {
       atNight: atNight,
       date: date,
       completed: completed,
+      startDate: startDate,
+      endDate: endDate,
     );
   }
 
@@ -58,6 +62,8 @@ mixin _$TaskDTO {
   bool get atNight => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
+  DateTime get startDate => throw _privateConstructorUsedError;
+  DateTime get endDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -75,7 +81,9 @@ abstract class $TaskDTOCopyWith<$Res> {
       List<MemberDTO> members,
       bool atNight,
       DateTime date,
-      bool completed});
+      bool completed,
+      DateTime startDate,
+      DateTime endDate});
 }
 
 /// @nodoc
@@ -95,6 +103,8 @@ class _$TaskDTOCopyWithImpl<$Res> implements $TaskDTOCopyWith<$Res> {
     Object? atNight = freezed,
     Object? date = freezed,
     Object? completed = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_value.copyWith(
       uuid: uuid == freezed
@@ -125,6 +135,14 @@ class _$TaskDTOCopyWithImpl<$Res> implements $TaskDTOCopyWith<$Res> {
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
+      startDate: startDate == freezed
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: endDate == freezed
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -141,7 +159,9 @@ abstract class _$TaskDTOCopyWith<$Res> implements $TaskDTOCopyWith<$Res> {
       List<MemberDTO> members,
       bool atNight,
       DateTime date,
-      bool completed});
+      bool completed,
+      DateTime startDate,
+      DateTime endDate});
 }
 
 /// @nodoc
@@ -162,6 +182,8 @@ class __$TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
     Object? atNight = freezed,
     Object? date = freezed,
     Object? completed = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_TaskDTO(
       uuid: uuid == freezed
@@ -192,6 +214,14 @@ class __$TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
+      startDate: startDate == freezed
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: endDate == freezed
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -206,7 +236,9 @@ class _$_TaskDTO extends _TaskDTO {
       required this.members,
       required this.atNight,
       required this.date,
-      required this.completed})
+      required this.completed,
+      required this.startDate,
+      required this.endDate})
       : super._();
 
   factory _$_TaskDTO.fromJson(Map<String, dynamic> json) =>
@@ -226,10 +258,14 @@ class _$_TaskDTO extends _TaskDTO {
   final DateTime date;
   @override
   final bool completed;
+  @override
+  final DateTime startDate;
+  @override
+  final DateTime endDate;
 
   @override
   String toString() {
-    return 'TaskDTO(uuid: $uuid, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed)';
+    return 'TaskDTO(uuid: $uuid, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -243,7 +279,9 @@ class _$_TaskDTO extends _TaskDTO {
             const DeepCollectionEquality().equals(other.members, members) &&
             const DeepCollectionEquality().equals(other.atNight, atNight) &&
             const DeepCollectionEquality().equals(other.date, date) &&
-            const DeepCollectionEquality().equals(other.completed, completed));
+            const DeepCollectionEquality().equals(other.completed, completed) &&
+            const DeepCollectionEquality().equals(other.startDate, startDate) &&
+            const DeepCollectionEquality().equals(other.endDate, endDate));
   }
 
   @override
@@ -255,7 +293,9 @@ class _$_TaskDTO extends _TaskDTO {
       const DeepCollectionEquality().hash(members),
       const DeepCollectionEquality().hash(atNight),
       const DeepCollectionEquality().hash(date),
-      const DeepCollectionEquality().hash(completed));
+      const DeepCollectionEquality().hash(completed),
+      const DeepCollectionEquality().hash(startDate),
+      const DeepCollectionEquality().hash(endDate));
 
   @JsonKey(ignore: true)
   @override
@@ -276,7 +316,9 @@ abstract class _TaskDTO extends TaskDTO {
       required List<MemberDTO> members,
       required bool atNight,
       required DateTime date,
-      required bool completed}) = _$_TaskDTO;
+      required bool completed,
+      required DateTime startDate,
+      required DateTime endDate}) = _$_TaskDTO;
   _TaskDTO._() : super._();
 
   factory _TaskDTO.fromJson(Map<String, dynamic> json) = _$_TaskDTO.fromJson;
@@ -295,6 +337,10 @@ abstract class _TaskDTO extends TaskDTO {
   DateTime get date;
   @override
   bool get completed;
+  @override
+  DateTime get startDate;
+  @override
+  DateTime get endDate;
   @override
   @JsonKey(ignore: true)
   _$TaskDTOCopyWith<_TaskDTO> get copyWith =>

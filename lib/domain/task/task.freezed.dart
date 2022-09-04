@@ -25,7 +25,9 @@ class _$TaskTearOff {
       required List<Member> members,
       required bool atNight,
       required DateTime date,
-      required bool completed}) {
+      required bool completed,
+      required DateTime startDate,
+      required DateTime endDate}) {
     return _Task(
       uuid: uuid,
       title: title,
@@ -34,6 +36,8 @@ class _$TaskTearOff {
       atNight: atNight,
       date: date,
       completed: completed,
+      startDate: startDate,
+      endDate: endDate,
     );
   }
 }
@@ -50,6 +54,8 @@ mixin _$Task {
   bool get atNight => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
+  DateTime get startDate => throw _privateConstructorUsedError;
+  DateTime get endDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
@@ -66,7 +72,9 @@ abstract class $TaskCopyWith<$Res> {
       List<Member> members,
       bool atNight,
       DateTime date,
-      bool completed});
+      bool completed,
+      DateTime startDate,
+      DateTime endDate});
 }
 
 /// @nodoc
@@ -86,6 +94,8 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
     Object? atNight = freezed,
     Object? date = freezed,
     Object? completed = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_value.copyWith(
       uuid: uuid == freezed
@@ -116,6 +126,14 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
+      startDate: startDate == freezed
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: endDate == freezed
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -132,7 +150,9 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       List<Member> members,
       bool atNight,
       DateTime date,
-      bool completed});
+      bool completed,
+      DateTime startDate,
+      DateTime endDate});
 }
 
 /// @nodoc
@@ -153,6 +173,8 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object? atNight = freezed,
     Object? date = freezed,
     Object? completed = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
   }) {
     return _then(_Task(
       uuid: uuid == freezed
@@ -183,6 +205,14 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
+      startDate: startDate == freezed
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: endDate == freezed
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -197,7 +227,9 @@ class _$_Task extends _Task {
       required this.members,
       required this.atNight,
       required this.date,
-      required this.completed})
+      required this.completed,
+      required this.startDate,
+      required this.endDate})
       : super._();
 
   @override
@@ -214,10 +246,14 @@ class _$_Task extends _Task {
   final DateTime date;
   @override
   final bool completed;
+  @override
+  final DateTime startDate;
+  @override
+  final DateTime endDate;
 
   @override
   String toString() {
-    return 'Task(uuid: $uuid, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed)';
+    return 'Task(uuid: $uuid, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -231,7 +267,9 @@ class _$_Task extends _Task {
             const DeepCollectionEquality().equals(other.members, members) &&
             const DeepCollectionEquality().equals(other.atNight, atNight) &&
             const DeepCollectionEquality().equals(other.date, date) &&
-            const DeepCollectionEquality().equals(other.completed, completed));
+            const DeepCollectionEquality().equals(other.completed, completed) &&
+            const DeepCollectionEquality().equals(other.startDate, startDate) &&
+            const DeepCollectionEquality().equals(other.endDate, endDate));
   }
 
   @override
@@ -243,7 +281,9 @@ class _$_Task extends _Task {
       const DeepCollectionEquality().hash(members),
       const DeepCollectionEquality().hash(atNight),
       const DeepCollectionEquality().hash(date),
-      const DeepCollectionEquality().hash(completed));
+      const DeepCollectionEquality().hash(completed),
+      const DeepCollectionEquality().hash(startDate),
+      const DeepCollectionEquality().hash(endDate));
 
   @JsonKey(ignore: true)
   @override
@@ -259,7 +299,9 @@ abstract class _Task extends Task {
       required List<Member> members,
       required bool atNight,
       required DateTime date,
-      required bool completed}) = _$_Task;
+      required bool completed,
+      required DateTime startDate,
+      required DateTime endDate}) = _$_Task;
   _Task._() : super._();
 
   @override
@@ -276,6 +318,10 @@ abstract class _Task extends Task {
   DateTime get date;
   @override
   bool get completed;
+  @override
+  DateTime get startDate;
+  @override
+  DateTime get endDate;
   @override
   @JsonKey(ignore: true)
   _$TaskCopyWith<_Task> get copyWith => throw _privateConstructorUsedError;

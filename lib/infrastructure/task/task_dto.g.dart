@@ -16,6 +16,8 @@ _$_TaskDTO _$$_TaskDTOFromJson(Map<String, dynamic> json) => _$_TaskDTO(
       atNight: json['atNight'] as bool,
       date: DateTime.parse(json['date'] as String),
       completed: json['completed'] as bool,
+      startDate: DateTime.parse(json['startDate'] as String),
+      endDate: DateTime.parse(json['endDate'] as String),
     );
 
 Map<String, dynamic> _$$_TaskDTOToJson(_$_TaskDTO instance) =>
@@ -27,4 +29,6 @@ Map<String, dynamic> _$$_TaskDTOToJson(_$_TaskDTO instance) =>
       'atNight': instance.atNight,
       'date': instance.date.toIso8601String(),
       'completed': instance.completed,
+      'startDate': instance.startDate.toIso8601String(),
+      'endDate': instance.endDate.toIso8601String(),
     };

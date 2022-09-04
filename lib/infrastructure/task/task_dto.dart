@@ -16,7 +16,9 @@ class TaskDTO with _$TaskDTO {
     required final List<MemberDTO> members,
     required final bool atNight,
     required final DateTime date,
-    required final bool completed
+    required final bool completed,
+    required final DateTime startDate,
+    required final DateTime endDate,
   }) = _TaskDTO;
 
 
@@ -29,7 +31,9 @@ class TaskDTO with _$TaskDTO {
       .toList(),
     atNight: task.atNight,
     date: task.date,
-    completed: task.completed
+    completed: task.completed,
+    startDate: task.startDate,
+    endDate: task.endDate,
   );
 
   Task toDomain() => Task(
@@ -41,7 +45,9 @@ class TaskDTO with _$TaskDTO {
       .toList(),
     atNight: atNight,
     date: date,
-    completed: completed
+    completed: completed,
+    startDate: startDate,
+    endDate: endDate,
   );
 
   factory TaskDTO.fromJson(Map<String, dynamic> json) => _$TaskDTOFromJson(json);

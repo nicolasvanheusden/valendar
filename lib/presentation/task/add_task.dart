@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +29,17 @@ class _AddTaskState extends State<AddTask> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _hoursController = TextEditingController();
   final List<Member> _currentMembersToAdd = [];
+  late DateTime _startDate;
+  late DateTime _endDate;
   bool atNight = false;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _startDate = widget.selectedDate;
+    _endDate = widget.selectedDate;
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -55,12 +67,31 @@ class _AddTaskState extends State<AddTask> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        'Ajouter une tâche',
-                        style: GoogleFonts.montserrat(
-                          color: blue064F60,
-                          fontSize: MediaQuery.of(context).size.width * 0.05
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Ajouter une tâche',
+                            style: GoogleFonts.montserrat(
+                              color: blue064F60,
+                              fontSize: MediaQuery.of(context).size.width * 0.05
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => setState(() {
+                              atNight = !atNight;
+                            }),
+                            icon: Icon(
+                              atNight 
+                                ? Icons.nightlight
+                                : Icons.nightlight_outlined,
+                              color: purple2E1A47,
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height *0.015,
                       ),
                       TextFormField(
                         controller: _titleController,
@@ -70,8 +101,10 @@ class _AddTaskState extends State<AddTask> {
                             color: blue064F60
                           ),
                           constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
-                        ),
-                         
+                        ),                         
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height *0.015,
                       ),
                       TextFormField(
                         controller: _hoursController,
@@ -90,31 +123,100 @@ class _AddTaskState extends State<AddTask> {
                         },
                         keyboardType: TextInputType.number,
                       ),
-                      Row(
+                      Wrap(
                         children: [
-                          Text(
-                            'De nuit : ',
-                            style: GoogleFonts.montserrat(
-                              color: blue064F60,
-                              fontSize: MediaQuery.of(context).size.width * 0.04,
-                            ),
+                          TextButton(
+                            onPressed: () async {
+                              if (Platform.isIOS) {
+                                showCupertinoModalPopup(
+                                  context: context,                                  
+                                  builder: (context) => Container(
+                                    height: MediaQuery.of(context).size.height * 0.3,
+                                    decoration: const BoxDecoration(
+                                      color: whiteFAFAFA,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20)
+                                      )
+                                    ),
+                                    child: CupertinoDatePicker(
+                                      mode: CupertinoDatePickerMode.date,
+                                      initialDateTime: _startDate,
+                                      minimumDate: DateTime.fromMillisecondsSinceEpoch(0),
+                                      maximumDate: DateTime.now().add(const Duration(days: 365)),
+                                      onDateTimeChanged: (value) => setState(() {
+                                        _startDate = value;
+                                      })
+                                    ),
+                                  )
+                                );
+                              } else {
+                                _startDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: _startDate,
+                                  firstDate: DateTime.fromMillisecondsSinceEpoch(0),
+                                  lastDate: DateTime.now().add(const Duration(days: 365)),
+                                  currentDate: _startDate
+                                ) ?? _startDate;
+                                setState(() {});
+                              }
+                            },
+                            child: Text(
+                              'Date de début : ${_startDate.day}/${_startDate.month}/${_startDate.year}',
+                              style: GoogleFonts.montserrat(
+                                color: blue064F60
+                              ),
+                            )
                           ),
-                          const SizedBox(
-                            width: 20,
+                          TextButton(
+                            onPressed: () async {
+                              if (Platform.isIOS) {
+                                showCupertinoModalPopup(
+                                  context: context,
+                                  builder: (context) => Container(
+                                    height: MediaQuery.of(context).size.height * 0.3,
+                                    decoration: const BoxDecoration(
+                                      color: whiteFAFAFA,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20)
+                                      )
+                                    ),
+                                    child: CupertinoDatePicker(
+                                      mode: CupertinoDatePickerMode.date,
+                                      initialDateTime: _endDate,
+                                      minimumDate: DateTime.fromMillisecondsSinceEpoch(0),
+                                      maximumDate: DateTime.now().add(const Duration(days: 365)),
+                                      onDateTimeChanged: (value) => setState(() {
+                                        _endDate = value;
+                                      })
+                                    ),
+                                  )
+                                );
+                              } else {
+                                 _endDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: _endDate,
+                                  firstDate: DateTime.fromMillisecondsSinceEpoch(0),
+                                  lastDate: DateTime.now().add(const Duration(days: 365)),
+                                  currentDate: _endDate
+                                ) ?? _endDate;
+                                setState(() {});
+                              }
+                            },
+                            child: Text(
+                              'Date de fin : ${_endDate.day}/${_endDate.month}/${_endDate.year}',
+                              style: GoogleFonts.montserrat(
+                                color: blue064F60
+                              ),
+                            )
                           ),
-                          CupertinoSwitch(
-                            value: atNight,
-                            onChanged: (value) => setState(() {
-                              atNight = value;
-                            })
-                          )
                         ],
                       ),
-                      BlocBuilder<MemberBloc, MemberState>(
-                        builder: (context, state) {
-                          return SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            child: Column(
+                      Expanded(
+                        child: BlocBuilder<MemberBloc, MemberState>(
+                          builder: (context, state) {
+                            return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
@@ -134,6 +236,7 @@ class _AddTaskState extends State<AddTask> {
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(8),
+                                      margin: const EdgeInsets.only(right: 5),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
@@ -201,9 +304,9 @@ class _AddTaskState extends State<AddTask> {
                                   ),
                                 ),
                               ]
-                            ),
-                          );
-                        }
+                            );
+                          }
+                        ),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -216,7 +319,9 @@ class _AddTaskState extends State<AddTask> {
                                 members: _currentMembersToAdd,
                                 atNight: atNight,
                                 date: widget.selectedDate,
-                                completed: false
+                                completed: false,
+                                startDate: _startDate,
+                                endDate: _endDate,
                               )
                             ));
                             _titleController.clear();

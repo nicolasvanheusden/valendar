@@ -21,7 +21,6 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   double _horizontalDragStart = 0;
   double _horizontalDragEnd = 0;
 
-
   @override
   void initState() {
     super.initState();

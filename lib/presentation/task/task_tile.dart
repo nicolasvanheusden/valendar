@@ -33,7 +33,7 @@ class _TaskTileState extends State<TaskTile> {
       },
       dismissThresholds: <DismissDirection, double>{
         DismissDirection.startToEnd: widget.task.completed ? 1.0 : 0.0,
-        DismissDirection.endToStart: widget.task.completed ? 1.0 : 0.0,
+        DismissDirection.endToStart: 0.0
       },
       secondaryBackground: Container(
         margin: EdgeInsets.only(
