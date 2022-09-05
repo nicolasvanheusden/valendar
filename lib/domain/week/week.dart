@@ -83,7 +83,6 @@ class Week with _$Week {
   );
 
   _Week initializeNullableFields() {
-    
     return _Week(
       days: days,
       dayNames: dayNames,

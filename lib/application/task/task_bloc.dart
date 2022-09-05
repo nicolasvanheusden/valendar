@@ -1,7 +1,9 @@
 
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 import 'package:valendar/domain/member/member.dart';
 import 'package:valendar/domain/task/task.dart';
 import 'package:valendar/infrastructure/task/task_dto.dart';
@@ -15,7 +17,10 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
   
   TaskBloc() : super(TaskState.initial()) {
     on<_AddTask>((event, emit) {
-      emit(state.copyWith(tasks: [...state.tasks, event.task]));
+      emit(state.copyWith(tasks: [
+        ...state.tasks,
+        ...splitTaskInMultipleDays(event.task)]
+      ));
     });
     on<_DeleteTask>((event, emit) {
       state.tasks.remove(event.task);
@@ -26,6 +31,29 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
         ...state.tasks.map((task) => task.uuid == event.task.uuid ? event.task : task)
       ]));
     });
+  }
+
+  /// Takes a [Task] and return a [List] of the same [Task] split on the period from 
+  /// [startDate] to [endDate]
+  List<Task> splitTaskInMultipleDays(Task task) {
+    final List<Task> tasks = [];
+
+      final numberOfDays = task.endDate.difference(task.startDate).inDays;
+
+      for (var i = 0; i < numberOfDays; i++) {
+          tasks.add(Task(
+            uuid: const Uuid().v1(),
+            title: task.title,
+            hours: task.hours ~/ numberOfDays,
+            members: task.members,
+            atNight: task.atNight,
+            date: task.startDate.add(Duration(days: i)),
+            completed: task.completed,
+            startDate: task.startDate,
+            endDate: task.endDate)
+          );
+      }
+      return tasks;
   }
 
   @override

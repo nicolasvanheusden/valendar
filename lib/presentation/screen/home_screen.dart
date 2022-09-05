@@ -27,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _currentWeek = Week.initialize(DateTime.now()).initializeNullableFields();
-    _selectedDate = DateTime.now();
+    _currentWeek = Week.initialize(DateUtils.dateOnly(DateTime.now())).initializeNullableFields();
+    _selectedDate = DateUtils.dateOnly(DateTime.now());
   }
 
   @override
@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ElevatedButton(
             onPressed: () {
               showGeneralDialog(
-                barrierLabel: 'Label',
+                barrierLabel: 'Add Task',
                 barrierDismissible: true,
                 barrierColor: Colors.black.withOpacity(0.5),
                 transitionDuration: const Duration(milliseconds: 700),

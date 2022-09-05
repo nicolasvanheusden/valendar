@@ -29,7 +29,12 @@ class TaskState with _$TaskState {
 
   int sumOfWeekHours(Member member, DateTime firstDate, DateTime lastDate) {
     return tasksByMember()[member]
-      ?.where((element) => element.date.difference(firstDate).inDays >= 0 && element.date.difference(lastDate).inDays <= 0)
+      ?.where((element) {
+        return DateUtils.dateOnly(element.date)
+          .difference(DateUtils.dateOnly(firstDate)).inDays >= 0 
+          && DateUtils.dateOnly(element.date)
+          .difference(DateUtils.dateOnly(lastDate)).inDays <= 0;
+      })
       .map((task) => task.hours)
       .fold(0, (value, element) => (value ?? 0) + element) ?? 0;
   }

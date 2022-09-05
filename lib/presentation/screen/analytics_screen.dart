@@ -43,6 +43,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             });
           },
           onHorizontalDragEnd: (_) {
+            print('-----------------------------------------------------');
             if (_horizontalDragEnd > _horizontalDragStart) {
               setState(() {
                 _currentWeek = _currentWeek.previousWeek();

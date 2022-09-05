@@ -15,9 +15,10 @@ import 'package:valendar/presentation/core/colors.dart';
 
 class AddTask extends StatefulWidget {
   
-  const AddTask({Key? key, required this.selectedDate}) : super(key: key);
+  const AddTask({Key? key, required this.selectedDate, this.taskToUpdate}) : super(key: key);
 
   final DateTime selectedDate;
+  final Task? taskToUpdate;
 
   @override
   State<AddTask> createState() => _AddTaskState();
@@ -26,19 +27,23 @@ class AddTask extends StatefulWidget {
 class _AddTaskState extends State<AddTask> {
 
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _hoursController = TextEditingController();
-  final List<Member> _currentMembersToAdd = [];
+  late final TextEditingController _titleController;
+  late final TextEditingController _hoursController;
+  late final List<Member> _currentMembersToAdd;
   late DateTime _startDate;
   late DateTime _endDate;
-  bool atNight = false;
+  late bool atNight;
 
 
   @override
   void initState() {
     super.initState();
-    _startDate = widget.selectedDate;
-    _endDate = widget.selectedDate;
+    _startDate = widget.taskToUpdate?.startDate ?? widget.selectedDate;
+    _endDate = widget.taskToUpdate?.endDate ?? widget.selectedDate;
+    _titleController = TextEditingController(text: widget.taskToUpdate?.title ?? '');
+    _hoursController = TextEditingController(text: widget.taskToUpdate?.hours.toString() ?? '');
+    _currentMembersToAdd = widget.taskToUpdate?.members ?? [];
+    atNight = widget.taskToUpdate?.atNight ?? false;
   }
   
   @override
@@ -145,7 +150,7 @@ class _AddTaskState extends State<AddTask> {
                                       minimumDate: DateTime.fromMillisecondsSinceEpoch(0),
                                       maximumDate: DateTime.now().add(const Duration(days: 365)),
                                       onDateTimeChanged: (value) => setState(() {
-                                        _startDate = value;
+                                        _startDate = DateUtils.dateOnly(value);
                                       })
                                     ),
                                   )
@@ -188,7 +193,7 @@ class _AddTaskState extends State<AddTask> {
                                       minimumDate: DateTime.fromMillisecondsSinceEpoch(0),
                                       maximumDate: DateTime.now().add(const Duration(days: 365)),
                                       onDateTimeChanged: (value) => setState(() {
-                                        _endDate = value;
+                                        _endDate = DateUtils.dateOnly(value);
                                       })
                                     ),
                                   )
@@ -311,7 +316,22 @@ class _AddTaskState extends State<AddTask> {
                       ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            BlocProvider.of<TaskBloc>(context).add(TaskEvent.addTask(
+                            if (widget.taskToUpdate != null) {
+                              BlocProvider.of<TaskBloc>(context).add(TaskEvent.updateTask(
+                                widget.taskToUpdate!.copyWith(
+                                  title: _titleController.text,
+                                  hours: int.parse(_hoursController.text),
+                                  members: _currentMembersToAdd,
+                                  atNight: atNight,
+                                  date: widget.taskToUpdate!.date,
+                                  completed: widget.taskToUpdate!.completed,
+                                  startDate: _startDate,
+                                  endDate: _endDate,
+                                )
+                              )
+                              );
+                            } else {
+                              BlocProvider.of<TaskBloc>(context).add(TaskEvent.addTask(
                               Task(
                                 uuid: const Uuid().v4(),
                                 title: _titleController.text,
@@ -324,6 +344,7 @@ class _AddTaskState extends State<AddTask> {
                                 endDate: _endDate,
                               )
                             ));
+                            }
                             _titleController.clear();
                             _hoursController.clear();
                             Navigator.pop(context);
