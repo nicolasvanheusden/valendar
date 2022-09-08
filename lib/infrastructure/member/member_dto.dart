@@ -1,5 +1,7 @@
 
 
+
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:valendar/domain/member/member.dart';
 
@@ -14,13 +16,15 @@ class MemberDTO with _$MemberDTO {
     required final String role,
     required final DateTime startContract,
     required final DateTime? endContract,
+    required final int colorValue
   }) = _MemberDTO;
 
   factory MemberDTO.fromDomain(Member member) => MemberDTO(
     name: member.name,
     role: member.role,
     startContract: member.startContract,
-    endContract: member.endContract
+    endContract: member.endContract,
+    colorValue: member.color.value
   );
 
   Member toDomain() {
@@ -28,7 +32,8 @@ class MemberDTO with _$MemberDTO {
       name: name,
       role: role,
       startContract: startContract,
-      endContract: endContract
+      endContract: endContract,
+      color: Color(colorValue)
     );
   }
 

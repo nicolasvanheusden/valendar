@@ -30,12 +30,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
       ));
     });
     on<_DeleteTask>((event, emit) {
-      state.tasks.remove(event.task);
-      emit(state.copyWith(tasks: state.tasks));
+      emit(state.copyWith(tasks: [...state.tasks.where((element) => element.uuid != event.task.uuid)]));
     });
     on<_UpdateTask>((event, emit) {
       emit(state.copyWith(tasks: [
-        ...state.tasks.map((task) => task.uuid == event.task.uuid ? event.task : task)
+        ...state.tasks.where((element) => element.id != event.task.id),
+        ...splitTaskInMultipleDays(event.task)
       ]));
     });
     on<_ExportCSV>((event, emit) async {
@@ -92,7 +92,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
     if (numberOfDays > 0) {
       for (var i = 0; i < numberOfDays; i++) {
         tasks.add(Task(
-          uuid: const Uuid().v1(),
+          uuid: const Uuid().v4(),
+          id: task.id,
           title: task.title,
           hours: task.hours ~/ numberOfDays,
           members: task.members,

@@ -1,6 +1,7 @@
 
 
 
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'member.freezed.dart';
@@ -13,5 +14,6 @@ class Member with _$Member {
     required final String role,
     required final DateTime startContract,
     required final DateTime? endContract,
+    required final Color color
   }) = _Member;
 }

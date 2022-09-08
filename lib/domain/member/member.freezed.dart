@@ -20,6 +20,7 @@ mixin _$Member {
   String get role => throw _privateConstructorUsedError;
   DateTime get startContract => throw _privateConstructorUsedError;
   DateTime? get endContract => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MemberCopyWith<Member> get copyWith => throw _privateConstructorUsedError;
@@ -33,7 +34,8 @@ abstract class $MemberCopyWith<$Res> {
       {String name,
       String role,
       DateTime startContract,
-      DateTime? endContract});
+      DateTime? endContract,
+      Color color});
 }
 
 /// @nodoc
@@ -50,6 +52,7 @@ class _$MemberCopyWithImpl<$Res> implements $MemberCopyWith<$Res> {
     Object? role = freezed,
     Object? startContract = freezed,
     Object? endContract = freezed,
+    Object? color = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -68,6 +71,10 @@ class _$MemberCopyWithImpl<$Res> implements $MemberCopyWith<$Res> {
           ? _value.endContract
           : endContract // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      color: color == freezed
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -81,7 +88,8 @@ abstract class _$$_MemberCopyWith<$Res> implements $MemberCopyWith<$Res> {
       {String name,
       String role,
       DateTime startContract,
-      DateTime? endContract});
+      DateTime? endContract,
+      Color color});
 }
 
 /// @nodoc
@@ -99,6 +107,7 @@ class __$$_MemberCopyWithImpl<$Res> extends _$MemberCopyWithImpl<$Res>
     Object? role = freezed,
     Object? startContract = freezed,
     Object? endContract = freezed,
+    Object? color = freezed,
   }) {
     return _then(_$_Member(
       name: name == freezed
@@ -117,6 +126,10 @@ class __$$_MemberCopyWithImpl<$Res> extends _$MemberCopyWithImpl<$Res>
           ? _value.endContract
           : endContract // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      color: color == freezed
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -128,7 +141,8 @@ class _$_Member extends _Member {
       {required this.name,
       required this.role,
       required this.startContract,
-      required this.endContract})
+      required this.endContract,
+      required this.color})
       : super._();
 
   @override
@@ -139,10 +153,12 @@ class _$_Member extends _Member {
   final DateTime startContract;
   @override
   final DateTime? endContract;
+  @override
+  final Color color;
 
   @override
   String toString() {
-    return 'Member(name: $name, role: $role, startContract: $startContract, endContract: $endContract)';
+    return 'Member(name: $name, role: $role, startContract: $startContract, endContract: $endContract, color: $color)';
   }
 
   @override
@@ -155,7 +171,8 @@ class _$_Member extends _Member {
             const DeepCollectionEquality()
                 .equals(other.startContract, startContract) &&
             const DeepCollectionEquality()
-                .equals(other.endContract, endContract));
+                .equals(other.endContract, endContract) &&
+            const DeepCollectionEquality().equals(other.color, color));
   }
 
   @override
@@ -164,7 +181,8 @@ class _$_Member extends _Member {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(role),
       const DeepCollectionEquality().hash(startContract),
-      const DeepCollectionEquality().hash(endContract));
+      const DeepCollectionEquality().hash(endContract),
+      const DeepCollectionEquality().hash(color));
 
   @JsonKey(ignore: true)
   @override
@@ -177,7 +195,8 @@ abstract class _Member extends Member {
       {required final String name,
       required final String role,
       required final DateTime startContract,
-      required final DateTime? endContract}) = _$_Member;
+      required final DateTime? endContract,
+      required final Color color}) = _$_Member;
   _Member._() : super._();
 
   @override
@@ -188,6 +207,8 @@ abstract class _Member extends Member {
   DateTime get startContract;
   @override
   DateTime? get endContract;
+  @override
+  Color get color;
   @override
   @JsonKey(ignore: true)
   _$$_MemberCopyWith<_$_Member> get copyWith =>

@@ -54,7 +54,8 @@ class _AppScreenState extends State<AppScreen> {
           borderRadius: BorderRadius.circular(30)
         ), 
         margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.05),
-        elevation: 10,
+        elevation: 5,
+        shadowColor: blue064F60.withOpacity(0.4),
         color: whiteFAFAFA,
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.9,

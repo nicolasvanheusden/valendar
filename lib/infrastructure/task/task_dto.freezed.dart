@@ -21,6 +21,7 @@ TaskDTO _$TaskDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TaskDTO {
   String get uuid => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get hours => throw _privateConstructorUsedError;
   List<MemberDTO> get members => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $TaskDTOCopyWith<$Res> {
       _$TaskDTOCopyWithImpl<$Res>;
   $Res call(
       {String uuid,
+      String id,
       String title,
       int hours,
       List<MemberDTO> members,
@@ -62,6 +64,7 @@ class _$TaskDTOCopyWithImpl<$Res> implements $TaskDTOCopyWith<$Res> {
   @override
   $Res call({
     Object? uuid = freezed,
+    Object? id = freezed,
     Object? title = freezed,
     Object? hours = freezed,
     Object? members = freezed,
@@ -75,6 +78,10 @@ class _$TaskDTOCopyWithImpl<$Res> implements $TaskDTOCopyWith<$Res> {
       uuid: uuid == freezed
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: title == freezed
           ? _value.title
@@ -120,6 +127,7 @@ abstract class _$$_TaskDTOCopyWith<$Res> implements $TaskDTOCopyWith<$Res> {
   @override
   $Res call(
       {String uuid,
+      String id,
       String title,
       int hours,
       List<MemberDTO> members,
@@ -142,6 +150,7 @@ class __$$_TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uuid = freezed,
+    Object? id = freezed,
     Object? title = freezed,
     Object? hours = freezed,
     Object? members = freezed,
@@ -155,6 +164,10 @@ class __$$_TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
       uuid: uuid == freezed
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: title == freezed
           ? _value.title
@@ -197,6 +210,7 @@ class __$$_TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
 class _$_TaskDTO extends _TaskDTO {
   _$_TaskDTO(
       {required this.uuid,
+      required this.id,
       required this.title,
       required this.hours,
       required final List<MemberDTO> members,
@@ -213,6 +227,8 @@ class _$_TaskDTO extends _TaskDTO {
 
   @override
   final String uuid;
+  @override
+  final String id;
   @override
   final String title;
   @override
@@ -237,7 +253,7 @@ class _$_TaskDTO extends _TaskDTO {
 
   @override
   String toString() {
-    return 'TaskDTO(uuid: $uuid, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed, startDate: $startDate, endDate: $endDate)';
+    return 'TaskDTO(uuid: $uuid, id: $id, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -246,6 +262,7 @@ class _$_TaskDTO extends _TaskDTO {
         (other.runtimeType == runtimeType &&
             other is _$_TaskDTO &&
             const DeepCollectionEquality().equals(other.uuid, uuid) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.hours, hours) &&
             const DeepCollectionEquality().equals(other._members, _members) &&
@@ -261,6 +278,7 @@ class _$_TaskDTO extends _TaskDTO {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(uuid),
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(hours),
       const DeepCollectionEquality().hash(_members),
@@ -286,6 +304,7 @@ class _$_TaskDTO extends _TaskDTO {
 abstract class _TaskDTO extends TaskDTO {
   factory _TaskDTO(
       {required final String uuid,
+      required final String id,
       required final String title,
       required final int hours,
       required final List<MemberDTO> members,
@@ -300,6 +319,8 @@ abstract class _TaskDTO extends TaskDTO {
 
   @override
   String get uuid;
+  @override
+  String get id;
   @override
   String get title;
   @override

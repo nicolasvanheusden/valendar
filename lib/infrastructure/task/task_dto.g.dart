@@ -8,6 +8,7 @@ part of 'task_dto.dart';
 
 _$_TaskDTO _$$_TaskDTOFromJson(Map<String, dynamic> json) => _$_TaskDTO(
       uuid: json['uuid'] as String,
+      id: json['id'] as String,
       title: json['title'] as String,
       hours: json['hours'] as int,
       members: (json['members'] as List<dynamic>)
@@ -23,6 +24,7 @@ _$_TaskDTO _$$_TaskDTOFromJson(Map<String, dynamic> json) => _$_TaskDTO(
 Map<String, dynamic> _$$_TaskDTOToJson(_$_TaskDTO instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
+      'id': instance.id,
       'title': instance.title,
       'hours': instance.hours,
       'members': instance.members,

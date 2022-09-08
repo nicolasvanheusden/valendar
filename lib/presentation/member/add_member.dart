@@ -2,6 +2,8 @@
 
 
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -204,7 +206,8 @@ class _AddMemberState extends State<AddMember> {
                           startContract: DateTime.parse(_startContractController.text),
                           endContract: _endContractController.text.isEmpty
                             ? null
-                            : DateTime.parse(_endContractController.text)
+                            : DateTime.parse(_endContractController.text),
+                          color: avatarColors.elementAt(Random().nextInt(avatarColors.length))
                         )
                       )
                     );

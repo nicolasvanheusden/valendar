@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context, constraints) {
                     return BlocBuilder<TaskBloc, TaskState>(
                       builder: (context, state) {
-                        final tasksFromSelectedDate = state.tasks.where((task) => task.date.day == _selectedDate.day && task.date.month == _selectedDate.month && task.date.year == _selectedDate.year).toList();
+                        final tasksFromSelectedDate = state.tasks.where((task) => DateUtils.isSameDay(task.date, _selectedDate)).toList()..sort((a, b) => a.completed ? 1 : 0);
                         return tasksFromSelectedDate.isEmpty 
                           ? const Center(child: NoResult(title: 'Aucune tâche pour ce jour',))
                           : ListView.builder(

@@ -9,6 +9,7 @@ class Task with _$Task {
   const Task._();
   factory Task({
     required final String uuid,
+    required final String id,
     required final String title,
     required final int hours,
     required final List<Member> members,

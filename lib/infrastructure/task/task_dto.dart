@@ -11,6 +11,7 @@ class TaskDTO with _$TaskDTO {
   const TaskDTO._();
   factory TaskDTO({
     required final String uuid,
+    required final String id,
     required final String title,
     required final int hours,
     required final List<MemberDTO> members,
@@ -24,6 +25,7 @@ class TaskDTO with _$TaskDTO {
 
   factory TaskDTO.fromDomain(Task task) => TaskDTO(
     uuid: task.uuid,
+    id: task.id,
     title: task.title,
     hours: task.hours,
     members: task.members
@@ -38,6 +40,7 @@ class TaskDTO with _$TaskDTO {
 
   Task toDomain() => Task(
     uuid: uuid,
+    id: id,
     title: title,
     hours: hours,
     members: members

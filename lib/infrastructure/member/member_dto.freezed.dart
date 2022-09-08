@@ -24,6 +24,7 @@ mixin _$MemberDTO {
   String get role => throw _privateConstructorUsedError;
   DateTime get startContract => throw _privateConstructorUsedError;
   DateTime? get endContract => throw _privateConstructorUsedError;
+  int get colorValue => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +40,8 @@ abstract class $MemberDTOCopyWith<$Res> {
       {String name,
       String role,
       DateTime startContract,
-      DateTime? endContract});
+      DateTime? endContract,
+      int colorValue});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$MemberDTOCopyWithImpl<$Res> implements $MemberDTOCopyWith<$Res> {
     Object? role = freezed,
     Object? startContract = freezed,
     Object? endContract = freezed,
+    Object? colorValue = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -74,6 +77,10 @@ class _$MemberDTOCopyWithImpl<$Res> implements $MemberDTOCopyWith<$Res> {
           ? _value.endContract
           : endContract // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      colorValue: colorValue == freezed
+          ? _value.colorValue
+          : colorValue // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -88,7 +95,8 @@ abstract class _$$_MemberDTOCopyWith<$Res> implements $MemberDTOCopyWith<$Res> {
       {String name,
       String role,
       DateTime startContract,
-      DateTime? endContract});
+      DateTime? endContract,
+      int colorValue});
 }
 
 /// @nodoc
@@ -107,6 +115,7 @@ class __$$_MemberDTOCopyWithImpl<$Res> extends _$MemberDTOCopyWithImpl<$Res>
     Object? role = freezed,
     Object? startContract = freezed,
     Object? endContract = freezed,
+    Object? colorValue = freezed,
   }) {
     return _then(_$_MemberDTO(
       name: name == freezed
@@ -125,6 +134,10 @@ class __$$_MemberDTOCopyWithImpl<$Res> extends _$MemberDTOCopyWithImpl<$Res>
           ? _value.endContract
           : endContract // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      colorValue: colorValue == freezed
+          ? _value.colorValue
+          : colorValue // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -136,7 +149,8 @@ class _$_MemberDTO extends _MemberDTO {
       {required this.name,
       required this.role,
       required this.startContract,
-      required this.endContract})
+      required this.endContract,
+      required this.colorValue})
       : super._();
 
   factory _$_MemberDTO.fromJson(Map<String, dynamic> json) =>
@@ -150,10 +164,12 @@ class _$_MemberDTO extends _MemberDTO {
   final DateTime startContract;
   @override
   final DateTime? endContract;
+  @override
+  final int colorValue;
 
   @override
   String toString() {
-    return 'MemberDTO(name: $name, role: $role, startContract: $startContract, endContract: $endContract)';
+    return 'MemberDTO(name: $name, role: $role, startContract: $startContract, endContract: $endContract, colorValue: $colorValue)';
   }
 
   @override
@@ -166,7 +182,9 @@ class _$_MemberDTO extends _MemberDTO {
             const DeepCollectionEquality()
                 .equals(other.startContract, startContract) &&
             const DeepCollectionEquality()
-                .equals(other.endContract, endContract));
+                .equals(other.endContract, endContract) &&
+            const DeepCollectionEquality()
+                .equals(other.colorValue, colorValue));
   }
 
   @JsonKey(ignore: true)
@@ -176,7 +194,8 @@ class _$_MemberDTO extends _MemberDTO {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(role),
       const DeepCollectionEquality().hash(startContract),
-      const DeepCollectionEquality().hash(endContract));
+      const DeepCollectionEquality().hash(endContract),
+      const DeepCollectionEquality().hash(colorValue));
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +215,8 @@ abstract class _MemberDTO extends MemberDTO {
       {required final String name,
       required final String role,
       required final DateTime startContract,
-      required final DateTime? endContract}) = _$_MemberDTO;
+      required final DateTime? endContract,
+      required final int colorValue}) = _$_MemberDTO;
   _MemberDTO._() : super._();
 
   factory _MemberDTO.fromJson(Map<String, dynamic> json) =
@@ -210,6 +230,8 @@ abstract class _MemberDTO extends MemberDTO {
   DateTime get startContract;
   @override
   DateTime? get endContract;
+  @override
+  int get colorValue;
   @override
   @JsonKey(ignore: true)
   _$$_MemberDTOCopyWith<_$_MemberDTO> get copyWith =>

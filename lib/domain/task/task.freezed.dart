@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Task {
   String get uuid => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get hours => throw _privateConstructorUsedError;
   List<Member> get members => throw _privateConstructorUsedError;
@@ -36,6 +37,7 @@ abstract class $TaskCopyWith<$Res> {
       _$TaskCopyWithImpl<$Res>;
   $Res call(
       {String uuid,
+      String id,
       String title,
       int hours,
       List<Member> members,
@@ -57,6 +59,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
   @override
   $Res call({
     Object? uuid = freezed,
+    Object? id = freezed,
     Object? title = freezed,
     Object? hours = freezed,
     Object? members = freezed,
@@ -70,6 +73,10 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
       uuid: uuid == freezed
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: title == freezed
           ? _value.title
@@ -114,6 +121,7 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @override
   $Res call(
       {String uuid,
+      String id,
       String title,
       int hours,
       List<Member> members,
@@ -136,6 +144,7 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uuid = freezed,
+    Object? id = freezed,
     Object? title = freezed,
     Object? hours = freezed,
     Object? members = freezed,
@@ -149,6 +158,10 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
       uuid: uuid == freezed
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: title == freezed
           ? _value.title
@@ -191,6 +204,7 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 class _$_Task extends _Task {
   _$_Task(
       {required this.uuid,
+      required this.id,
       required this.title,
       required this.hours,
       required final List<Member> members,
@@ -204,6 +218,8 @@ class _$_Task extends _Task {
 
   @override
   final String uuid;
+  @override
+  final String id;
   @override
   final String title;
   @override
@@ -228,7 +244,7 @@ class _$_Task extends _Task {
 
   @override
   String toString() {
-    return 'Task(uuid: $uuid, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed, startDate: $startDate, endDate: $endDate)';
+    return 'Task(uuid: $uuid, id: $id, title: $title, hours: $hours, members: $members, atNight: $atNight, date: $date, completed: $completed, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -237,6 +253,7 @@ class _$_Task extends _Task {
         (other.runtimeType == runtimeType &&
             other is _$_Task &&
             const DeepCollectionEquality().equals(other.uuid, uuid) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.hours, hours) &&
             const DeepCollectionEquality().equals(other._members, _members) &&
@@ -251,6 +268,7 @@ class _$_Task extends _Task {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(uuid),
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(hours),
       const DeepCollectionEquality().hash(_members),
@@ -269,6 +287,7 @@ class _$_Task extends _Task {
 abstract class _Task extends Task {
   factory _Task(
       {required final String uuid,
+      required final String id,
       required final String title,
       required final int hours,
       required final List<Member> members,
@@ -281,6 +300,8 @@ abstract class _Task extends Task {
 
   @override
   String get uuid;
+  @override
+  String get id;
   @override
   String get title;
   @override

@@ -29,7 +29,7 @@ class _AddTaskState extends State<AddTask> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _titleController;
   late final TextEditingController _hoursController;
-  late final List<Member> _currentMembersToAdd;
+  late List<Member> _currentMembersToAdd;
   late DateTime _startDate;
   late DateTime _endDate;
   late bool atNight;
@@ -62,8 +62,9 @@ class _AddTaskState extends State<AddTask> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
           ),
-          child: SizedBox(
+          child: Container(
             height: MediaQuery.of(context).size.height * 0.8,
+            margin: const EdgeInsets.symmetric(horizontal: 5),
             child: SizedBox.expand(
               child: Form(
                 key: _formKey,
@@ -83,6 +84,8 @@ class _AddTaskState extends State<AddTask> {
                             ),
                           ),
                           IconButton(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.only(left: 30),
                             onPressed: () => setState(() {
                               atNight = !atNight;
                             }),
@@ -131,6 +134,9 @@ class _AddTaskState extends State<AddTask> {
                       Wrap(
                         children: [
                           TextButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(blue064F60.withOpacity(0.07))
+                            ),
                             onPressed: () async {
                               if (Platform.isIOS) {
                                 showCupertinoModalPopup(
@@ -174,6 +180,9 @@ class _AddTaskState extends State<AddTask> {
                             )
                           ),
                           TextButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(blue064F60.withOpacity(0.07))
+                            ),
                             onPressed: () async {
                               if (Platform.isIOS) {
                                 showCupertinoModalPopup(
@@ -210,7 +219,7 @@ class _AddTaskState extends State<AddTask> {
                               }
                             },
                             child: Text(
-                              'Date de fin : ${_endDate.day}/${_endDate.month}/${_endDate.year}',
+                              'Date de fin : ${_endDate.day}/${_endDate.month}/${_endDate.year}      ',
                               style: GoogleFonts.montserrat(
                                 color: blue064F60
                               ),
@@ -236,7 +245,7 @@ class _AddTaskState extends State<AddTask> {
                                   children: _currentMembersToAdd.map((member) => GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        _currentMembersToAdd.remove(member);
+                                        _currentMembersToAdd = [..._currentMembersToAdd.where((element) => element != member)];
                                       });
                                     },
                                     child: Container(
@@ -249,7 +258,7 @@ class _AddTaskState extends State<AddTask> {
                                         )
                                       ),
                                       child: Text(
-                                        member.name,
+                                        '${member.name}  x',
                                         style: GoogleFonts.montserrat(
                                           color: blue064F60
                                         ),),
@@ -266,7 +275,7 @@ class _AddTaskState extends State<AddTask> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  _currentMembersToAdd.add(member);
+                                                  _currentMembersToAdd = [..._currentMembersToAdd,  member];
                                                 });
                                               },
                                               child: Container(
@@ -334,6 +343,7 @@ class _AddTaskState extends State<AddTask> {
                               BlocProvider.of<TaskBloc>(context).add(TaskEvent.addTask(
                               Task(
                                 uuid: const Uuid().v4(),
+                                id: const Uuid().v1(),
                                 title: _titleController.text,
                                 hours: int.parse(_hoursController.text),
                                 members: _currentMembersToAdd,

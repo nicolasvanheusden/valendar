@@ -1,5 +1,6 @@
 
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -104,44 +105,56 @@ class _TaskTileState extends State<TaskTile> {
           child: Row(
             children: [
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Wrap(
-                    direction: Axis.vertical,
-                    children: widget.task.members.map(
-                      (member) => Text(
-                        member.name,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 16,
-                          color: widget.task.atNight ? Colors.white : Colors.black,
-                        ),
-                      ),
-                      ).toList()
-                    ),
-                ),
-              ),
-              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       widget.task.title,
                       style: GoogleFonts.montserrat(
-                        fontSize: 16,
+                        fontSize: 18,
                         color: widget.task.atNight ? Colors.white : Colors.black,
                       ),
                     ),
-                    Text(
-                      '${widget.task.hours.toString()}h',
-                      style: GoogleFonts.montserrat(
-                        fontSize: 16,
-                        color: widget.task.atNight ? Colors.white : Colors.black,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
                       ),
+                      constraints: const BoxConstraints(
+                        maxHeight: 50
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: Wrap(
+                        direction: Axis.vertical,
+                        children: widget.task.members.map(
+                          (member) => CircleAvatar(
+                            backgroundColor: member.color,
+                            child: Text(
+                              member.name.substring(0, 1),
+                              style: GoogleFonts.montserrat(
+                                fontSize: 16,
+                                color: widget.task.atNight ? Colors.white : Colors.black,
+                              ),
+                            ),
+                          ),
+                          ).toList()
+                        ),
                     ),
                   ],
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 30.0),
+                    child: Text(
+                      '${widget.task.hours.toString()}h',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 20,
+                        color: widget.task.atNight ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ),
                 )
               )
             ],
