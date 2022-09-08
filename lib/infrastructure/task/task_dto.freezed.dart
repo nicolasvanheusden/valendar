@@ -12,46 +12,11 @@ part of 'task_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 TaskDTO _$TaskDTOFromJson(Map<String, dynamic> json) {
   return _TaskDTO.fromJson(json);
 }
-
-/// @nodoc
-class _$TaskDTOTearOff {
-  const _$TaskDTOTearOff();
-
-  _TaskDTO call(
-      {required String uuid,
-      required String title,
-      required int hours,
-      required List<MemberDTO> members,
-      required bool atNight,
-      required DateTime date,
-      required bool completed,
-      required DateTime startDate,
-      required DateTime endDate}) {
-    return _TaskDTO(
-      uuid: uuid,
-      title: title,
-      hours: hours,
-      members: members,
-      atNight: atNight,
-      date: date,
-      completed: completed,
-      startDate: startDate,
-      endDate: endDate,
-    );
-  }
-
-  TaskDTO fromJson(Map<String, Object?> json) {
-    return TaskDTO.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $TaskDTO = _$TaskDTOTearOff();
 
 /// @nodoc
 mixin _$TaskDTO {
@@ -148,9 +113,10 @@ class _$TaskDTOCopyWithImpl<$Res> implements $TaskDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TaskDTOCopyWith<$Res> implements $TaskDTOCopyWith<$Res> {
-  factory _$TaskDTOCopyWith(_TaskDTO value, $Res Function(_TaskDTO) then) =
-      __$TaskDTOCopyWithImpl<$Res>;
+abstract class _$$_TaskDTOCopyWith<$Res> implements $TaskDTOCopyWith<$Res> {
+  factory _$$_TaskDTOCopyWith(
+          _$_TaskDTO value, $Res Function(_$_TaskDTO) then) =
+      __$$_TaskDTOCopyWithImpl<$Res>;
   @override
   $Res call(
       {String uuid,
@@ -165,13 +131,13 @@ abstract class _$TaskDTOCopyWith<$Res> implements $TaskDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
-    implements _$TaskDTOCopyWith<$Res> {
-  __$TaskDTOCopyWithImpl(_TaskDTO _value, $Res Function(_TaskDTO) _then)
-      : super(_value, (v) => _then(v as _TaskDTO));
+class __$$_TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
+    implements _$$_TaskDTOCopyWith<$Res> {
+  __$$_TaskDTOCopyWithImpl(_$_TaskDTO _value, $Res Function(_$_TaskDTO) _then)
+      : super(_value, (v) => _then(v as _$_TaskDTO));
 
   @override
-  _TaskDTO get _value => super._value as _TaskDTO;
+  _$_TaskDTO get _value => super._value as _$_TaskDTO;
 
   @override
   $Res call({
@@ -185,7 +151,7 @@ class __$TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? endDate = freezed,
   }) {
-    return _then(_TaskDTO(
+    return _then(_$_TaskDTO(
       uuid: uuid == freezed
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -199,7 +165,7 @@ class __$TaskDTOCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res>
           : hours // ignore: cast_nullable_to_non_nullable
               as int,
       members: members == freezed
-          ? _value.members
+          ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
               as List<MemberDTO>,
       atNight: atNight == freezed
@@ -233,13 +199,14 @@ class _$_TaskDTO extends _TaskDTO {
       {required this.uuid,
       required this.title,
       required this.hours,
-      required this.members,
+      required final List<MemberDTO> members,
       required this.atNight,
       required this.date,
       required this.completed,
       required this.startDate,
       required this.endDate})
-      : super._();
+      : _members = members,
+        super._();
 
   factory _$_TaskDTO.fromJson(Map<String, dynamic> json) =>
       _$$_TaskDTOFromJson(json);
@@ -250,8 +217,13 @@ class _$_TaskDTO extends _TaskDTO {
   final String title;
   @override
   final int hours;
+  final List<MemberDTO> _members;
   @override
-  final List<MemberDTO> members;
+  List<MemberDTO> get members {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_members);
+  }
+
   @override
   final bool atNight;
   @override
@@ -272,11 +244,11 @@ class _$_TaskDTO extends _TaskDTO {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _TaskDTO &&
+            other is _$_TaskDTO &&
             const DeepCollectionEquality().equals(other.uuid, uuid) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.hours, hours) &&
-            const DeepCollectionEquality().equals(other.members, members) &&
+            const DeepCollectionEquality().equals(other._members, _members) &&
             const DeepCollectionEquality().equals(other.atNight, atNight) &&
             const DeepCollectionEquality().equals(other.date, date) &&
             const DeepCollectionEquality().equals(other.completed, completed) &&
@@ -284,13 +256,14 @@ class _$_TaskDTO extends _TaskDTO {
             const DeepCollectionEquality().equals(other.endDate, endDate));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(uuid),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(hours),
-      const DeepCollectionEquality().hash(members),
+      const DeepCollectionEquality().hash(_members),
       const DeepCollectionEquality().hash(atNight),
       const DeepCollectionEquality().hash(date),
       const DeepCollectionEquality().hash(completed),
@@ -299,26 +272,28 @@ class _$_TaskDTO extends _TaskDTO {
 
   @JsonKey(ignore: true)
   @override
-  _$TaskDTOCopyWith<_TaskDTO> get copyWith =>
-      __$TaskDTOCopyWithImpl<_TaskDTO>(this, _$identity);
+  _$$_TaskDTOCopyWith<_$_TaskDTO> get copyWith =>
+      __$$_TaskDTOCopyWithImpl<_$_TaskDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TaskDTOToJson(this);
+    return _$$_TaskDTOToJson(
+      this,
+    );
   }
 }
 
 abstract class _TaskDTO extends TaskDTO {
   factory _TaskDTO(
-      {required String uuid,
-      required String title,
-      required int hours,
-      required List<MemberDTO> members,
-      required bool atNight,
-      required DateTime date,
-      required bool completed,
-      required DateTime startDate,
-      required DateTime endDate}) = _$_TaskDTO;
+      {required final String uuid,
+      required final String title,
+      required final int hours,
+      required final List<MemberDTO> members,
+      required final bool atNight,
+      required final DateTime date,
+      required final bool completed,
+      required final DateTime startDate,
+      required final DateTime endDate}) = _$_TaskDTO;
   _TaskDTO._() : super._();
 
   factory _TaskDTO.fromJson(Map<String, dynamic> json) = _$_TaskDTO.fromJson;
@@ -343,6 +318,6 @@ abstract class _TaskDTO extends TaskDTO {
   DateTime get endDate;
   @override
   @JsonKey(ignore: true)
-  _$TaskDTOCopyWith<_TaskDTO> get copyWith =>
+  _$$_TaskDTOCopyWith<_$_TaskDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }

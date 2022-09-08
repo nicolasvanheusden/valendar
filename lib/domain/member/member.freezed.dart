@@ -12,28 +12,7 @@ part of 'member.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$MemberTearOff {
-  const _$MemberTearOff();
-
-  _Member call(
-      {required String name,
-      required String role,
-      required DateTime startContract,
-      required DateTime? endContract}) {
-    return _Member(
-      name: name,
-      role: role,
-      startContract: startContract,
-      endContract: endContract,
-    );
-  }
-}
-
-/// @nodoc
-const $Member = _$MemberTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Member {
@@ -94,9 +73,9 @@ class _$MemberCopyWithImpl<$Res> implements $MemberCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MemberCopyWith<$Res> implements $MemberCopyWith<$Res> {
-  factory _$MemberCopyWith(_Member value, $Res Function(_Member) then) =
-      __$MemberCopyWithImpl<$Res>;
+abstract class _$$_MemberCopyWith<$Res> implements $MemberCopyWith<$Res> {
+  factory _$$_MemberCopyWith(_$_Member value, $Res Function(_$_Member) then) =
+      __$$_MemberCopyWithImpl<$Res>;
   @override
   $Res call(
       {String name,
@@ -106,13 +85,13 @@ abstract class _$MemberCopyWith<$Res> implements $MemberCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$MemberCopyWithImpl<$Res> extends _$MemberCopyWithImpl<$Res>
-    implements _$MemberCopyWith<$Res> {
-  __$MemberCopyWithImpl(_Member _value, $Res Function(_Member) _then)
-      : super(_value, (v) => _then(v as _Member));
+class __$$_MemberCopyWithImpl<$Res> extends _$MemberCopyWithImpl<$Res>
+    implements _$$_MemberCopyWith<$Res> {
+  __$$_MemberCopyWithImpl(_$_Member _value, $Res Function(_$_Member) _then)
+      : super(_value, (v) => _then(v as _$_Member));
 
   @override
-  _Member get _value => super._value as _Member;
+  _$_Member get _value => super._value as _$_Member;
 
   @override
   $Res call({
@@ -121,7 +100,7 @@ class __$MemberCopyWithImpl<$Res> extends _$MemberCopyWithImpl<$Res>
     Object? startContract = freezed,
     Object? endContract = freezed,
   }) {
-    return _then(_Member(
+    return _then(_$_Member(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -170,7 +149,7 @@ class _$_Member extends _Member {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Member &&
+            other is _$_Member &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.role, role) &&
             const DeepCollectionEquality()
@@ -189,16 +168,16 @@ class _$_Member extends _Member {
 
   @JsonKey(ignore: true)
   @override
-  _$MemberCopyWith<_Member> get copyWith =>
-      __$MemberCopyWithImpl<_Member>(this, _$identity);
+  _$$_MemberCopyWith<_$_Member> get copyWith =>
+      __$$_MemberCopyWithImpl<_$_Member>(this, _$identity);
 }
 
 abstract class _Member extends Member {
   factory _Member(
-      {required String name,
-      required String role,
-      required DateTime startContract,
-      required DateTime? endContract}) = _$_Member;
+      {required final String name,
+      required final String role,
+      required final DateTime startContract,
+      required final DateTime? endContract}) = _$_Member;
   _Member._() : super._();
 
   @override
@@ -211,5 +190,6 @@ abstract class _Member extends Member {
   DateTime? get endContract;
   @override
   @JsonKey(ignore: true)
-  _$MemberCopyWith<_Member> get copyWith => throw _privateConstructorUsedError;
+  _$$_MemberCopyWith<_$_Member> get copyWith =>
+      throw _privateConstructorUsedError;
 }

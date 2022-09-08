@@ -12,38 +12,11 @@ part of 'member_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$MemberEventTearOff {
-  const _$MemberEventTearOff();
-
-  _AddMember addMember(Member member) {
-    return _AddMember(
-      member,
-    );
-  }
-
-  _DeleteMember deleteMember(Member member) {
-    return _DeleteMember(
-      member,
-    );
-  }
-
-  _UpdateMember updateMember(Member member) {
-    return _UpdateMember(
-      member,
-    );
-  }
-}
-
-/// @nodoc
-const $MemberEvent = _$MemberEventTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$MemberEvent {
   Member get member => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Member member) addMember,
@@ -133,10 +106,11 @@ class _$MemberEventCopyWithImpl<$Res> implements $MemberEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AddMemberCopyWith<$Res> implements $MemberEventCopyWith<$Res> {
-  factory _$AddMemberCopyWith(
-          _AddMember value, $Res Function(_AddMember) then) =
-      __$AddMemberCopyWithImpl<$Res>;
+abstract class _$$_AddMemberCopyWith<$Res>
+    implements $MemberEventCopyWith<$Res> {
+  factory _$$_AddMemberCopyWith(
+          _$_AddMember value, $Res Function(_$_AddMember) then) =
+      __$$_AddMemberCopyWithImpl<$Res>;
   @override
   $Res call({Member member});
 
@@ -145,19 +119,20 @@ abstract class _$AddMemberCopyWith<$Res> implements $MemberEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$AddMemberCopyWithImpl<$Res> extends _$MemberEventCopyWithImpl<$Res>
-    implements _$AddMemberCopyWith<$Res> {
-  __$AddMemberCopyWithImpl(_AddMember _value, $Res Function(_AddMember) _then)
-      : super(_value, (v) => _then(v as _AddMember));
+class __$$_AddMemberCopyWithImpl<$Res> extends _$MemberEventCopyWithImpl<$Res>
+    implements _$$_AddMemberCopyWith<$Res> {
+  __$$_AddMemberCopyWithImpl(
+      _$_AddMember _value, $Res Function(_$_AddMember) _then)
+      : super(_value, (v) => _then(v as _$_AddMember));
 
   @override
-  _AddMember get _value => super._value as _AddMember;
+  _$_AddMember get _value => super._value as _$_AddMember;
 
   @override
   $Res call({
     Object? member = freezed,
   }) {
-    return _then(_AddMember(
+    return _then(_$_AddMember(
       member == freezed
           ? _value.member
           : member // ignore: cast_nullable_to_non_nullable
@@ -183,7 +158,7 @@ class _$_AddMember implements _AddMember {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AddMember &&
+            other is _$_AddMember &&
             const DeepCollectionEquality().equals(other.member, member));
   }
 
@@ -193,8 +168,8 @@ class _$_AddMember implements _AddMember {
 
   @JsonKey(ignore: true)
   @override
-  _$AddMemberCopyWith<_AddMember> get copyWith =>
-      __$AddMemberCopyWithImpl<_AddMember>(this, _$identity);
+  _$$_AddMemberCopyWith<_$_AddMember> get copyWith =>
+      __$$_AddMemberCopyWithImpl<_$_AddMember>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -266,22 +241,22 @@ class _$_AddMember implements _AddMember {
 }
 
 abstract class _AddMember implements MemberEvent {
-  const factory _AddMember(Member member) = _$_AddMember;
+  const factory _AddMember(final Member member) = _$_AddMember;
 
   @override
   Member get member;
   @override
   @JsonKey(ignore: true)
-  _$AddMemberCopyWith<_AddMember> get copyWith =>
+  _$$_AddMemberCopyWith<_$_AddMember> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$DeleteMemberCopyWith<$Res>
+abstract class _$$_DeleteMemberCopyWith<$Res>
     implements $MemberEventCopyWith<$Res> {
-  factory _$DeleteMemberCopyWith(
-          _DeleteMember value, $Res Function(_DeleteMember) then) =
-      __$DeleteMemberCopyWithImpl<$Res>;
+  factory _$$_DeleteMemberCopyWith(
+          _$_DeleteMember value, $Res Function(_$_DeleteMember) then) =
+      __$$_DeleteMemberCopyWithImpl<$Res>;
   @override
   $Res call({Member member});
 
@@ -290,20 +265,21 @@ abstract class _$DeleteMemberCopyWith<$Res>
 }
 
 /// @nodoc
-class __$DeleteMemberCopyWithImpl<$Res> extends _$MemberEventCopyWithImpl<$Res>
-    implements _$DeleteMemberCopyWith<$Res> {
-  __$DeleteMemberCopyWithImpl(
-      _DeleteMember _value, $Res Function(_DeleteMember) _then)
-      : super(_value, (v) => _then(v as _DeleteMember));
+class __$$_DeleteMemberCopyWithImpl<$Res>
+    extends _$MemberEventCopyWithImpl<$Res>
+    implements _$$_DeleteMemberCopyWith<$Res> {
+  __$$_DeleteMemberCopyWithImpl(
+      _$_DeleteMember _value, $Res Function(_$_DeleteMember) _then)
+      : super(_value, (v) => _then(v as _$_DeleteMember));
 
   @override
-  _DeleteMember get _value => super._value as _DeleteMember;
+  _$_DeleteMember get _value => super._value as _$_DeleteMember;
 
   @override
   $Res call({
     Object? member = freezed,
   }) {
-    return _then(_DeleteMember(
+    return _then(_$_DeleteMember(
       member == freezed
           ? _value.member
           : member // ignore: cast_nullable_to_non_nullable
@@ -329,7 +305,7 @@ class _$_DeleteMember implements _DeleteMember {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DeleteMember &&
+            other is _$_DeleteMember &&
             const DeepCollectionEquality().equals(other.member, member));
   }
 
@@ -339,8 +315,8 @@ class _$_DeleteMember implements _DeleteMember {
 
   @JsonKey(ignore: true)
   @override
-  _$DeleteMemberCopyWith<_DeleteMember> get copyWith =>
-      __$DeleteMemberCopyWithImpl<_DeleteMember>(this, _$identity);
+  _$$_DeleteMemberCopyWith<_$_DeleteMember> get copyWith =>
+      __$$_DeleteMemberCopyWithImpl<_$_DeleteMember>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -412,22 +388,22 @@ class _$_DeleteMember implements _DeleteMember {
 }
 
 abstract class _DeleteMember implements MemberEvent {
-  const factory _DeleteMember(Member member) = _$_DeleteMember;
+  const factory _DeleteMember(final Member member) = _$_DeleteMember;
 
   @override
   Member get member;
   @override
   @JsonKey(ignore: true)
-  _$DeleteMemberCopyWith<_DeleteMember> get copyWith =>
+  _$$_DeleteMemberCopyWith<_$_DeleteMember> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$UpdateMemberCopyWith<$Res>
+abstract class _$$_UpdateMemberCopyWith<$Res>
     implements $MemberEventCopyWith<$Res> {
-  factory _$UpdateMemberCopyWith(
-          _UpdateMember value, $Res Function(_UpdateMember) then) =
-      __$UpdateMemberCopyWithImpl<$Res>;
+  factory _$$_UpdateMemberCopyWith(
+          _$_UpdateMember value, $Res Function(_$_UpdateMember) then) =
+      __$$_UpdateMemberCopyWithImpl<$Res>;
   @override
   $Res call({Member member});
 
@@ -436,20 +412,21 @@ abstract class _$UpdateMemberCopyWith<$Res>
 }
 
 /// @nodoc
-class __$UpdateMemberCopyWithImpl<$Res> extends _$MemberEventCopyWithImpl<$Res>
-    implements _$UpdateMemberCopyWith<$Res> {
-  __$UpdateMemberCopyWithImpl(
-      _UpdateMember _value, $Res Function(_UpdateMember) _then)
-      : super(_value, (v) => _then(v as _UpdateMember));
+class __$$_UpdateMemberCopyWithImpl<$Res>
+    extends _$MemberEventCopyWithImpl<$Res>
+    implements _$$_UpdateMemberCopyWith<$Res> {
+  __$$_UpdateMemberCopyWithImpl(
+      _$_UpdateMember _value, $Res Function(_$_UpdateMember) _then)
+      : super(_value, (v) => _then(v as _$_UpdateMember));
 
   @override
-  _UpdateMember get _value => super._value as _UpdateMember;
+  _$_UpdateMember get _value => super._value as _$_UpdateMember;
 
   @override
   $Res call({
     Object? member = freezed,
   }) {
-    return _then(_UpdateMember(
+    return _then(_$_UpdateMember(
       member == freezed
           ? _value.member
           : member // ignore: cast_nullable_to_non_nullable
@@ -475,7 +452,7 @@ class _$_UpdateMember implements _UpdateMember {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UpdateMember &&
+            other is _$_UpdateMember &&
             const DeepCollectionEquality().equals(other.member, member));
   }
 
@@ -485,8 +462,8 @@ class _$_UpdateMember implements _UpdateMember {
 
   @JsonKey(ignore: true)
   @override
-  _$UpdateMemberCopyWith<_UpdateMember> get copyWith =>
-      __$UpdateMemberCopyWithImpl<_UpdateMember>(this, _$identity);
+  _$$_UpdateMemberCopyWith<_$_UpdateMember> get copyWith =>
+      __$$_UpdateMemberCopyWithImpl<_$_UpdateMember>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -558,29 +535,15 @@ class _$_UpdateMember implements _UpdateMember {
 }
 
 abstract class _UpdateMember implements MemberEvent {
-  const factory _UpdateMember(Member member) = _$_UpdateMember;
+  const factory _UpdateMember(final Member member) = _$_UpdateMember;
 
   @override
   Member get member;
   @override
   @JsonKey(ignore: true)
-  _$UpdateMemberCopyWith<_UpdateMember> get copyWith =>
+  _$$_UpdateMemberCopyWith<_$_UpdateMember> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$MemberStateTearOff {
-  const _$MemberStateTearOff();
-
-  _MemberState call({required List<Member> members}) {
-    return _MemberState(
-      members: members,
-    );
-  }
-}
-
-/// @nodoc
-const $MemberState = _$MemberStateTearOff();
 
 /// @nodoc
 mixin _$MemberState {
@@ -621,32 +584,32 @@ class _$MemberStateCopyWithImpl<$Res> implements $MemberStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MemberStateCopyWith<$Res>
+abstract class _$$_MemberStateCopyWith<$Res>
     implements $MemberStateCopyWith<$Res> {
-  factory _$MemberStateCopyWith(
-          _MemberState value, $Res Function(_MemberState) then) =
-      __$MemberStateCopyWithImpl<$Res>;
+  factory _$$_MemberStateCopyWith(
+          _$_MemberState value, $Res Function(_$_MemberState) then) =
+      __$$_MemberStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Member> members});
 }
 
 /// @nodoc
-class __$MemberStateCopyWithImpl<$Res> extends _$MemberStateCopyWithImpl<$Res>
-    implements _$MemberStateCopyWith<$Res> {
-  __$MemberStateCopyWithImpl(
-      _MemberState _value, $Res Function(_MemberState) _then)
-      : super(_value, (v) => _then(v as _MemberState));
+class __$$_MemberStateCopyWithImpl<$Res> extends _$MemberStateCopyWithImpl<$Res>
+    implements _$$_MemberStateCopyWith<$Res> {
+  __$$_MemberStateCopyWithImpl(
+      _$_MemberState _value, $Res Function(_$_MemberState) _then)
+      : super(_value, (v) => _then(v as _$_MemberState));
 
   @override
-  _MemberState get _value => super._value as _MemberState;
+  _$_MemberState get _value => super._value as _$_MemberState;
 
   @override
   $Res call({
     Object? members = freezed,
   }) {
-    return _then(_MemberState(
+    return _then(_$_MemberState(
       members: members == freezed
-          ? _value.members
+          ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
               as List<Member>,
     ));
@@ -656,10 +619,16 @@ class __$MemberStateCopyWithImpl<$Res> extends _$MemberStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MemberState extends _MemberState {
-  _$_MemberState({required this.members}) : super._();
+  _$_MemberState({required final List<Member> members})
+      : _members = members,
+        super._();
 
+  final List<Member> _members;
   @override
-  final List<Member> members;
+  List<Member> get members {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_members);
+  }
 
   @override
   String toString() {
@@ -670,28 +639,28 @@ class _$_MemberState extends _MemberState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _MemberState &&
-            const DeepCollectionEquality().equals(other.members, members));
+            other is _$_MemberState &&
+            const DeepCollectionEquality().equals(other._members, _members));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(members));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_members));
 
   @JsonKey(ignore: true)
   @override
-  _$MemberStateCopyWith<_MemberState> get copyWith =>
-      __$MemberStateCopyWithImpl<_MemberState>(this, _$identity);
+  _$$_MemberStateCopyWith<_$_MemberState> get copyWith =>
+      __$$_MemberStateCopyWithImpl<_$_MemberState>(this, _$identity);
 }
 
 abstract class _MemberState extends MemberState {
-  factory _MemberState({required List<Member> members}) = _$_MemberState;
+  factory _MemberState({required final List<Member> members}) = _$_MemberState;
   _MemberState._() : super._();
 
   @override
   List<Member> get members;
   @override
   @JsonKey(ignore: true)
-  _$MemberStateCopyWith<_MemberState> get copyWith =>
+  _$$_MemberStateCopyWith<_$_MemberState> get copyWith =>
       throw _privateConstructorUsedError;
 }

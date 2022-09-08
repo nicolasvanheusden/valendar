@@ -12,28 +12,7 @@ part of 'analytics.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$AnalyticsTearOff {
-  const _$AnalyticsTearOff();
-
-  _Analytics call(
-      {required Week week,
-      required List<Member> members,
-      required List<Task> tasks,
-      required Map<Member, List<int>> memberWeekHours}) {
-    return _Analytics(
-      week: week,
-      members: members,
-      tasks: tasks,
-      memberWeekHours: memberWeekHours,
-    );
-  }
-}
-
-/// @nodoc
-const $Analytics = _$AnalyticsTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Analytics {
@@ -105,10 +84,10 @@ class _$AnalyticsCopyWithImpl<$Res> implements $AnalyticsCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AnalyticsCopyWith<$Res> implements $AnalyticsCopyWith<$Res> {
-  factory _$AnalyticsCopyWith(
-          _Analytics value, $Res Function(_Analytics) then) =
-      __$AnalyticsCopyWithImpl<$Res>;
+abstract class _$$_AnalyticsCopyWith<$Res> implements $AnalyticsCopyWith<$Res> {
+  factory _$$_AnalyticsCopyWith(
+          _$_Analytics value, $Res Function(_$_Analytics) then) =
+      __$$_AnalyticsCopyWithImpl<$Res>;
   @override
   $Res call(
       {Week week,
@@ -121,13 +100,14 @@ abstract class _$AnalyticsCopyWith<$Res> implements $AnalyticsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$AnalyticsCopyWithImpl<$Res> extends _$AnalyticsCopyWithImpl<$Res>
-    implements _$AnalyticsCopyWith<$Res> {
-  __$AnalyticsCopyWithImpl(_Analytics _value, $Res Function(_Analytics) _then)
-      : super(_value, (v) => _then(v as _Analytics));
+class __$$_AnalyticsCopyWithImpl<$Res> extends _$AnalyticsCopyWithImpl<$Res>
+    implements _$$_AnalyticsCopyWith<$Res> {
+  __$$_AnalyticsCopyWithImpl(
+      _$_Analytics _value, $Res Function(_$_Analytics) _then)
+      : super(_value, (v) => _then(v as _$_Analytics));
 
   @override
-  _Analytics get _value => super._value as _Analytics;
+  _$_Analytics get _value => super._value as _$_Analytics;
 
   @override
   $Res call({
@@ -136,21 +116,21 @@ class __$AnalyticsCopyWithImpl<$Res> extends _$AnalyticsCopyWithImpl<$Res>
     Object? tasks = freezed,
     Object? memberWeekHours = freezed,
   }) {
-    return _then(_Analytics(
+    return _then(_$_Analytics(
       week: week == freezed
           ? _value.week
           : week // ignore: cast_nullable_to_non_nullable
               as Week,
       members: members == freezed
-          ? _value.members
+          ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
               as List<Member>,
       tasks: tasks == freezed
-          ? _value.tasks
+          ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>,
       memberWeekHours: memberWeekHours == freezed
-          ? _value.memberWeekHours
+          ? _value._memberWeekHours
           : memberWeekHours // ignore: cast_nullable_to_non_nullable
               as Map<Member, List<int>>,
     ));
@@ -162,19 +142,36 @@ class __$AnalyticsCopyWithImpl<$Res> extends _$AnalyticsCopyWithImpl<$Res>
 class _$_Analytics extends _Analytics {
   _$_Analytics(
       {required this.week,
-      required this.members,
-      required this.tasks,
-      required this.memberWeekHours})
-      : super._();
+      required final List<Member> members,
+      required final List<Task> tasks,
+      required final Map<Member, List<int>> memberWeekHours})
+      : _members = members,
+        _tasks = tasks,
+        _memberWeekHours = memberWeekHours,
+        super._();
 
   @override
   final Week week;
+  final List<Member> _members;
   @override
-  final List<Member> members;
+  List<Member> get members {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_members);
+  }
+
+  final List<Task> _tasks;
   @override
-  final List<Task> tasks;
+  List<Task> get tasks {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
+
+  final Map<Member, List<int>> _memberWeekHours;
   @override
-  final Map<Member, List<int>> memberWeekHours;
+  Map<Member, List<int>> get memberWeekHours {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_memberWeekHours);
+  }
 
   @override
   String toString() {
@@ -185,34 +182,34 @@ class _$_Analytics extends _Analytics {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Analytics &&
+            other is _$_Analytics &&
             const DeepCollectionEquality().equals(other.week, week) &&
-            const DeepCollectionEquality().equals(other.members, members) &&
-            const DeepCollectionEquality().equals(other.tasks, tasks) &&
+            const DeepCollectionEquality().equals(other._members, _members) &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
             const DeepCollectionEquality()
-                .equals(other.memberWeekHours, memberWeekHours));
+                .equals(other._memberWeekHours, _memberWeekHours));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(week),
-      const DeepCollectionEquality().hash(members),
-      const DeepCollectionEquality().hash(tasks),
-      const DeepCollectionEquality().hash(memberWeekHours));
+      const DeepCollectionEquality().hash(_members),
+      const DeepCollectionEquality().hash(_tasks),
+      const DeepCollectionEquality().hash(_memberWeekHours));
 
   @JsonKey(ignore: true)
   @override
-  _$AnalyticsCopyWith<_Analytics> get copyWith =>
-      __$AnalyticsCopyWithImpl<_Analytics>(this, _$identity);
+  _$$_AnalyticsCopyWith<_$_Analytics> get copyWith =>
+      __$$_AnalyticsCopyWithImpl<_$_Analytics>(this, _$identity);
 }
 
 abstract class _Analytics extends Analytics {
   factory _Analytics(
-      {required Week week,
-      required List<Member> members,
-      required List<Task> tasks,
-      required Map<Member, List<int>> memberWeekHours}) = _$_Analytics;
+      {required final Week week,
+      required final List<Member> members,
+      required final List<Task> tasks,
+      required final Map<Member, List<int>> memberWeekHours}) = _$_Analytics;
   _Analytics._() : super._();
 
   @override
@@ -225,6 +222,6 @@ abstract class _Analytics extends Analytics {
   Map<Member, List<int>> get memberWeekHours;
   @override
   @JsonKey(ignore: true)
-  _$AnalyticsCopyWith<_Analytics> get copyWith =>
+  _$$_AnalyticsCopyWith<_$_Analytics> get copyWith =>
       throw _privateConstructorUsedError;
 }

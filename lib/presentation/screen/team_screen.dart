@@ -1,4 +1,3 @@
-import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +6,7 @@ import 'package:valendar/application/member/member_bloc.dart';
 import 'package:valendar/presentation/core/colors.dart';
 import 'package:valendar/presentation/member/add_member.dart';
 import 'package:valendar/presentation/widget/no_result.dart';
+import 'package:valendar/presentation/widget/positionned_floating_action_button.dart';
 
 class TeamScreen extends StatefulWidget {
   const TeamScreen({Key? key}) : super(key: key);
@@ -86,39 +86,25 @@ class _TeamScreenState extends State<TeamScreen> {
                 );
             }
           ),
-          AlignPositioned(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.15,
-                right: 10
-              ),
-              child: FloatingActionButton(
-                elevation: 5,
-                onPressed: () {
-                  showModalBottomSheet(
-                    isDismissible: true,
-                    barrierColor: Colors.black.withOpacity(0.5),
-                    context: context,
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)
-                      )
-                    ),
-                    builder: (context) {
-                      return const AddMember();
-                    },
-                  );
-                },
-                backgroundColor: yellowFFAD47,
-                child: const Icon(
-                  Icons.add_rounded,
-                  size: 40,
+          PositionnedFloatingActionButton(
+            onPressed: () {
+              showModalBottomSheet(
+                isDismissible: true,
+                barrierColor: Colors.black.withOpacity(0.5),
+                context: context,
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30)
+                  )
                 ),
-              ),
-            ),
+                builder: (context) {
+                  return const AddMember();
+                },
+              );
+            },
+            iconData:  Icons.add_rounded
           )
         ],
       ),

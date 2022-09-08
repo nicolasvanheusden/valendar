@@ -23,8 +23,9 @@ class TaskState with _$TaskState {
     return tasksByMember;
   }
 
-  List<Task> tasksByMemberAtSpecificDay(Member member, DateTime day, Map<Member,List<Task>> tasksByMember) {
-    return tasksByMember[member]?.where((element) => element.date.day == day.day && element.date.month == day.month && element.date.year == day.year).toList() ?? [];
+  List<Task> tasksByMemberAtSpecificDay(Member member, DateTime day, List<Task> tasksOfMember) {
+    return tasksOfMember.where((element) => DateUtils.isSameDay(day, element.date))
+      .toList();
   }
 
   int sumOfWeekHours(Member member, DateTime firstDate, DateTime lastDate) {

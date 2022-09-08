@@ -12,36 +12,11 @@ part of 'member_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 MemberDTO _$MemberDTOFromJson(Map<String, dynamic> json) {
   return _MemberDTO.fromJson(json);
 }
-
-/// @nodoc
-class _$MemberDTOTearOff {
-  const _$MemberDTOTearOff();
-
-  _MemberDTO call(
-      {required String name,
-      required String role,
-      required DateTime startContract,
-      required DateTime? endContract}) {
-    return _MemberDTO(
-      name: name,
-      role: role,
-      startContract: startContract,
-      endContract: endContract,
-    );
-  }
-
-  MemberDTO fromJson(Map<String, Object?> json) {
-    return MemberDTO.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $MemberDTO = _$MemberDTOTearOff();
 
 /// @nodoc
 mixin _$MemberDTO {
@@ -104,10 +79,10 @@ class _$MemberDTOCopyWithImpl<$Res> implements $MemberDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MemberDTOCopyWith<$Res> implements $MemberDTOCopyWith<$Res> {
-  factory _$MemberDTOCopyWith(
-          _MemberDTO value, $Res Function(_MemberDTO) then) =
-      __$MemberDTOCopyWithImpl<$Res>;
+abstract class _$$_MemberDTOCopyWith<$Res> implements $MemberDTOCopyWith<$Res> {
+  factory _$$_MemberDTOCopyWith(
+          _$_MemberDTO value, $Res Function(_$_MemberDTO) then) =
+      __$$_MemberDTOCopyWithImpl<$Res>;
   @override
   $Res call(
       {String name,
@@ -117,13 +92,14 @@ abstract class _$MemberDTOCopyWith<$Res> implements $MemberDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$MemberDTOCopyWithImpl<$Res> extends _$MemberDTOCopyWithImpl<$Res>
-    implements _$MemberDTOCopyWith<$Res> {
-  __$MemberDTOCopyWithImpl(_MemberDTO _value, $Res Function(_MemberDTO) _then)
-      : super(_value, (v) => _then(v as _MemberDTO));
+class __$$_MemberDTOCopyWithImpl<$Res> extends _$MemberDTOCopyWithImpl<$Res>
+    implements _$$_MemberDTOCopyWith<$Res> {
+  __$$_MemberDTOCopyWithImpl(
+      _$_MemberDTO _value, $Res Function(_$_MemberDTO) _then)
+      : super(_value, (v) => _then(v as _$_MemberDTO));
 
   @override
-  _MemberDTO get _value => super._value as _MemberDTO;
+  _$_MemberDTO get _value => super._value as _$_MemberDTO;
 
   @override
   $Res call({
@@ -132,7 +108,7 @@ class __$MemberDTOCopyWithImpl<$Res> extends _$MemberDTOCopyWithImpl<$Res>
     Object? startContract = freezed,
     Object? endContract = freezed,
   }) {
-    return _then(_MemberDTO(
+    return _then(_$_MemberDTO(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -184,7 +160,7 @@ class _$_MemberDTO extends _MemberDTO {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _MemberDTO &&
+            other is _$_MemberDTO &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.role, role) &&
             const DeepCollectionEquality()
@@ -193,6 +169,7 @@ class _$_MemberDTO extends _MemberDTO {
                 .equals(other.endContract, endContract));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -203,21 +180,23 @@ class _$_MemberDTO extends _MemberDTO {
 
   @JsonKey(ignore: true)
   @override
-  _$MemberDTOCopyWith<_MemberDTO> get copyWith =>
-      __$MemberDTOCopyWithImpl<_MemberDTO>(this, _$identity);
+  _$$_MemberDTOCopyWith<_$_MemberDTO> get copyWith =>
+      __$$_MemberDTOCopyWithImpl<_$_MemberDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MemberDTOToJson(this);
+    return _$$_MemberDTOToJson(
+      this,
+    );
   }
 }
 
 abstract class _MemberDTO extends MemberDTO {
   factory _MemberDTO(
-      {required String name,
-      required String role,
-      required DateTime startContract,
-      required DateTime? endContract}) = _$_MemberDTO;
+      {required final String name,
+      required final String role,
+      required final DateTime startContract,
+      required final DateTime? endContract}) = _$_MemberDTO;
   _MemberDTO._() : super._();
 
   factory _MemberDTO.fromJson(Map<String, dynamic> json) =
@@ -233,6 +212,6 @@ abstract class _MemberDTO extends MemberDTO {
   DateTime? get endContract;
   @override
   @JsonKey(ignore: true)
-  _$MemberDTOCopyWith<_MemberDTO> get copyWith =>
+  _$$_MemberDTOCopyWith<_$_MemberDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }

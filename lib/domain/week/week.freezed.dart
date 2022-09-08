@@ -12,38 +12,7 @@ part of 'week.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$WeekTearOff {
-  const _$WeekTearOff();
-
-  _Week call(
-      {required List<DateTime> days,
-      required List<String> dayNames,
-      required List<int> daysNumber,
-      required String monthName,
-      required int monthNumber,
-      required int year,
-      String? nextMonthName,
-      int? nextMonthNumber,
-      int? nextYear}) {
-    return _Week(
-      days: days,
-      dayNames: dayNames,
-      daysNumber: daysNumber,
-      monthName: monthName,
-      monthNumber: monthNumber,
-      year: year,
-      nextMonthName: nextMonthName,
-      nextMonthNumber: nextMonthNumber,
-      nextYear: nextYear,
-    );
-  }
-}
-
-/// @nodoc
-const $Week = _$WeekTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Week {
@@ -139,9 +108,9 @@ class _$WeekCopyWithImpl<$Res> implements $WeekCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
-  factory _$WeekCopyWith(_Week value, $Res Function(_Week) then) =
-      __$WeekCopyWithImpl<$Res>;
+abstract class _$$_WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
+  factory _$$_WeekCopyWith(_$_Week value, $Res Function(_$_Week) then) =
+      __$$_WeekCopyWithImpl<$Res>;
   @override
   $Res call(
       {List<DateTime> days,
@@ -156,13 +125,13 @@ abstract class _$WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
-    implements _$WeekCopyWith<$Res> {
-  __$WeekCopyWithImpl(_Week _value, $Res Function(_Week) _then)
-      : super(_value, (v) => _then(v as _Week));
+class __$$_WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
+    implements _$$_WeekCopyWith<$Res> {
+  __$$_WeekCopyWithImpl(_$_Week _value, $Res Function(_$_Week) _then)
+      : super(_value, (v) => _then(v as _$_Week));
 
   @override
-  _Week get _value => super._value as _Week;
+  _$_Week get _value => super._value as _$_Week;
 
   @override
   $Res call({
@@ -176,17 +145,17 @@ class __$WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
     Object? nextMonthNumber = freezed,
     Object? nextYear = freezed,
   }) {
-    return _then(_Week(
+    return _then(_$_Week(
       days: days == freezed
-          ? _value.days
+          ? _value._days
           : days // ignore: cast_nullable_to_non_nullable
               as List<DateTime>,
       dayNames: dayNames == freezed
-          ? _value.dayNames
+          ? _value._dayNames
           : dayNames // ignore: cast_nullable_to_non_nullable
               as List<String>,
       daysNumber: daysNumber == freezed
-          ? _value.daysNumber
+          ? _value._daysNumber
           : daysNumber // ignore: cast_nullable_to_non_nullable
               as List<int>,
       monthName: monthName == freezed
@@ -221,23 +190,41 @@ class __$WeekCopyWithImpl<$Res> extends _$WeekCopyWithImpl<$Res>
 
 class _$_Week extends _Week {
   _$_Week(
-      {required this.days,
-      required this.dayNames,
-      required this.daysNumber,
+      {required final List<DateTime> days,
+      required final List<String> dayNames,
+      required final List<int> daysNumber,
       required this.monthName,
       required this.monthNumber,
       required this.year,
       this.nextMonthName,
       this.nextMonthNumber,
       this.nextYear})
-      : super._();
+      : _days = days,
+        _dayNames = dayNames,
+        _daysNumber = daysNumber,
+        super._();
 
+  final List<DateTime> _days;
   @override
-  final List<DateTime> days;
+  List<DateTime> get days {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_days);
+  }
+
+  final List<String> _dayNames;
   @override
-  final List<String> dayNames;
+  List<String> get dayNames {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dayNames);
+  }
+
+  final List<int> _daysNumber;
   @override
-  final List<int> daysNumber;
+  List<int> get daysNumber {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_daysNumber);
+  }
+
   @override
   final String monthName;
   @override
@@ -260,11 +247,11 @@ class _$_Week extends _Week {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Week &&
-            const DeepCollectionEquality().equals(other.days, days) &&
-            const DeepCollectionEquality().equals(other.dayNames, dayNames) &&
+            other is _$_Week &&
+            const DeepCollectionEquality().equals(other._days, _days) &&
+            const DeepCollectionEquality().equals(other._dayNames, _dayNames) &&
             const DeepCollectionEquality()
-                .equals(other.daysNumber, daysNumber) &&
+                .equals(other._daysNumber, _daysNumber) &&
             const DeepCollectionEquality().equals(other.monthName, monthName) &&
             const DeepCollectionEquality()
                 .equals(other.monthNumber, monthNumber) &&
@@ -279,9 +266,9 @@ class _$_Week extends _Week {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(days),
-      const DeepCollectionEquality().hash(dayNames),
-      const DeepCollectionEquality().hash(daysNumber),
+      const DeepCollectionEquality().hash(_days),
+      const DeepCollectionEquality().hash(_dayNames),
+      const DeepCollectionEquality().hash(_daysNumber),
       const DeepCollectionEquality().hash(monthName),
       const DeepCollectionEquality().hash(monthNumber),
       const DeepCollectionEquality().hash(year),
@@ -291,21 +278,21 @@ class _$_Week extends _Week {
 
   @JsonKey(ignore: true)
   @override
-  _$WeekCopyWith<_Week> get copyWith =>
-      __$WeekCopyWithImpl<_Week>(this, _$identity);
+  _$$_WeekCopyWith<_$_Week> get copyWith =>
+      __$$_WeekCopyWithImpl<_$_Week>(this, _$identity);
 }
 
 abstract class _Week extends Week {
   factory _Week(
-      {required List<DateTime> days,
-      required List<String> dayNames,
-      required List<int> daysNumber,
-      required String monthName,
-      required int monthNumber,
-      required int year,
-      String? nextMonthName,
-      int? nextMonthNumber,
-      int? nextYear}) = _$_Week;
+      {required final List<DateTime> days,
+      required final List<String> dayNames,
+      required final List<int> daysNumber,
+      required final String monthName,
+      required final int monthNumber,
+      required final int year,
+      final String? nextMonthName,
+      final int? nextMonthNumber,
+      final int? nextYear}) = _$_Week;
   _Week._() : super._();
 
   @override
@@ -328,5 +315,5 @@ abstract class _Week extends Week {
   int? get nextYear;
   @override
   @JsonKey(ignore: true)
-  _$WeekCopyWith<_Week> get copyWith => throw _privateConstructorUsedError;
+  _$$_WeekCopyWith<_$_Week> get copyWith => throw _privateConstructorUsedError;
 }
