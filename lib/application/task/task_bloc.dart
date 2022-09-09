@@ -35,7 +35,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
     on<_UpdateTask>((event, emit) {
       emit(state.copyWith(tasks: [
         ...state.tasks.where((element) => element.id != event.task.id),
-        ...splitTaskInMultipleDays(event.task)
+        ...splitTaskInMultipleDays(event.task, isUpdate: true)
       ]));
     });
     on<_ExportCSV>((event, emit) async {
@@ -84,7 +84,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
 
   /// Takes a [Task] and return a [List] of the same [Task] split on the period from 
   /// [startDate] to [endDate]
-  List<Task> splitTaskInMultipleDays(Task task) {
+  List<Task> splitTaskInMultipleDays(Task task, {bool isUpdate = false}) {
     final List<Task> tasks = [];
 
     final numberOfDays = task.endDate.difference(task.startDate).inDays;
@@ -95,7 +95,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
           uuid: const Uuid().v4(),
           id: task.id,
           title: task.title,
-          hours: task.hours ~/ numberOfDays,
+          hours: isUpdate ? task.hours : task.hours ~/ numberOfDays,
           members: task.members,
           atNight: task.atNight,
           date: task.startDate.add(Duration(days: i)),
