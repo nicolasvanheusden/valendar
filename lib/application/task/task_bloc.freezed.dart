@@ -692,6 +692,7 @@ abstract class _ExportCSV implements TaskEvent {
 /// @nodoc
 mixin _$TaskState {
   List<Task> get tasks => throw _privateConstructorUsedError;
+  String? get path => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskStateCopyWith<TaskState> get copyWith =>
@@ -702,7 +703,7 @@ mixin _$TaskState {
 abstract class $TaskStateCopyWith<$Res> {
   factory $TaskStateCopyWith(TaskState value, $Res Function(TaskState) then) =
       _$TaskStateCopyWithImpl<$Res>;
-  $Res call({List<Task> tasks});
+  $Res call({List<Task> tasks, String? path});
 }
 
 /// @nodoc
@@ -716,12 +717,17 @@ class _$TaskStateCopyWithImpl<$Res> implements $TaskStateCopyWith<$Res> {
   @override
   $Res call({
     Object? tasks = freezed,
+    Object? path = freezed,
   }) {
     return _then(_value.copyWith(
       tasks: tasks == freezed
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>,
+      path: path == freezed
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -732,7 +738,7 @@ abstract class _$$_TaskStateCopyWith<$Res> implements $TaskStateCopyWith<$Res> {
           _$_TaskState value, $Res Function(_$_TaskState) then) =
       __$$_TaskStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Task> tasks});
+  $Res call({List<Task> tasks, String? path});
 }
 
 /// @nodoc
@@ -748,12 +754,17 @@ class __$$_TaskStateCopyWithImpl<$Res> extends _$TaskStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tasks = freezed,
+    Object? path = freezed,
   }) {
     return _then(_$_TaskState(
       tasks: tasks == freezed
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>,
+      path: path == freezed
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -761,7 +772,7 @@ class __$$_TaskStateCopyWithImpl<$Res> extends _$TaskStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TaskState extends _TaskState {
-  _$_TaskState({required final List<Task> tasks})
+  _$_TaskState({required final List<Task> tasks, this.path})
       : _tasks = tasks,
         super._();
 
@@ -773,8 +784,11 @@ class _$_TaskState extends _TaskState {
   }
 
   @override
+  final String? path;
+
+  @override
   String toString() {
-    return 'TaskState(tasks: $tasks)';
+    return 'TaskState(tasks: $tasks, path: $path)';
   }
 
   @override
@@ -782,12 +796,15 @@ class _$_TaskState extends _TaskState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TaskState &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            const DeepCollectionEquality().equals(other.path, path));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_tasks),
+      const DeepCollectionEquality().hash(path));
 
   @JsonKey(ignore: true)
   @override
@@ -796,11 +813,14 @@ class _$_TaskState extends _TaskState {
 }
 
 abstract class _TaskState extends TaskState {
-  factory _TaskState({required final List<Task> tasks}) = _$_TaskState;
+  factory _TaskState({required final List<Task> tasks, final String? path}) =
+      _$_TaskState;
   _TaskState._() : super._();
 
   @override
   List<Task> get tasks;
+  @override
+  String? get path;
   @override
   @JsonKey(ignore: true)
   _$$_TaskStateCopyWith<_$_TaskState> get copyWith =>

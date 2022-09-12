@@ -4,7 +4,8 @@ part of 'task_bloc.dart';
 class TaskState with _$TaskState {
     const TaskState._();
   factory TaskState({
-    required final List<Task> tasks
+    required final List<Task> tasks,
+    final String? path,
   }) = _TaskState;
 
   factory TaskState.initial() => _TaskState(tasks: []);

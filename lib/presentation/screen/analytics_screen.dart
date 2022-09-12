@@ -1,7 +1,9 @@
 import 'package:align_positioned/align_positioned.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:open_file/open_file.dart';
 import 'package:valendar/application/member/member_bloc.dart';
 import 'package:valendar/application/task/task_bloc.dart';
 import 'package:valendar/domain/week/week.dart';
@@ -76,7 +78,54 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   Expanded(
                     child: BlocBuilder<MemberBloc, MemberState>(
                       builder: (context, memberState) {
-                        return BlocBuilder<TaskBloc, TaskState>(
+                        return BlocConsumer<TaskBloc, TaskState>(
+                          listenWhen: (prev, curr) => curr.path != null,
+                          listener: (context, state) {
+                            print('here');
+                            Flushbar(                                
+                              flushbarPosition: FlushbarPosition.TOP,
+                              flushbarStyle: FlushbarStyle.FLOATING,
+                              reverseAnimationCurve: Curves.easeOut,
+                              forwardAnimationCurve: Curves.easeIn,
+                              backgroundColor: blue064F60,
+                              isDismissible: false,
+                              duration: const Duration(seconds: 4),
+                              icon: const Icon(
+                                Icons.check,
+                                color: Colors.greenAccent,
+                              ),
+                              mainButton: TextButton(
+                                onPressed: () {
+                                  OpenFile.open(state.path!);
+                                },
+                                child: Text(
+                                  'Ouvrir',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              titleText: Text(
+                                'Semaine exportée ! ',
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                  ),
+                              ),
+                              messageText: Text(
+                                'Fichier localisé dans ${state.path}',
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                  ),
+                              ),
+                            ).show(context);
+
+                          },
                           builder: (context, taskState) {
                             final map = taskState.tasksByMember();
                             return ListView(

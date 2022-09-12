@@ -40,8 +40,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
     });
     on<_ExportCSV>((event, emit) async {
 
-      final appDocDir = await getApplicationDocumentsDirectory();
-      String path = '${appDocDir.path}/${event.range.start.displayOnlyDate}_${event.range.end.displayOnlyDate}.csv';
+      final appDocDir = await (Platform.isAndroid ? getExternalStorageDirectory() : getApplicationDocumentsDirectory());
+      String path = '${appDocDir!.path}/${event.range.start.displayOnlyDate}_${event.range.end.displayOnlyDate}.csv';
       final File file = File(path);
 
       final Map<Member, List<int>> fullMemberHours = {};
@@ -58,27 +58,23 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with HydratedMixin{
               ifAbsent: () => [state.sumOfWeekHours(entry.key, day, day)]);
           }
       }
-
-      
-
       
       List<List<String>> csvData = [
       // headers
-      <String>[
-        'Nom', 
-        ...Week.initialize(event.range.start).days
-        .map((e) => '${Week.weekdayNames.elementAt(e.weekday-1)} ${e.day}').toList(),
-        'Total'],
+        <String>[
+          'Nom', 
+          ...Week.initialize(event.range.start).days
+          .map((e) => '${Week.weekdayNames.elementAt(e.weekday-1)} ${e.day}').toList(),
+          'Total'],
       // data
-      ...fullMemberHours.entries.map(
-        (entry) => [entry.key.name, ...entry.value.map((e) => e.toString()), entry.value.fold<int>(0, (prev, curr) => prev+curr).toString()]
-      )
-      //
-
+        ...fullMemberHours.entries.map(
+          (entry) => [entry.key.name, ...entry.value.map((e) => e.toString()), entry.value.fold<int>(0, (prev, curr) => prev+curr).toString()]
+        )
       ];
       String csv = const ListToCsvConverter().convert(csvData);
       await file.writeAsString(csv);
-
+      emit(state.copyWith(path: path));
+      await Future.delayed(const Duration(seconds: 2), () => emit(state.copyWith(path: null)));
     });
   }
 
