@@ -1,6 +1,7 @@
 
 
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -92,7 +93,7 @@ class _TaskTileState extends State<TaskTile> {
           child: const Icon(Icons.check, color: Colors.green,),
         ),
         child: Container(
-          height: 100,
+          height: MediaQuery.of(context).size.height * 0.18,
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
@@ -105,17 +106,21 @@ class _TaskTileState extends State<TaskTile> {
           child: Row(
             children: [
               Expanded(
+                flex: 2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
+                    AutoSizeText(
                       widget.task.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                       style: GoogleFonts.montserrat(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: widget.task.atNight ? Colors.white : Colors.black,
                       ),
                     ),
                     Container(
+                      alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                       ),

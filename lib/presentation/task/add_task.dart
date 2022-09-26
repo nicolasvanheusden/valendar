@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,24 +104,28 @@ class _AddTaskState extends State<AddTask> {
                       ),
                       TextFormField(
                         controller: _titleController,
+                        scrollPadding: EdgeInsets.zero,
                         decoration: InputDecoration(
                           labelText: 'Titre',
                           labelStyle: GoogleFonts.montserrat(
                             color: blue064F60
                           ),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                           constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
-                        ),                         
+                        ),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height *0.015,
                       ),
                       TextFormField(
                         controller: _hoursController,
+                        scrollPadding: EdgeInsets.zero,
                         decoration: InputDecoration(
                           labelText: 'Heures',
                           labelStyle: GoogleFonts.montserrat(
                             color: blue064F60
                           ),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                           constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                         ),
                         validator: (value) {
@@ -292,11 +297,16 @@ class _AddTaskState extends State<AddTask> {
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        member.name,
-                                                        style: GoogleFonts.montserrat(
-                                                          color: blue064F60,
-                                                          fontSize: MediaQuery.of(context).size.width * 0.04
+                                                      SizedBox(
+                                                        width: constraints.maxWidth * 0.5,
+                                                        child: AutoSizeText(
+                                                          member.name,
+                                                          maxLines: 1, 
+                                                          overflow: TextOverflow.ellipsis,
+                                                          style: GoogleFonts.montserrat(
+                                                            color: blue064F60,
+                                                            fontSize: MediaQuery.of(context).size.width * 0.04
+                                                          ),
                                                         ),
                                                       ),
                                                       Text(

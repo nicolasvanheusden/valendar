@@ -95,6 +95,7 @@ class _AddMemberState extends State<AddMember> {
                     color: blue064F60,
                     fontSize: 12,
                   ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                   constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                 ),
                 validator: (value) {
@@ -119,6 +120,7 @@ class _AddMemberState extends State<AddMember> {
                     color: blue064F60,
                     fontSize: 12,
                   ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                   constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                 ),
                 validator: (value) {
@@ -147,6 +149,7 @@ class _AddMemberState extends State<AddMember> {
                     color: blue064F60,
                     fontSize: 12,
                   ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                   constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                 ),
                 validator: (value) {
@@ -179,6 +182,7 @@ class _AddMemberState extends State<AddMember> {
                     color: blue064F60,
                     fontSize: 12,
                   ),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                   constraints: BoxConstraints.loose(Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.07))
                 ),
                 validator: (value) {
